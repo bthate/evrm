@@ -1,0 +1,90 @@
+﻿##########
+KAMERBRIEF
+##########
+
+
+::
+
+# this is an MEDS file, 4024 characters
+#
+# this file can be edited !!
+
+{
+  "data": {
+    "Content-Type": "multipart/alternative; boundary=14dae93996cbe5a2e604ca02f74a",
+    "Date": "Wed, 19 Sep 2012 02:20:04 +0200",
+    "Delivered-To": "bthate@gmail.com",
+    "From": "Bart Thate <bthate@gmail.com>",
+    "MIME-Version": "1.0",
+    "Message-ID": "<CAJdWPN7sXdhtrZ=mf6XmMdhRFi0WXkhmnd6cm982goPfoFGsiA@mail.gmail.com>",
+    "Received": "by 10.194.35.193 with HTTP; Tue, 18 Sep 2012 17:20:04 -0700 (PDT)",
+    "Subject": "Urgent handelen nodig ter aanpak van het \"ontbreken van weekend hulp\"
+ probleem voor GGZ patienten.",
+    "To": "voorzitter@tweedekamer.nl, cie.vws@tweedekamer.nl",
+    "prefix": "email",
+    "text": "Geachte Voorzitter van de 2e kamer, mevrouw Verbeet,
+
+ik schrijf deze email aan u omdat u de tweede kamer vertegenwoordigt, en ik
+wil u vragen om met spoed te reageren op de volgende melding die ik doe
+over misstanden in de maatschappij, in dit geval het onbreken van
+verantwoorde zorg aan mensen met een ernstige psychiatrische aandoening
+(EPA). De zorg voor deze mensen is uitbesteed aan GGZ Nederland, die de
+zorg voor deze patienten in het weekend weer uitbesteed aan een
+\"ketenzorg\". Deze ketenzorg is niet effectief in het helpen van mensen met
+een EPA, omdat het erop neerkomt dat de HAP (huisartsenpost) de
+verantwoordelijkheid krijgt om een diagnose te stellen of de situatie van
+de patient een crisis situatie is of niet. Bij het stellen van deze
+diagnose door een onbekende arts via de telefoon, die de patient verder
+niet kent, levert een enorm risisco op voor de gezondheid van deze patient,
+indien de zorgvraag die geuit word, door het stellen van de diagnose \"geen
+crisis\", geweigerd word. De, al in paniek en wanhoop zijnde patient, die
+moet vrezen voor zichzelf, omdat zn ziel/geest het niet meer uit houd in
+dit leven, word bij deze zorgweigering kompleet terug geworpen op zichzelf,
+ja verder het pad van suicide op de duwt.
+
+90% van de suicides die plaats vinden betreft mensen met een psychiatrische
+stoornis. Dit is een zaak van de GGZ EN het toezicht op het functioneren
+van deze GGZ door de minister en de commissie van vws. Er zijn elke dag 4
+geslaagde suicides en schatting is dat 40 mensen op een dag een poging
+wagen. Elke dag weer.
+
+Er moet hier preventieve actie ondernomen worden, de minister moet een plan
+van aanpak maken die het suicide risisco van deze patienten terug dringt. U
+heeft de mogelijkheid om de kamer bij een te roepen en de minister via de
+kamer een kordaat signaal te geven dat optreden vereist is. Ik doe dan ook
+een klemmend beroep op u om ook van deze mogelijkheid gebruik te maken. Er
+zijn nog 3 dagen te gaan, voordat zich een nieuw weekend aandient, met 100
+pogingen en 10 suicides, die te voorkomen zijn. Als er maar contact is voor
+de patienten die daar om vragen. Een hulpvraag weigeren van een patient in
+levensnood is moord door schuld. Moord door nalaten van het vervullen van
+een plicht die van de zorgverlener, de controleur en de bewindsman/vrouw en
+de uwe en die van de kamer is.
+
+Ja ik voel elke poging van mijn mede collega patient, ik ken de kompleet
+ontreddering, angst, paniek, wanhoop van de mensen die voor hunzelf moet
+vrezen. De moordenaar in je kop, en de hulpverlener nergens te bekennen.
+Het komplete in de steek laten, wat mensen over de drempel stuurt. Ik kan
+mij niet meer veroorloven om keer op keer aan de bel te trekken, overal,
+bij elke betrokken partij, om vervolgens een stilzwijgen te ontmoeten, en
+weer een weekend waarbij de GGZ patient er alleen voorstaat.
+
+Ik hoop dat God u bijstaat om daadwerkelijk tot afdoende actie over te gaan.
+
+Hoogachtend, in in afwachting van uw, hopelijk snelle reactie,
+
+Bart Thate
+
+-- 
+Bart Thate
+
+programming schizophrenic - \"till freedom come!\"
+
+[!] http://jsonbot.org
+[!] http:// <http://tinyurl.com/schizoo>gozerbot.org
+"
+  },
+  "saved": "Mon Aug  3 18:04:24 2015",
+  "saved_from": "meds.plugins.write",
+  "signature": "3ae2dad6553e545bf588e70ef7d0c00fbf073190",
+  "type": "Object"
+}

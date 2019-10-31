@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+
+import doctest
+import sys
+import os
+
+sys.path.insert(0, os.getcwd() + os.sep + ".")
+sys.path.insert(0, os.getcwd() + os.sep + "..")
+
+from mids import parse_cli, shutdown, loglevel, sname, j
+from mids import main, fleet, launcher, mods
+
+from mads.scheduler import Scheduler
+from mads.launcher import Launcher
+from mads.test import TestBot
+from mads.event import Event
+from mads.obj import Object
+
+import logging
+import time
+
+#flags = doctest.ELLIPSIS | doctest.REPORT_ONLY_FIRST_FAILURE | doctest.NORMALIZE_WHITESPACE
+flags = doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE
+
+parse_cli()
+main.cfg.workdir = "doctest.data" 
+mods.boot()
+main.cfg.verbose = True
+
+scheduler = Scheduler()
+
+event = Event()
+event.test = 'ok'
+
+o = Object()
+
+bot = TestBot()
+bot.start()
+
+fleet.add(bot)
+
+for top, *modules in os.walk("mads"):
+    for flist in modules:
+        for fn in sorted(flist):
+            fnn = j(top, fn)
+            if fnn.endswith(".py"):
+                logging.info(fnn)
+                doctest.testfile(fnn, module_relative=False, 
+                                      raise_on_error=False,
+                                      globs={
+                                             'Event': Event,
+                                             'Launcher': Launcher,
+                                             'Object': Object,
+                                             'bot': bot,
+                                             'main': main,
+                                             'event': event,
+                                             'scheduler': scheduler,
+                                             'launcher': launcher,
+                                             'obj': o, 
+                                      }, 
+                                      optionflags=flags)
+
+bot.stop()
+mods.shutdown()
+shutdown()

@@ -1,0 +1,5 @@
+--index-url https://pypi.python.org/simple/
+
+beautifulsoup4
+sleekxmpp
+feedparser==5.2.1

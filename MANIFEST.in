@@ -1,0 +1,8 @@
+include LICENSE
+include README
+include docs/index.rst
+include docs/conf.py
+recursive-include doctests *
+recursive-include docs/jpg *.jpg
+recursive-include docs/txt *.txt
+recursive-include docs/_templates *

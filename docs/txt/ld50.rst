@@ -1,0 +1,50 @@
+LD50 oral intake
+================
+
+Cannabidiol:
+
+http://www.chemblink.com/MSDS/MSDSFiles/13956-29-1_Clear%20Synth.pdf
+
+mouse  300mg  /  kg lichaamsgewicht
+rabbit 3200mg /  kg
+rat    980mg  /  kg
+
+THC:
+
+https://www.caymanchem.com/msdss/12068m.pdf
+
+rat    666mg  /  kg 
+mouse  482mg  /  kg 
+
+Warfarin, bloedverdunner:
+
+https://www.caymanchem.com/msdss/13566m.pdf
+
+rat    1.6mg  /  kg 
+
+Olanzapine:
+
+http://ehs.lilly.com/msds/Zyprexa%20(tablets).pdf
+
+rat    177mg  /  kg
+
+Haldol:
+
+https://www.caymanchem.com/msdss/12014m.pdf
+
+rat    128mg  /  kg
+mouse   71mg  /  kg
+
+Clozapine:
+
+https://www.caymanchem.com/msdss/12059m.pdf
+
+rat    240mg  /  kg
+mouse  150mg  /  kg
+
+Diazepam:
+
+http://www.pfizer.com/files/products/material_safety_data/PZ00145.pdf
+
+rat    710mg  /  kg
+mouse   48mg  /  kg

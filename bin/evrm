@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+#
+#
+
+""" Die medicijnen zijn gif en het toedienen ervan is stafbaar !! """
+
+import os, sys
+sys.path.insert(0, os.getcwd())
+
+from botlib.utils import parse_cli, reset, startup, enable_history
+from botlib.space import kernel, exceptions
+
+from evrm import __version__, __txt__
+
+startup()
+
+def main():
+    cfg = parse_cli()
+    cfg.name = "EVRM"
+    cfg.version = __version__
+    enable_history()
+    kernel.boot(cfg)
+    kernel.wait()
+    kernel.shutdown()
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("")
+    if exceptions:
+        for ex in exceptions:
+            print(ex)
+    reset()
+    os._exit(0)
