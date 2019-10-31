@@ -62,15 +62,15 @@ def uploadlist(dir):
 
 setup(
     name='evrm',
-    version='25',
-    url='https://bitbucket.org/thatebart/evrm',
+    version='67',
+    url='https://github.com/bthate/evrm',
     author='Bart Thate',
     author_email='bthate@dds.nl',
     description="En dat schadelijk karakter verzwijgende !!".upper(),
-    license='MIT',
+    license='Public Domain',
     include_package_data=True,
     zip_safe=False,
-    install_requires=["botlib",],
+    install_requires=["obot",],
     scripts=["bin/evrm"],
     packages=['evrm', ],
     long_description='''

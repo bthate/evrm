@@ -1,35 +1,20 @@
-#!/usr/bin/env python3
-#
-#
+#!/usr/bin/python3 -u
 
-""" Die medicijnen zijn gif en het toedienen ervan is stafbaar !! """
+import os, sys ; sys.path.insert(0, os.getcwd())
 
-import os, sys
-sys.path.insert(0, os.getcwd())
+from ob.shl import daemon, execute, parse_cli
+from evrm import __version__
 
-from botlib.utils import parse_cli, reset, startup, enable_history
-from botlib.space import kernel, exceptions
-
-from evrm import __version__, __txt__
-
-startup()
+from ob import k
 
 def main():
-    cfg = parse_cli()
-    cfg.name = "EVRM"
-    cfg.version = __version__
-    enable_history()
-    kernel.boot(cfg)
-    kernel.wait()
-    kernel.shutdown()
+    parse_cli("evrm", __version__)
+    if k.cfg.daemon:
+        daemon()
+    k.load_mod("obot.cmd.cmds")
+    k.start(True, not k.cfg.noshell, False)
+    k.init(k.cfg.modules)
+    k.wait()
 
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("")
-    if exceptions:
-        for ex in exceptions:
-            print(ex)
-    reset()
-    os._exit(0)
+execute(main)
+os._exit(0)
