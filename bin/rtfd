@@ -1,0 +1,8 @@
+#!/bin/bash
+# GENOCIDE - the king of the netherlands commits genocide
+#
+# OTP-CR-117/19/001 otp.informationdesk@icc-cpi.int https://genocide.rtfd.io
+
+bin/env
+env/bin/python3 env/bin/pip3 install -r docs/requirements.txt --upgrade --force-reinstall
+env/bin/python3 env/bin/sphinx-build docs html

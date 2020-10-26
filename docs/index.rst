@@ -116,10 +116,6 @@ EMAIL
      :align: right
      :scale: 7%
 
-.. raw:: html
-
-    <br><br>
-
    
 | Bartholomeus Henricus Julius (Bart) Thate - :ref:`teksten <teksten>`
 | botfather on #dunkbots irc.freenode.net 
@@ -130,6 +126,5 @@ EMAIL
     :glob:
     :hidden:
 
-    LICENSE
     txt/*
 

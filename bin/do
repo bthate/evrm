@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+# GENOCIDE - the king of the netherlands commits genocide
+#
+# OTP-CR-117/19/001 otp.informationdesk@icc-cpi.int https://genocide.rtfd.io
+
+import importlib, os, sys
+importlib.invalidate_caches()
+
+import ol, os, shutil, sys
+import urllib
+import urllib.parse
+import urllib.request
+
+from ol.spc import execute
+
+from setuptools.command.easy_install import main
+
+pipurl = "https://bootstrap.pypa.io/get-pip.py"
+buildouturl = "https://bootstrap.pypa.io/bootstrap-buildout.py"
+fname = "run"
+installdir = os.path.join(os.getcwd(), fname)
+rs = '--always-copy --install-dir=%s --script-dir=%s/bin -a -U' % (installdir, installdir)
+sys.path.insert(0, installdir)
+os.environ['PYTHONPATH'] = installdir
+os.environ['PYTHONUSERBASE'] = installdir
+
+def bopen(txt):
+    print(txt)
+    try:
+        for line in os.popen(txt).readlines():
+            print(line.rstrip())
+    except:
+        pass
+
+def nexcept(txt):
+    print(txt)
+    try:
+        eval(txt)
+    except:
+        pass
+
+def nopen(txt):
+    txt += " 2>&1"
+    try:
+        for line in os.popen(txt).readlines():
+            pass
+    except:
+        pass
+
+def get_pip(url):
+    url = urllib.parse.urlunparse(urllib.parse.urlparse(url))
+    req = urllib.request.Request(url)
+    response = urllib.request.urlopen(req)
+    response.data = response.read()
+    f = open("%s/get-pip.py" % installdir, "w")
+    f.write(str(response.data, "utf-8"))
+    f.flush()
+    f.close()
+    return response
+
+def highest():
+    fns = os.listdir("dist")
+    print(",".join(fns))
+    target = fname
+    highest = 0
+    for fn in fns:
+        ff = fn.split(".")
+        for f in ff:
+            try:
+                nr = int(f.split("-")[-1])
+                break
+            except:
+                pass
+        if nr > highest:
+            highest = nr
+            target = fn
+    return target
+
+def do_main():
+    rss = rs + " dist/%s" % highest()
+    main(rss.split())
+
+def bmain():
+    nopen("rm -fR %s" % installdir)
+    nopen("mkdir %s" % installdir)
+    get_pip(pipurl)
+    nopen("python3 %s/get-pip.py -t %s" % (installdir, installdir))
+    nopen("rm build")
+    nopen("rm -fR evrm.egg-info")
+    nopen("python3 setup.py sdist")
+    do_main()
+    nopen("rm %s/pip" % installdir)
+    nopen('rm -fR %s/pip-19.1.1.dist-info' % installdir)
+    nopen('rm -fR %s/wheel' % installdir)
+    nopen('rm -fR %s/wheel-0.33.4.dist-info' % installdir)
+    nopen("rm -fR %s/__pycache__" % installdir)
+    nopen("rm %s/get-pip.py" % installdir)
+    nopen("tar zcvf %s.tar.gz %s" % (fname.lower(), fname))
+
+execute(bmain)

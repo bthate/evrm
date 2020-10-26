@@ -1,0 +1,5 @@
+# GENOCIDE - the king of the netherlands commits genocide
+#
+# OTP-CR-117/19/001 otp.informationdesk@icc-cpi.int https://genocide.rtfd.io
+
+rm -fR .readthedocs.yml~ bot/*~ bot/__pycache__ evrm/*~ evrm/__pycache__ files/*~ docs/*~ docs/mods*.rst docs/ol*.rst run run.tar.gz html env env.tar.gz mods/*~ mods/__pycache__ ol/*~ ol/__pycache__ .data build dist MANIFEST evrm.egg-info bin/*~ *~ tests/*~ tests/__pycache__

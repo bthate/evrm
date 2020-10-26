@@ -1,20 +1,45 @@
-#!/usr/bin/python3 -u
+#!/usr/bin/python3
+# GENOCIDE - the king of the netherlands commits genocide
+#
+# OTP-CR-117/19/001 otp.informationdesk@icc-cpi.int https://genocide.rtfd.io
 
 import os, sys ; sys.path.insert(0, os.getcwd())
 
-from ob.shl import daemon, execute, parse_cli
-from evrm import __version__
+from ol.spc import Console, boot, cmd, execute, ol, scandir
+from ol.spc import os, sys, time 
 
-from ob import k
+def daemon():
+    pid = os.fork()
+    if pid != 0:
+        ol.trm.termreset()
+        os._exit(0)
+    os.setsid()
+    os.umask(0)
+    si = open("/dev/null", 'r')
+    so = open("/dev/null", 'a+')
+    se = open("/dev/null", 'a+')
+    os.dup2(si.fileno(), sys.stdin.fileno())
+    os.dup2(so.fileno(), sys.stdout.fileno())
+    os.dup2(se.fileno(), sys.stderr.fileno())
 
 def main():
-    parse_cli("evrm", __version__)
-    if k.cfg.daemon:
+    k = boot("evrm")
+    if "b" in k.cfg.opts:
+        print("EVRM started at %s" % time.ctime(time.time()))
+        print(ol.format(k.cfg))
+    scandir(k.cfg.wd)
+    k.walk("bot,botmod,evrm")
+    if k.cfg.txt:
+        return cmd(k.cfg.otxt)
+    if "d" in k.cfg.opts:
         daemon()
-    k.load_mod("obot.cmd.cmds")
-    k.start(True, not k.cfg.noshell, False)
-    k.init(k.cfg.modules)
-    k.wait()
-
+    k.start()
+    k.init(k.cfg.mods)
+    if "s" in k.cfg.opts or k.cfg.mods:
+        c = Console()
+        c.start()
+    if "s" in k.cfg.opts or "d" in k.cfg.opts or k.cfg.mods:
+        k.wait()
+         
 execute(main)
 os._exit(0)

@@ -66,11 +66,11 @@ setup(
     url='https://github.com/bthate/evrm',
     author='Bart Thate',
     author_email='bthate@dds.nl',
-    description="En dat schadelijk karakter verzwijgende !!".upper(),
+    description="en dat schadelijk karakter verzwijgende !!".upper(),
     license='Public Domain',
     include_package_data=True,
     zip_safe=False,
-    install_requires=["obot",],
+    install_requires=["botlib", "feedparser"],
     scripts=["bin/evrm"],
     packages=['evrm', ],
     long_description='''
