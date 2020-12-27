@@ -62,11 +62,11 @@ def uploadlist(dir):
 
 setup(
     name='evrm',
-    version='67',
+    version='68',
     url='https://github.com/bthate/evrm',
     author='Bart Thate',
     author_email='bthate@dds.nl',
-    description="en dat schadelijk karakter verzwijgende !!".upper(),
+    description="Not a basis to proceed means the king is doing his genocide",
     license='Public Domain',
     include_package_data=True,
     zip_safe=False,

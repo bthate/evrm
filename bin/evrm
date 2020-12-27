@@ -1,17 +1,84 @@
 #!/usr/bin/python3
-# GENOCIDE - the king of the netherlands commits genocide
+# BOTLIB - bot
 #
-# OTP-CR-117/19/001 otp.informationdesk@icc-cpi.int https://genocide.rtfd.io
+# this file is placed in the public domain
 
-import os, sys ; sys.path.insert(0, os.getcwd())
+import atexit, os, pwd, readline, sys
 
-from ol.spc import Console, boot, cmd, execute, ol, scandir
-from ol.spc import os, sys, time 
+from bot.hdl import Command, Handler, cmd
+from bot.prs import parse_cli
+from bot.thr import launch
+from bot.trm import execute, termsave, termreset
+
+# defines
+
+wd = os.path.expanduser("~/.evrm")
+
+# classes
+
+class Console(Handler):
+
+    "console class"
+
+    def __init__(self):
+        super().__init__()
+        self.register("cmd", cmd)
+
+    def announce(self, txt):
+        "silence announcing"
+        self.direct(txt)
+
+    def direct(self, txt):
+        print(txt)
+
+    def input(self):
+        "loop for input"
+        while 1:
+            try:
+                e = self.poll()
+            except EOFError:
+                break
+            self.put(e)
+            e.wait()
+
+    def poll(self):
+        "wait for input"
+        return Command(input("> "))
+
+    def say(self, channel, txt):
+        "strip channel from output"
+        self.direct(txt)
+
+    def start(self):
+        "start console"
+        super().start()
+        launch(self.input)
+
+# functions
+
+def complete(text, state):
+    "complete matches"
+    matches = []
+    if text:
+        matches = [s for s in cmds if s and s.startswith(text)]
+    else:
+        matches = cmds[:]
+    try:
+        return matches[state]
+    except IndexError:
+        return None
+
+def setcompleter(commands):
+    "set the completer"
+    cmds.extend(commands)
+    readline.set_completer(complete)
+    readline.parse_and_bind("tab: complete")
+    atexit.register(lambda: readline.set_completer(None))
 
 def daemon():
     pid = os.fork()
     if pid != 0:
-        ol.trm.termreset()
+        termreset()
         os._exit(0)
     os.setsid()
     os.umask(0)
@@ -23,23 +90,23 @@ def daemon():
     os.dup2(se.fileno(), sys.stderr.fileno())
 
 def main():
-    k = boot("evrm")
-    if "b" in k.cfg.opts:
-        print("EVRM started at %s" % time.ctime(time.time()))
-        print(ol.format(k.cfg))
-    scandir(k.cfg.wd)
-    k.walk("bot,botmod,evrm")
-    if k.cfg.txt:
-        return cmd(k.cfg.otxt)
-    if "d" in k.cfg.opts:
+    import bot.obj
+    cfg = parse_cli(wd)
+    if "d" in cfg.opts:
         daemon()
-    k.start()
-    k.init(k.cfg.mods)
-    if "s" in k.cfg.opts or k.cfg.mods:
-        c = Console()
-        c.start()
-    if "s" in k.cfg.opts or "d" in k.cfg.opts or k.cfg.mods:
-        k.wait()
-         
+        h = Handler()
+    else:
+        h = Console()
+    h.walk("evrm")
+    if cfg.txt:
+        return h.cmd(cfg.otxt)
+    h.init(cfg.sets.mods)
+    h.start()
+    h.wait()
+
+# runtime
+
+cmds = []
+     
 execute(main)
 os._exit(0)
