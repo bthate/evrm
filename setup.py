@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
+# EVRM - ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE !!!
 #
-#
+# this file is in the Public Domain
 
 import os
 import sys
@@ -62,15 +63,15 @@ def uploadlist(dir):
 
 setup(
     name='evrm',
-    version='68',
+    version='69',
     url='https://github.com/bthate/evrm',
     author='Bart Thate',
     author_email='bthate@dds.nl',
-    description="Not a basis to proceed means the king is doing his genocide",
+    description="ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE !!!",
     license='Public Domain',
     include_package_data=True,
     zip_safe=False,
-    install_requires=["botlib", "feedparser"],
+    install_requires=["oplib", "feedparser"],
     scripts=["bin/evrm"],
     packages=['evrm', ],
     long_description='''
@@ -103,7 +104,7 @@ Op de Hodge and Sterner Scale:
                  },
    classifiers=[
         'Development Status :: 3 - Alpha',
-        'License :: OSI Approved :: MIT License',
+        'License :: Public Domanin',
         'Operating System :: Unix',
         'Programming Language :: Python',
         'Topic :: Utilities'],

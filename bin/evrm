@@ -1,18 +1,34 @@
-#!/usr/bin/python3
-# BOTLIB - bot
+#!/usr/bin/env python3
+# EVRM  (bin/evrm)
 #
 # this file is placed in the public domain
 
-import atexit, os, pwd, readline, sys
+"EVRM"
 
-from bot.hdl import Command, Handler, cmd
-from bot.prs import parse_cli
-from bot.thr import launch
-from bot.trm import execute, termsave, termreset
+# imports
+
+import os, sys ; sys.path.insert(0, os.getcwd())
+
+import atexit
+import op
+import op.usr
+import os
+import readline
+import signal
+import sys
+import threading
+import time
+
+from op.hdl import Command, Handler, cmd
+from op.prs import parse_cli
+from op.sel import Select
+from op.thr import launch
+from op.trm import console, termreset
+from op.utl import privileges
 
 # defines
 
-wd = os.path.expanduser("~/.evrm")
+wd = os.path.abspath(os.path.expanduser("~/.evrm"))
 
 # classes
 
@@ -26,7 +42,7 @@ class Console(Handler):
 
     def announce(self, txt):
         "silence announcing"
-        self.direct(txt)
+        #self.direct(txt)
 
     def direct(self, txt):
         print(txt)
@@ -38,6 +54,9 @@ class Console(Handler):
                 e = self.poll()
             except EOFError:
                 break
+            if not e:
+                time.sleep(0.01)
+                continue
             self.put(e)
             e.wait()
 
@@ -54,28 +73,33 @@ class Console(Handler):
         super().start()
         launch(self.input)
 
+class Mini(Handler):
+
+    "just output to terminal"
+
+    def direct(self, txt):
+        print(txt)
+
+class SelectConsole(Select):
+
+    "print to stdout from select"
+
+    def __init__(self):
+        super().__init__()
+        self.register_fd(sys.stdin)
+        self.register("cmd", cmd)
+
+    def poll(self):
+        "wait for input"
+        return Command(input("> "))
+
+    def direct(self, txt):
+        print(txt)
+
 # functions
 
-def complete(text, state):
-    "complete matches"
-    matches = []
-    if text:
-        matches = [s for s in cmds if s and s.startswith(text)]
-    else:
-        matches = cmds[:]
-    try:
-        return matches[state]
-    except IndexError:
-        return None
-
-def setcompleter(commands):
-    "set the completer"
-    cmds.extend(commands)
-    readline.set_completer(complete)
-    readline.parse_and_bind("tab: complete")
-    atexit.register(lambda: readline.set_completer(None))
-
 def daemon():
+    "fork to child proces"
     pid = os.fork()
     if pid != 0:
         termreset()
@@ -89,24 +113,50 @@ def daemon():
     os.dup2(so.fileno(), sys.stdout.fileno())
     os.dup2(se.fileno(), sys.stderr.fileno())
 
+def opcheck(ops, cfg):
+    for o in ops:
+        if o in cfg.opts:
+             return True    
+    return False
+
+def sighup(frame, bla):
+    print("sighup")
+
 def main():
-    import bot.obj
+    "main function"
+    signal.signal(signal.SIGHUP, sighup)
     cfg = parse_cli(wd)
-    if "d" in cfg.opts:
-        daemon()
-        h = Handler()
-    else:
-        h = Console()
+    if opcheck("r", cfg):
+        op.wd = cfg.wd = "/var/lib/opd/"
+        privileges("opd")
+    if opcheck("h", cfg):
+        return print(__doc__)
+    if opcheck("bx", cfg):
+        print("EVRM %s started at %s" % (op.__version__, time.ctime(time.time())))
+        print(op.format(cfg))
+    if opcheck("x", cfg):
+        op.debug = True
+    h = Mini()
+    h.load("op.cmd")
     h.walk("evrm")
-    if cfg.txt:
+    if cfg.txt or opcheck("n", cfg):
         return h.cmd(cfg.otxt)
-    h.init(cfg.sets.mods)
+    if opcheck("d", cfg):
+        daemon()
     h.start()
-    h.wait()
+    for thr in h.init(cfg.sets.mods):
+        thr.join()
+    if opcheck("s", cfg):
+        c = SelectConsole()
+        c.clone(h)
+        c.start()
+        c.wait()
+    elif opcheck("sdw", cfg) or cfg.sets.mods:
+        h.wait()
 
 # runtime
 
 cmds = []
-     
-execute(main)
+starttime = time.time()
+console(main)
 os._exit(0)
