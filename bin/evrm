@@ -61,10 +61,9 @@ def console(main):
 def main():
     cfg = parse_cli(wd)
     c = Console()
-    c.walk("op")
+    c.load("op.cmd")
     c.walk("evrm")
-    mdd = os.path.join(cfg.sets.wd, "mod")
-    c.fromdir(mdd, "mod")
+    c.fromdir(os.path.join(cfg.sets.wd, "mod"))
     c.fromdir("mod", "mod")
     if cfg.txt:
         m = Mini()
