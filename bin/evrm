@@ -5,13 +5,10 @@
 
 "EVRM"
 
-# imports
-
 import os, sys ; sys.path.insert(0, os.getcwd())
 
 import atexit
 import op
-import op.usr
 import os
 import readline
 import signal
@@ -23,140 +20,66 @@ from op.hdl import Command, Handler, cmd
 from op.prs import parse_cli
 from op.sel import Select
 from op.thr import launch
-from op.trm import console, termreset
-from op.utl import privileges
-
-# defines
+from op.trm import termreset, termsave
+from op.utl import opcheck, privileges
 
 wd = os.path.abspath(os.path.expanduser("~/.evrm"))
+md = os.path.join(wd, "mod", "")
 
-# classes
-
-class Console(Handler):
-
-    "console class"
+class Console(Select):
 
     def __init__(self):
         super().__init__()
         self.register("cmd", cmd)
+        self.register_fd(sys.stdin)
 
-    def announce(self, txt):
-        "silence announcing"
-        #self.direct(txt)
+    def poll(self):
+        return Command(input("> "))
 
     def direct(self, txt):
         print(txt)
 
-    def input(self):
-        "loop for input"
-        while 1:
-            try:
-                e = self.poll()
-            except EOFError:
-                break
-            if not e:
-                time.sleep(0.01)
-                continue
-            self.put(e)
-            e.wait()
-
-    def poll(self):
-        "wait for input"
-        return Command(input("> "))
-
     def say(self, channel, txt):
-        "strip channel from output"
         self.direct(txt)
-
-    def start(self):
-        "start console"
-        super().start()
-        launch(self.input)
 
 class Mini(Handler):
 
-    "just output to terminal"
-
     def direct(self, txt):
         print(txt)
 
-class SelectConsole(Select):
-
-    "print to stdout from select"
-
-    def __init__(self):
-        super().__init__()
-        self.register_fd(sys.stdin)
-        self.register("cmd", cmd)
-
-    def poll(self):
-        "wait for input"
-        return Command(input("> "))
-
-    def direct(self, txt):
-        print(txt)
-
-# functions
-
-def daemon():
-    "fork to child proces"
-    pid = os.fork()
-    if pid != 0:
+def console(main):
+    termsave()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("")
+    except PermissionError as ex:
+        print(str(ex))
+    finally:
         termreset()
-        os._exit(0)
-    os.setsid()
-    os.umask(0)
-    si = open("/dev/null", 'r')
-    so = open("/dev/null", 'a+')
-    se = open("/dev/null", 'a+')
-    os.dup2(si.fileno(), sys.stdin.fileno())
-    os.dup2(so.fileno(), sys.stdout.fileno())
-    os.dup2(se.fileno(), sys.stderr.fileno())
-
-def opcheck(ops, cfg):
-    for o in ops:
-        if o in cfg.opts:
-             return True    
-    return False
-
-def sighup(frame, bla):
-    print("sighup")
 
 def main():
-    "main function"
-    signal.signal(signal.SIGHUP, sighup)
     cfg = parse_cli(wd)
-    if opcheck("r", cfg):
-        op.wd = cfg.wd = "/var/lib/opd/"
-        privileges("opd")
-    if opcheck("h", cfg):
-        return print(__doc__)
-    if opcheck("bx", cfg):
-        print("EVRM %s started at %s" % (op.__version__, time.ctime(time.time())))
-        print(op.format(cfg))
-    if opcheck("x", cfg):
-        op.debug = True
-    h = Mini()
-    h.load("op.cmd")
-    h.walk("evrm")
-    if cfg.txt or opcheck("n", cfg):
-        return h.cmd(cfg.otxt)
-    if opcheck("d", cfg):
-        daemon()
-    h.start()
-    for thr in h.init(cfg.sets.mods):
-        thr.join()
+    c = Console()
+    c.walk("op")
+    c.walk("evrm")
+    mdd = os.path.join(cfg.sets.wd, "mod")
+    c.fromdir(mdd, "mod")
+    c.fromdir("mod", "mod")
+    if cfg.txt:
+        m = Mini()
+        m.clone(c)
+        return m.cmd(cfg.otxt)
     if opcheck("s", cfg):
-        c = SelectConsole()
-        c.clone(h)
         c.start()
+        for thr in c.init(cfg.sets.mods):
+            thr.join()
+        for thr in c.init(cfg.sets.mods, "mod"):
+            thr.join()
         c.wait()
-    elif opcheck("sdw", cfg) or cfg.sets.mods:
-        h.wait()
-
-# runtime
 
 cmds = []
 starttime = time.time()
 console(main)
 os._exit(0)
+
