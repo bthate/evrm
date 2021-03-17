@@ -12,7 +12,7 @@ curdir = os.getcwd()
 sys.path.insert(0, curdir + os.sep)
 sys.path.insert(0, curdir + os.sep + '..' + os.sep)
 
-from evrm import __version__, __txt__
+__version__ = 69
 
 needs_sphinx='1.1'
 nitpick_ignore=[
