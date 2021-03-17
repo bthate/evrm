@@ -71,9 +71,8 @@ setup(
     license='Public Domain',
     include_package_data=True,
     zip_safe=False,
-    install_requires=["oplib", "feedparser"],
+    install_requires=["oplib"],
     scripts=["bin/evrm"],
-    packages=['evrm', ],
     long_description='''
     
 Het bewijs dat deze stoffen gif zijn is te vinden is de :ref:`Material Safety Data Sheet <sds>`, daar staan LD50 waardes in. 

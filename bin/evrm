@@ -1,84 +1,23 @@
-#!/usr/bin/env python3
-# EVRM  (bin/evrm)
-#
-# this file is placed in the public domain
+#!/usr/bin/env python3 
+# This file is placed in the Public Domain.
 
-"EVRM"
+from op import cfg, e, j, op, os
+from op.csl import Console, exec, parse
 
-import os, sys ; sys.path.insert(0, os.getcwd())
-
-import atexit
-import op
-import os
-import readline
-import signal
-import sys
-import threading
-import time
-
-from op.hdl import Command, Handler, cmd
-from op.prs import parse_cli
-from op.sel import Select
-from op.thr import launch
-from op.trm import termreset, termsave
-from op.utl import opcheck, privileges
-
-wd = os.path.abspath(os.path.expanduser("~/.evrm"))
-md = os.path.join(wd, "mod", "")
-
-class Console(Select):
-
-    def __init__(self):
-        super().__init__()
-        self.register("cmd", cmd)
-        self.register_fd(sys.stdin)
-
-    def poll(self):
-        return Command(input("> "))
-
-    def direct(self, txt):
-        print(txt)
-
-    def say(self, channel, txt):
-        self.direct(txt)
-
-class Mini(Handler):
-
-    def direct(self, txt):
-        print(txt)
-
-def console(main):
-    termsave()
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("")
-    except PermissionError as ex:
-        print(str(ex))
-    finally:
-        termreset()
+def ver(event):
+    event.reply("OTP-CR-117/19 otp.informationdesk@icc-cpi.int http://pypi.org/project/genocide !")
 
 def main():
-    cfg = parse_cli(wd)
-    c = Console()
-    c.load("op.cmd")
-    c.walk("evrm")
-    c.fromdir(os.path.join(cfg.sets.wd, "mod"))
-    c.fromdir("mod", "mod")
+    cfg.wd = e("~/.evrm")
+    parse()
+    s = Console()
+    s.add("ver", ver)
+    s.scandir(j(os.getcwd(), "mod"))
     if cfg.txt:
-        m = Mini()
-        m.clone(c)
-        return m.cmd(cfg.otxt)
-    if opcheck("s", cfg):
-        c.start()
-        for thr in c.init(cfg.sets.mods):
-            thr.join()
-        for thr in c.init(cfg.sets.mods, "mod"):
-            thr.join()
-        c.wait()
+        s.cmd(cfg.old.txt)
+        return
+    s.start()
+    s.init(cfg.mods)
+    s.wait()
 
-cmds = []
-starttime = time.time()
-console(main)
-os._exit(0)
-
+exec(main)
