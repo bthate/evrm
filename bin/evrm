@@ -1,23 +1,27 @@
 #!/usr/bin/env python3 
 # This file is placed in the Public Domain.
 
-from op import cfg, e, j, op, os
-from op.csl import Console, exec, parse
+import os, sys ; sys.path.insert(0, os.getcwd())
 
-def ver(event):
-    event.reply("OTP-CR-117/19 otp.informationdesk@icc-cpi.int http://pypi.org/project/genocide !")
+from op.clt import Console
+from op.trm import exec
+from op.zzz import os, time
+from op.tbl import tbl
 
 def main():
-    cfg.wd = e("~/.evrm")
-    parse()
-    s = Console()
-    s.add("ver", ver)
-    s.scandir(j(os.getcwd(), "mod"))
-    if cfg.txt:
-        s.cmd(cfg.old.txt)
+    k = Console()
+    k.prompt = False
+    k.tbl(tbl)
+    k.cfg.name = "evrm"
+    k.parse()
+    k.scan(os.path.join(os.getcwd(), "mod"))
+    if k.cfg.txt:
+        k.run()
         return
-    s.start()
-    s.init(cfg.mods)
-    s.wait()
+    if k.op("c"):
+        k.prompt = True
+        k.start()
+        k.init(k.cfg.mods)
+        k.wait()
 
 exec(main)
