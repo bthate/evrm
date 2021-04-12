@@ -1,0 +1,87 @@
+#!/usr/bin/env python3
+# This file is placed in the Public Domain.
+
+import os, sys ; sys.path.insert(0, os.getcwd())
+
+import pkgutil
+import importlib
+import inspect
+import sys
+
+def direct(name, pname=''):
+    if name in sys.modules:
+        return sys.modules[name]
+    return importlib.import_module(name, pname)
+
+def findall(names):
+    for pn in spl(names):
+        try:
+            mod = direct(pn)
+        except ModuleNotFoundError:
+            continue
+        if "__file__" in dir(mod) and mod.__file__:
+            pths = [os.path.dirname(mod.__file__),]
+            for m, n, p in pkgutil.iter_modules(pths):
+                fqn = "%s.%s" % (pn, n)
+                yield fqn
+        else:
+            p = list(mod.__path__)[0]
+            if not os.path.exists(p):
+                continue
+            for mn in [x[:-3] for x in os.listdir(p) if x.endswith(".py")]:
+                fqn = "%s.%s" % (pn, mn)
+                yield fqn
+
+def findnames(mod, match=None):
+    tps = {}
+    for _key, o in inspect.getmembers(mod, inspect.isclass):
+        if match and match not in o.__module__:
+            continue
+        t = "%s.%s" % (o.__module__, o.__name__)
+        if t not in tps:
+            tps[o.__name__.lower()] = t
+    return tps
+
+def findmods(mod):
+    mods = {}
+    for key, o in inspect.getmembers(mod, inspect.isfunction):
+        if "event" in o.__code__.co_varnames:
+            if o.__code__.co_argcount == 1:
+                if key not in mods:
+                    mods[key] = o.__module__
+    return mods
+
+def spl(txt):
+    return [x for x in txt.split(",") if x]
+
+def walk(names):
+    "scan all packages."
+    o = {}
+    o["pnames"] = {}
+    o["names"] = {}
+    o["modnames"] = {}
+    for mn in findall(names):
+        mod = direct(mn)
+        if "cmd" not in mn:
+            o["pnames"][mn.split(".")[-1]] = mn
+        o["modnames"].update(findmods(mod))
+        for k, v in findnames(mod).items():
+            if k not in o["names"]:
+                o["names"][k] = []
+            if v not in o["names"][k]:
+                o["names"][k].append(v)
+    return o
+
+def main():
+    if len(sys.argv) > 1:
+        a = sys.argv[1]
+    else:
+        a = "op"
+    tbl = walk(a)
+    print("# This file is placed in the Public Domain.")
+    print("")
+    print("tbl = %s" % tbl)
+
+main()
+sys.stdout.flush()
+sys.exit()
