@@ -11,7 +11,7 @@ import types
 import uuid
 import _thread
 
-from botl.err import ENOCLASS, ENOFILENAME
+from op.err import ENOCLASS, ENOFILENAME
 
 starttime = time.time()
 wd = ""

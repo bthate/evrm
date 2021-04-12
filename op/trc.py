@@ -16,7 +16,7 @@ def exception(txt="", sep=" | "):
         res = []
         for x in elem[0].split(os.sep)[::-1]:
             res.append(x)
-            if x in ["botl", "botd"," mod"]:
+            if x in ["op",]:
                 break
         result.append("%s %s:%s" % (".".join(res[::-1]), elem[2], elem[1]))
     res = "%s | %s: %s" % (sep.join(result), exctype, excvalue)

@@ -6,7 +6,7 @@ from .obj import gettype, hook
 from .tms import fntime
 from .zzz import os, _thread
 
-import botl.obj
+import op.obj
 
 dirlock = _thread.allocate_lock()
 
@@ -36,7 +36,7 @@ def every(selector=None, index=None, timed=None):
     nr = -1
     if selector is None:
         selector = {}
-    for otype in os.listdir(os.path.join(botl.obj.wd, "store")):
+    for otype in os.listdir(os.path.join(op.obj.wd, "store")):
         for fn in fns(otype, timed):
             o = hook(fn)
             if selector and not search(o, selector):
@@ -111,8 +111,8 @@ def lastfn(otype):
 def fns(name, timed=None):
     if not name:
         return []
-    assert botl.obj.wd
-    p = os.path.join(botl.obj.wd, "store", name) + os.sep
+    assert op.obj.wd
+    p = os.path.join(op.obj.wd, "store", name) + os.sep
     res = []
     d = ""
     for rootdir, dirs, _files in os.walk(p, topdown=False):

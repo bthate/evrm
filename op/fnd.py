@@ -7,11 +7,11 @@ from .obj import fmt
 from .tms import elapsed, fntime
 from .zzz import time
 
-import botl.obj
+import op.obj
 
 def fnd(event):
     if not event.args:
-        fls = listfiles(botl.obj.wd)
+        fls = listfiles(op.obj.wd)
         if fls:
             event.reply("|".join([x.split(".")[-1].lower() for x in fls]))
         return

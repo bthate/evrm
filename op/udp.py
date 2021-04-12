@@ -2,11 +2,11 @@
 
 "relay"
 
-from botl.obj import Cfg, Object
-from botl.bus import Bus
-from botl.dbs import last
-from botl.thr import launch
-from botl.zzz import socket, time
+from op.obj import Cfg, Object
+from op.bus import Bus
+from op.dbs import last
+from op.thr import launch
+from op.zzz import socket, time
 
 def init(hdl):
     u = UDP()

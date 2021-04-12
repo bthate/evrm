@@ -1,24 +1,24 @@
 # This file is placed in the Public Domain.
 
-"bot"
+"24/7 channel bot"
 
 __version__ = 36
 
-from botl.bus import Bus
-from botl.clt import Client
-from botl.dbs import find, last
-from botl.edt import edit
-from botl.err import ENOUSER
-from botl.evt import Event
-from botl.obj import Cfg, Object, fmt, save
-from botl.opt import Output
-from botl.hdl import Handler, cmd
-from botl.thr import launch
-from botl.trc import exception
-from botl.usr import Users
-from botl.utl import cprint, locked
-from botl.zzz import os, queue, socket, textwrap
-from botl.zzz import time, threading, _thread
+from op.bus import Bus
+from op.clt import Client
+from op.dbs import find, last
+from op.edt import edit
+from op.err import ENOUSER
+from op.evt import Event
+from op.obj import Cfg, Object, fmt, save
+from op.opt import Output
+from op.hdl import Handler, cmd
+from op.thr import launch
+from op.trc import exception
+from op.usr import Users
+from op.utl import cprint, locked
+from op.zzz import os, queue, socket, textwrap
+from op.zzz import time, threading, _thread
 
 def init(hdl):
     i = IRC()
@@ -34,12 +34,12 @@ class Cfg(Cfg):
     def __init__(self, val=None):
         super().__init__()
         self.cc = "!"
-        self.channel = "#botd"
-        self.nick = "botd"
+        self.channel = "#opbot"
+        self.nick = "opbot"
         self.port = 6667
         self.server = "localhost"
         self.realname = "24/7 channel daemon"
-        self.username = "botd"
+        self.username = "opbot"
         if val:
             self.update(val)
 

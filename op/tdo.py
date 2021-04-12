@@ -2,8 +2,8 @@
 
 "todo"
 
-from botl.dbs import find
-from botl.obj import Object, save
+from op.dbs import find
+from op.obj import Object, save
 
 class Todo(Object):
 
@@ -16,7 +16,7 @@ def dne(event):
         event.reply("dne <stringintodo>")
         return
     selector = {"txt": event.args[0]}
-    for fn, o in find("botd.tdo.Todo", selector):
+    for fn, o in find("op.tdo.Todo", selector):
         o._deleted = True
         save(o)
         event.reply("ok")

@@ -2,15 +2,15 @@
 
 "feeds"
 
-from botl.bus import Bus
-from botl.dbs import find
-from botl.edt import edit
-from botl.clk import Repeater
-from botl.dbs import all, find, last, lastmatch
-from botl.obj import Cfg, Default, Object, save
-from botl.thr import launch
-from botl.url import geturl, striphtml, unescape
-from botl.zzz import html, re, threading, urllib
+from op.bus import Bus
+from op.dbs import find
+from op.edt import edit
+from op.clk import Repeater
+from op.dbs import all, find, last, lastmatch
+from op.obj import Cfg, Default, Object, save
+from op.thr import launch
+from op.url import geturl, striphtml, unescape
+from op.zzz import html, re, threading, urllib
 
 from urllib.error import HTTPError, URLError
 
@@ -114,7 +114,7 @@ class Fetcher(Object):
 
     def run(self):
         thrs = []
-        for fn, o in all("botd.rss.Rss"):
+        for fn, o in all("op.rss.Rss"):
             thrs.append(launch(self.fetch, o))
         return thrs
 
@@ -151,7 +151,7 @@ def dpl(event):
         event.reply("dpl <stringinurl> <item1,item2>")
         return
     setter = {"display_list": event.args[1]}
-    fn, o = lastmatch("botd.rss.Rss", {"rss": event.args[0]})
+    fn, o = lastmatch("op.rss.Rss", {"rss": event.args[0]})
     if o:
         edit(o, setter)
         save(o)
@@ -176,7 +176,7 @@ def rem(event):
     selector = {"rss": event.args[0]}
     nr = 0
     got = []
-    for fn, o in find("botd.rss.Rss", selector):
+    for fn, o in find("op.rss.Rss", selector):
         nr += 1
         o._deleted = True
         got.append(o)
@@ -189,7 +189,7 @@ def rss(event):
         event.reply("rss <url>")
         return
     url = event.args[0]
-    res = list(find("botd.rss.Rss", {"rss": url}))
+    res = list(find("op.rss.Rss", {"rss": url}))
     if res:
         return
     o = Rss()

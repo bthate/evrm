@@ -39,7 +39,7 @@ class Users(Object):
 
     def get_users(self, origin=""):
         s = {"user": origin}
-        return find("botl.usr.User", s)
+        return find("op.usr.User", s)
 
     def get_user(self, origin):
         u = list(self.get_users(origin))
@@ -61,7 +61,7 @@ def dlt(event):
         event.reply("dlt <username>")
         return
     selector = {"user": event.args[0]}
-    for fn, o in find("botl.usr.User", selector):
+    for fn, o in find("op.usr.User", selector):
         o._deleted = True
         save(o)
         event.reply("ok")

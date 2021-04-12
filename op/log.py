@@ -2,7 +2,7 @@
 
 "logging"
 
-from botl.obj import Object, save
+from op.obj import Object, save
 
 class Log(Object):
 

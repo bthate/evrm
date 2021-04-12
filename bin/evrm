@@ -5,14 +5,15 @@ import os, sys ; sys.path.insert(0, os.getcwd())
 
 from op.clt import Console
 from op.trm import exec
-from op.zzz import os, time
 from op.tbl import tbl
+from op.zzz import os, time
 
 def main():
     k = Console()
     k.prompt = False
     k.tbl(tbl)
     k.cfg.name = "evrm"
+    k.cfg.version = 70
     k.parse()
     k.scan(os.path.join(os.getcwd(), "mod"))
     if k.cfg.txt:

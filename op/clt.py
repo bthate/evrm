@@ -21,7 +21,7 @@ class Cfg(Cfg):
 
     def __init__(self):
         super().__init__(self)
-        self.name = "botl"
+        self.name = "opbot"
 
 class Client(Handler):
 
@@ -65,12 +65,12 @@ class Client(Handler):
         return False
 
     def parse(self, wd=None):
-        import botl.obj
+        import op.obj
         parseargs(self.cfg, " ".join(sys.argv[1:]))
         self.cfg.update(self.cfg.sets or {})
         if self.op("v"):
             self.cfg.verbose = True
-        botl.obj.wd = self.cfg.wd = wd or self.cfg.wd or os.path.expanduser("~/.%s" % self.cfg.name)
+        op.obj.wd = self.cfg.wd = wd or self.cfg.wd or os.path.expanduser("~/.%s" % self.cfg.name)
         return self
 
     def pre(self, e):
