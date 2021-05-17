@@ -1,28 +1,93 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # This file is placed in the Public Domain.
 
-import os, sys ; sys.path.insert(0, os.getcwd())
+__version__ = 121
 
-from op.clt import Console
-from op.trm import exec
-from op.tbl import tbl
-from op.zzz import os, time
+import atexit
+import os
+import readline
+import sys
+import termios
+
+sys.path.insert(0, os.getcwd())
+
+from op.hdl import ENOMORE, Client, Event, first
+from op.krn import Kernel, kcmd
+from op.obj import cfg
+
+import op.all
+
+all = "cms,fnd,log,irc"
+resume = {}
+
+def termsetup(fd):
+    return termios.tcgetattr(fd)
+
+def termreset():
+    if "old" in resume:
+        try:
+            termios.tcsetattr(resume["fd"], termios.TCSADRAIN, resume["old"])
+        except termios.error:
+            pass
+
+def termsave():
+    try:
+        resume["fd"] = sys.stdin.fileno()
+        resume["old"] = termsetup(sys.stdin.fileno())
+        atexit.register(termreset)
+    except termios.error:
+        pass
+
+class CLI(Client):
+
+    def raw(self, txt):
+        print(txt)
+
+    def start(self):
+        super().start()
+        self.initialize(kcmd)
+
+class Console(CLI):
+
+    def handle(self, e):
+        super().handle(e)
+        e.wait()
+
+    def poll(self):
+        return input("> ")
+
+def ver(event):
+    event.reply("KONING %s" % __version__)
 
 def main():
-    k = Console()
-    k.prompt = False
-    k.tbl(tbl)
-    k.cfg.name = "evrm"
-    k.cfg.version = 70
-    k.parse()
-    k.scan(os.path.join(os.getcwd(), "mod"))
+    cfg.wd = os.path.expanduser("~/.koning")
+    k = Kernel()
+    k.addcmd(ver)
+    k.boot("koning", "cms")
     if k.cfg.txt:
-        k.run()
-        return
-    if k.op("c"):
-        k.prompt = True
-        k.start()
+        k.regs(all)
+        c = CLI()
+        c.initialize()
+        e = c.event(k.cfg.otxt)
+        kcmd(c, e)
+        e.wait()
+        return 
+    c = Client()
+    if k.opts("c"):
+        c = Console()
+    if k.opts("cd"):
+        k.regs(k.cfg.mods)
         k.init(k.cfg.mods)
-        k.wait()
+        c.start()
+        c.wait()
+
+def exec(main):
+    termsave()
+    try:
+         main()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        termreset()
 
 exec(main)

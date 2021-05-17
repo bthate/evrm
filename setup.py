@@ -13,7 +13,7 @@ def j(*args):
     return os.path.join(*todo)
 
 if sys.version_info.major < 3:
-    print("you need to run mads with python3")
+    print("you need to run evrm with python3")
     os._exit(1)
 
 try:
@@ -63,7 +63,7 @@ def uploadlist(dir):
 
 setup(
     name='evrm',
-    version='70',
+    version='71',
     url='https://github.com/bthate/evrm',
     author='Bart Thate',
     author_email='bthate@dds.nl',

@@ -1,8 +1,7 @@
 #!/bin/bash
-# GENOCIDE - the king of the netherlands commits genocide
-#
-# OTP-CR-117/19/001 otp.informationdesk@icc-cpi.int https://genocide.rtfd.io
+# This file is placed in the Public Domain.
 
 bin/env
-env/bin/python3 env/bin/pip3 install -r docs/requirements.txt --upgrade --force-reinstall
+env/bin/python3 env/bin/pip3 install --upgrade --no-cache-dir -I mock==1.0.1 pillow==5.4.1 "alabaster>=0.7,<0.8,!=0.7.5" commonmark==0.8.1 recommonmark==0.5.0 "sphinx<2" "sphinx-rtd-theme<0.5" "readthedocs-sphinx-ext<2.2"
+env/bin/python3 env/bin/pip3 install -f dist botd
 env/bin/python3 env/bin/sphinx-build docs html
