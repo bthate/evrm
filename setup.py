@@ -61,6 +61,9 @@ def uploadlist(dir):
 
     return upl
 
+def read():
+    return open("README.rst", "r").read()
+
 setup(
     name='evrm',
     version='72',
@@ -73,37 +76,17 @@ setup(
     zip_safe=False,
     install_requires=["botlib"],
     scripts=["bin/evrm"],
-    long_description='''
-    
-Het bewijs dat deze stoffen gif zijn is te vinden is de :ref:`Material Safety Data Sheet <sds>`, daar staan LD50 waardes in. 
-
-De bedoeling van deze tests zijn om de giftigheid van een stof te bepalen in het geval dat de medicijnen getransporteerd moeten worden. Voor als er een pallet Zyprexa in de fik vliegt tijdens transport bijvoorbeeld.
-
-LD50 staat voor lethal dose 50%, de dosis die nodig is om de helft van de test populatie te vermoorden door toediening van de betreffende st
-
-In het getoonde geval van clozapine is de LD50 251mg/kg en kan men clozapine dus moderately toxic noemen.
-
-Op de Hodge and Sterner Scale:
-
-| 1 Extremely Toxic             1 or less mg/kg
-| 2 Highly Toxic                1-50
-| 3 Moderately Toxic            50-500
-| 4 Slightly Toxic              500-5000
-| 5 Practically Non-toxic       5000-15,000
-| 6 Relatively Harmless         15,000 or more
-
-
-''',
-   data_files=[("docs", ["docs/conf.py","docs/index.rst"]),
+    long_description=read(),
+    data_files=[("docs", ["docs/conf.py","docs/index.rst"]),
                (j('docs', 'jpg'), uploadlist(j("docs","jpg"))),
                (j('docs', 'txt'), uploadlist(j("docs", "txt"))),
                (j('docs', '_templates'), uploadlist(j("docs", "_templates")))
               ],
-   package_data={'': ["*.crt"],
+    package_data={'': ["*.crt"],
                  },
-   classifiers=[
+    classifiers=[
         'Development Status :: 3 - Alpha',
-        'License :: Public Domanin',
+        'License :: Public Domain',
         'Operating System :: Unix',
         'Programming Language :: Python',
         'Topic :: Utilities'],

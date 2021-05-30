@@ -1,20 +1,19 @@
 EVRM
 ####
 
-In 2012 heb ik het Europeese Hof voor de Rechten van de Mens :ref:`aangeschreven <verzoek>` om een klacht tegen Nederland in te dienen.
-De :ref:`klacht <greffe>` betrof het afwezig zijn van verpleging in het nieuwe ambulante behandeltijdperk van de GGZ. :ref:`Uitspraak <uitspraak>` is niet-ontvankelijk. 
-
+In 2012 heb ik het Europeese Hof voor de Rechten van de Mens aangeschreven om een klacht tegen Nederland in te dienen.
+De klacht betrof het afwezig zijn van verpleging in het nieuwe ambulante behandeltijdperk van de GGZ. Uitspraak is niet-ontvankelijk. 
 Het EVRM is voor de GGZ patient een doodlopende weg.
 
-Het is pas na tussenkomst van de koningin mogelijk om :ref:`aangifte <aangifte>` te kunnen.
-De :ref:`Hoge Raad <hogeraad>` concludeert dat het geen verantwoordelijkheid heeft.
-Het verwijst vervolgens naar het :ref:`IGZ <om>`, die geen structurele :ref:`onzorgvuldigheid <igz>` in de afhandeling van klachten bij GGZ-NHN constrateert.
-De IGZ heeft erkent verantwoordelijk te zijn voor ambulante zorg, zowel voor vrijwillig als onder de BOPZ behandelde patienten, zie :ref:`quote <absoluut>`.
+Het is pas na tussenkomst van de koningin mogelijk om aangifte te kunnen.
+De Hoge Raad concludeert dat het geen verantwoordelijkheid heeft.
+Het verwijst vervolgens naar het IGZ, die geen structurele onzorgvuldigheid in de afhandeling van klachten bij GGZ-NHN constrateert.
+De IGZ heeft erkent verantwoordelijk te zijn voor ambulante zorg, zowel voor vrijwillig als onder de BOPZ behandelde patienten.
 
 De GGZ patient als slachtoffer word de rechtsgang naar de strafrechter geblokkeerd.
 
-De :ref:`Minister van VWS <minister>` zegt dat de wijze waarop hulp word geboden levert een bijdrage aan het voorkomen van een (dwang)opname in een ggz-instelling.
-Het is niet mogelijk voor de Koningin, noch de Koning om  :ref:`verdere tussenkomst <beuker>` te verlenen vanwege ministeriele verantwoordelijkheid. 
+De Minister van VWS zegt dat de wijze waarop hulp word geboden levert een bijdrage aan het voorkomen van een (dwang)opname in een ggz-instelling.
+Het is niet mogelijk voor de Koningin, noch de Koning om  verdere tussenkomst te verlenen vanwege ministeriele verantwoordelijkheid. 
 
 Op basis van de veronderstelling dat opnames worden voorkomen is men bedden gaan afbouwen.
 
@@ -30,7 +29,7 @@ Artikel 174
 BEWIJS
 ######
 
-Het bewijs dat deze stoffen gif zijn is te vinden is de :ref:`Material Safety Data Sheet <sds>`, daar staan LD50 waardes in.
+Het bewijs dat deze stoffen gif zijn is te vinden is de Material Safety Data Sheet, daar staan LD50 waardes in.
 LD50 staat voor lethal dose 50%, de dosis die nodig is om de helft van de test populatie te doden door toediening van de betreffende stof.
 
 In het geval van clozapine is de LD50 251mg/kg en kan men clozapine dus moderately toxic noemen.
@@ -113,13 +112,6 @@ Het niet melden van schadelijkheid heeft desastreuze gevolgen:
 EMAIL
 #####
 
-| Bartholomeus Henricus Julius (Bart) Thate - :ref:`teksten <teksten>`
+| Bartholomeus Henricus Julius (Bart) Thate 
 | botfather on #dunkbots irc.freenode.net 
 | email is bthate@dds.nl, thatebart@gmail.com 
-
-
-.. toctree::
-    :glob:
-    :hidden:
-
-    txt/*

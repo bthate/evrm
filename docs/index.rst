@@ -1,8 +1,5 @@
 .. title:: ! ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE !
 
-.. image:: jpg/nederland2.jpg
-    :width: 100%
-
 EVRM
 ####
 
