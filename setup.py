@@ -63,7 +63,7 @@ def uploadlist(dir):
 
 setup(
     name='evrm',
-    version='71',
+    version='72',
     url='https://github.com/bthate/evrm',
     author='Bart Thate',
     author_email='bthate@dds.nl',
