@@ -6,34 +6,31 @@
 EVRM
 ####
 
-| In 2012 heb ik het Europeese Hof voor de Rechten van de Mens :ref:`aangeschreven <verzoek>` om een klacht tegen Nederland in te dienen.
-| De :ref:`klacht <greffe>` betrof het afwezig zijn van verpleging in het nieuwe ambulante behandeltijdperk van de GGZ.
-| :ref:`Uitspraak <uitspraak>` is niet-ontvankelijk. 
+In 2012 heb ik het Europeese Hof voor de Rechten van de Mens :ref:`aangeschreven <verzoek>` om een klacht tegen Nederland in te dienen.
+De :ref:`klacht <greffe>` betrof het afwezig zijn van verpleging in het nieuwe ambulante behandeltijdperk van de GGZ. :ref:`Uitspraak <uitspraak>` is niet-ontvankelijk. 
 
-| Het EVRM is voor de GGZ patient een doodlopende weg.
+Het EVRM is voor de GGZ patient een doodlopende weg.
 
-| Het is pas na tussenkomst van de koningin mogelijk om :ref:`aangifte <aangifte>` te kunnen.
-| De :ref:`Hoge Raad <hogeraad>` concludeert dat het geen verantwoordelijkheid heeft.
-| Het verwijst vervolgens naar het :ref:`IGZ <om>`, die geen structurele :ref:`onzorgvuldigheid <igz>` in de afhandeling van klachten bij GGZ-NHN constrateert.
-| De IGZ heeft erkent verantwoordelijk te zijn voor ambulante zorg, zowel voor vrijwillig als onder de BOPZ behandelde patienten, zie :ref:`quote <absoluut>`.
+Het is pas na tussenkomst van de koningin mogelijk om :ref:`aangifte <aangifte>` te kunnen.
+De :ref:`Hoge Raad <hogeraad>` concludeert dat het geen verantwoordelijkheid heeft.
+Het verwijst vervolgens naar het :ref:`IGZ <om>`, die geen structurele :ref:`onzorgvuldigheid <igz>` in de afhandeling van klachten bij GGZ-NHN constrateert.
+De IGZ heeft erkent verantwoordelijk te zijn voor ambulante zorg, zowel voor vrijwillig als onder de BOPZ behandelde patienten, zie :ref:`quote <absoluut>`.
 
-| De GGZ patient als slachtoffer word de rechtsgang naar de strafrechter geblokkeerd.
+De GGZ patient als slachtoffer word de rechtsgang naar de strafrechter geblokkeerd.
 
-| De :ref:`Minister van VWS <minister>` zegt dat de wijze waarop hulp word geboden levert een bijdrage aan het voorkomen van een (dwang)opname in een ggz-instelling.
-| Het is niet mogelijk voor de Koningin, noch de Koning om  :ref:`verdere tussenkomst <beuker>` te verlenen vanwege ministeriele verantwoordelijkheid. 
+De :ref:`Minister van VWS <minister>` zegt dat de wijze waarop hulp word geboden levert een bijdrage aan het voorkomen van een (dwang)opname in een ggz-instelling.
+Het is niet mogelijk voor de Koningin, noch de Koning om  :ref:`verdere tussenkomst <beuker>` te verlenen vanwege ministeriele verantwoordelijkheid. 
 
-| Op basis van de veronderstelling dat opnames worden voorkomen is men bedden gaan afbouwen.
+Op basis van de veronderstelling dat opnames worden voorkomen is men bedden gaan afbouwen.
 
 WET
 ###
 
 Artikel 174
 
-1.
-Hij die waren verkoopt, te koop aanbiedt, aflevert of uitdeelt, wetende dat zij voor het leven of de gezondheid schadelijk zijn, en dat schadelijk karakter verzwijgende , wordt gestraft met gevangenisstraf van ten hoogste vijftien jaren of geldboete van de vijfde categorie.
+1. Hij die waren verkoopt, te koop aanbiedt, aflevert of uitdeelt, wetende dat zij voor het leven of de gezondheid schadelijk zijn, en dat schadelijk karakter verzwijgende , wordt gestraft met gevangenisstraf van ten hoogste vijftien jaren of geldboete van de vijfde categorie.
 
-2.
-Indien het feit iemands dood ten gevolge heeft, wordt de schuldige gestraft met levenslange gevangenisstraf of tijdelijke van ten hoogste dertig jaren of geldboete van de vijfde categorie.
+2. Indien het feit iemands dood ten gevolge heeft, wordt de schuldige gestraft met levenslange gevangenisstraf of tijdelijke van ten hoogste dertig jaren of geldboete van de vijfde categorie.
 
 BEWIJS
 ######
@@ -51,7 +48,6 @@ Op de Hodge and Sterner Scale:
 | 4 Slightly Toxic              500-5000
 | 5 Practically Non-toxic       5000-15,000
 | 6 Relatively Harmless         15,000 or more
-
 
 (F)ACT
 ######
@@ -122,15 +118,8 @@ Het niet melden van schadelijkheid heeft desastreuze gevolgen:
 EMAIL
 #####
 
-.. image:: jpg/stoned2.jpg
-     :align: right
-     :scale: 5%
-
-   
 | Bartholomeus Henricus Julius (Bart) Thate - :ref:`teksten <teksten>`
 | botfather on #dunkbots irc.freenode.net 
-|
-|
 | email is bthate@dds.nl, thatebart@gmail.com 
 
 
@@ -139,4 +128,3 @@ EMAIL
     :hidden:
 
     txt/*
-

@@ -71,7 +71,7 @@ setup(
     license='Public Domain',
     include_package_data=True,
     zip_safe=False,
-    install_requires=["oplib"],
+    install_requires=["botlib"],
     scripts=["bin/evrm"],
     long_description='''
     

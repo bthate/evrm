@@ -1,23 +1,24 @@
 #!/usr/bin/env python3
 # This file is placed in the Public Domain.
 
-__version__ = 121
+__version__ = 43
 
 import atexit
 import os
-import readline
 import sys
 import termios
 
 sys.path.insert(0, os.getcwd())
 
-from op.hdl import ENOMORE, Client, Event, first
-from op.krn import Kernel, kcmd
-from op.obj import cfg
+from bot.bus import first
+from bot.clt import Client
+from bot.krn import Kernel, kcmd
+from bot.obj import cfg
 
-import op.all
+import bot.all
 
-all = "cms,fnd,log,irc"
+all = "adm,cms,fnd,irc,krn,log,rss,tdo,ver"
+name = "evrm"
 resume = {}
 
 def termsetup(fd):
@@ -56,14 +57,11 @@ class Console(CLI):
     def poll(self):
         return input("> ")
 
-def ver(event):
-    event.reply("KONING %s" % __version__)
-
 def main():
-    cfg.wd = os.path.expanduser("~/.koning")
+    cfg.wd = os.path.expanduser("~/.%s" % name)
     k = Kernel()
-    k.addcmd(ver)
-    k.boot("koning", "cms")
+    k.parse()
+    k.boot(name, __version__)
     if k.cfg.txt:
         k.regs(all)
         c = CLI()
@@ -71,20 +69,23 @@ def main():
         e = c.event(k.cfg.otxt)
         kcmd(c, e)
         e.wait()
-        return 
+        return
     c = Client()
     if k.opts("c"):
         c = Console()
+        k.cfg.mods += "adm,cms"
+    k.regs(k.cfg.mods)
+    k.init(k.cfg.mods)
     if k.opts("cd"):
-        k.regs(k.cfg.mods)
-        k.init(k.cfg.mods)
         c.start()
         c.wait()
 
 def exec(main):
     termsave()
     try:
-         main()
+        main()
+    except PermissionError as ex:
+        print(str(ex))
     except KeyboardInterrupt:
         pass
     finally:
