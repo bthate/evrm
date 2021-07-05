@@ -66,15 +66,15 @@ def read():
 
 setup(
     name='evrm',
-    version='72',
+    version='73',
     url='https://github.com/bthate/evrm',
     author='Bart Thate',
     author_email='bthate@dds.nl',
     description="ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE !!!",
     license='Public Domain',
     include_package_data=True,
-    zip_safe=False,
-    install_requires=["botlib"],
+    zip_safe=True,
+    py_modules=["ob"],
     scripts=["bin/evrm"],
     long_description=read(),
     data_files=[("docs", ["docs/conf.py","docs/index.rst"]),
