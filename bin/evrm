@@ -1,25 +1,60 @@
 #!/usr/bin/env python3
 # This file is placed in the Public Domain.
 
-__version__ = 43
+"EVRM"
+
+import os, sys
+sys.path.insert(0, os.getcwd())
+sys.path.insert(0, "lib")
 
 import atexit
+import ob
 import os
 import sys
 import termios
 
-sys.path.insert(0, os.getcwd())
+ob.wd = os.path.expanduser("~/.evrm")
 
-from bot.bus import first
-from bot.clt import Client
-from bot.krn import Kernel, kcmd
-from bot.obj import cfg
+from ob import Handler, Kernel
 
-import bot.all
-
-all = "adm,cms,fnd,irc,krn,log,rss,tdo,ver"
-name = "evrm"
+k = Kernel()
+k.cfg.p = "evrm"
+k.cfg.m = ""
 resume = {}
+
+def init(k):
+    c = Console()
+    ob.launch(c.start)
+    return
+
+class CLI(Handler):
+
+    def error(self, e):
+        print(e.exc)
+        raise ob.Restart
+
+    def handle(self, e):
+        k.put(e)
+        e.wait()
+
+    def raw(self, txt):
+        print(txt)
+
+class Console(ob.CLI):
+
+    def error(self, e):
+        print(e.exc)
+        raise Restart
+
+    def handle(self, e):
+        k.put(e)
+        e.wait()
+
+    def poll(self):
+        return input("> ")
+
+    def raw(self, txt):
+        print(txt)
 
 def termsetup(fd):
     return termios.tcgetattr(fd)
@@ -39,56 +74,23 @@ def termsave():
     except termios.error:
         pass
 
-class CLI(Client):
-
-    def raw(self, txt):
-        print(txt)
-
-    def start(self):
-        super().start()
-        self.initialize(kcmd)
-
-class Console(CLI):
-
-    def handle(self, e):
-        super().handle(e)
-        e.wait()
-
-    def poll(self):
-        return input("> ")
-
-def main():
-    cfg.wd = os.path.expanduser("~/.%s" % name)
-    k = Kernel()
-    k.parse()
-    k.boot(name, __version__)
-    if k.cfg.txt:
-        k.regs(all)
-        c = CLI()
-        c.initialize()
-        e = c.event(k.cfg.otxt)
-        kcmd(c, e)
-        e.wait()
-        return
-    c = Client()
-    if k.opts("c"):
-        c = Console()
-        k.cfg.mods += "adm,cms"
-    k.regs(k.cfg.mods)
-    k.init(k.cfg.mods)
-    if k.opts("cd"):
-        c.start()
-        c.wait()
-
-def exec(main):
+def wrap(func):
     termsave()
     try:
-        main()
-    except PermissionError as ex:
-        print(str(ex))
+        func()
     except KeyboardInterrupt:
         pass
     finally:
         termreset()
 
-exec(main)
+def main():
+    k.start()
+    if k.cfg.txt:
+       cli = CLI()
+       return k.cmd(cli, k.cfg.otxt)
+    if k.cfg.m:
+       csl = Console()
+       csl.start()
+       k.wait()
+
+wrap(main)
