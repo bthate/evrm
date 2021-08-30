@@ -1,49 +1,11 @@
 #!/usr/bin/env python3
-# EVRM - ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE !!!
+# OTP-CR-117/19 otp.informationdesk@icc-cpi.int http://pypi.org/project/genocide
 #
-# this file is in the Public Domain
+# This file is placed in the Public Domain.
 
 import os
-import sys
-import os.path
 
-def j(*args):
-    if not args: return
-    todo = list(map(str, filter(None, args)))
-    return os.path.join(*todo)
-
-if sys.version_info.major < 3:
-    print("you need to run evrm with python3")
-    os._exit(1)
-
-try:
-    use_setuptools()
-except:
-    pass
-
-try:
-    from setuptools import setup
-except Exception as ex:
-    print(str(ex))
-    os._exit(1)
-
-target = "evrm"
-upload = []
-
-def uploadfiles(dir):
-    upl = []
-    if not os.path.isdir(dir):
-        print("%s does not exist" % dir)
-        os._exit(1)
-    for file in os.listdir(dir):
-        if not file or file.startswith('.'):
-            continue
-        d = dir + os.sep + file
-        if not os.path.isdir(d):
-            if file.endswith(".pyc") or file.startswith("__pycache"):
-                continue
-            upl.append(d)
-    return upl
+from setuptools import setup
 
 def uploadlist(dir):
     upl = []
@@ -58,7 +20,6 @@ def uploadlist(dir):
             if file.endswith(".pyc") or file.startswith("__pycache"):
                 continue
             upl.append(d)
-
     return upl
 
 def read():
@@ -66,24 +27,17 @@ def read():
 
 setup(
     name='evrm',
-    version='73',
+    version='74',
     url='https://github.com/bthate/evrm',
     author='Bart Thate',
-    author_email='bthate@dds.nl',
+    author_email='bthate67@gmail.com',
     description="ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE !!!",
     license='Public Domain',
-    include_package_data=True,
     zip_safe=True,
-    py_modules=["ob"],
     scripts=["bin/evrm"],
     long_description=read(),
-    data_files=[("docs", ["docs/conf.py","docs/index.rst"]),
-               (j('docs', 'jpg'), uploadlist(j("docs","jpg"))),
-               (j('docs', 'txt'), uploadlist(j("docs", "txt"))),
-               (j('docs', '_templates'), uploadlist(j("docs", "_templates")))
-              ],
-    package_data={'': ["*.crt"],
-                 },
+    include_package_data=True,
+    data_files=[("share/doc/evrm", uploadlist("docs"))],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: Public Domain',

@@ -12,7 +12,6 @@ def main():
     for line in os.popen("python3 setup.py sdist").readlines():
         print(line.strip())
     open("python3 -mvirtualenv --python=python3 --system-site-packages env")
-    open("env/bin/pip3 install oplib -f ../oplib/dist --upgrade --force-reinstall")
     open("env/bin/pip3 install evrm -f dist --upgrade --force-reinstall")
 
 if __name__ == "__main__":

@@ -1,96 +1,144 @@
 #!/usr/bin/env python3
 # This file is placed in the Public Domain.
 
-"EVRM"
+import os, sys ; sys.path.insert(0, os.getcwd())
 
-import os, sys
-sys.path.insert(0, os.getcwd())
-sys.path.insert(0, "lib")
 
-import atexit
-import ob
 import os
+import readline
 import sys
 import termios
+import time
 
-ob.wd = os.path.expanduser("~/.evrm")
 
-from ob import Handler, Kernel
+wd = os.path.expanduser("~/.evrm")
 
-k = Kernel()
-k.cfg.p = "evrm"
-k.cfg.m = ""
-resume = {}
 
-def init(k):
-    c = Console()
-    ob.launch(c.start)
-    return
+from krn.obj import Object, fmt, find, fntime, getmain, getwd
+from krn.obj import keys, listfiles, save
+from krn.run import Client, Runtime
+from krn.tbl import Table
+from krn.tms import elapsed
+from krn.trc import get_exception
+from krn.ver import __version__
 
-class CLI(Handler):
 
-    def error(self, e):
-        print(e.exc)
-        raise ob.Restart
+starttime = time.time()
 
-    def handle(self, e):
+
+class CLI(Client):
+
+    def handle(self, clt, e):
         k.put(e)
-        e.wait()
+
 
     def raw(self, txt):
         print(txt)
+        sys.stdout.flush()
 
-class Console(ob.CLI):
 
-    def error(self, e):
-        print(e.exc)
-        raise Restart
+class Console(CLI):
 
-    def handle(self, e):
+    def handle(self, clt, e):
         k.put(e)
         e.wait()
 
     def poll(self):
         return input("> ")
 
-    def raw(self, txt):
+
+class Kernel(Runtime):
+
+    def error(self, txt):
         print(txt)
+        sys.stdout.flush()
 
-def termsetup(fd):
-    return termios.tcgetattr(fd)
+    def log(self, txt):
+        if k.opt("v"):
+            print(txt)
+            sys.stdout.flush()
 
-def termreset():
-    if "old" in resume:
-        try:
-            termios.tcsetattr(resume["fd"], termios.TCSADRAIN, resume["old"])
-        except termios.error:
-            pass
+class Log(Object):
 
-def termsave():
+    def __init__(self):
+        super().__init__()
+        self.txt = ""
+
+
+clt = CLI()
+k = Kernel()
+tbl = Table()
+
+
+def cmd(event):
+    tbl = getmain("tbl")
+    event.reply(",".join(sorted(tbl.modnames)))
+
+
+def fnd(event):
+    if not event.args:
+        fls = listfiles(getwd())
+        if fls:
+            event.reply(",".join(sorted({x.split(".")[-1].lower() for x in fls})))
+        return
+    otype = event.args[0]
+    nr = -1
+    args = list(event.gets)
     try:
-        resume["fd"] = sys.stdin.fileno()
-        resume["old"] = termsetup(sys.stdin.fileno())
-        atexit.register(termreset)
-    except termios.error:
+        args.extend(event.args[1:])
+    except IndexError:
         pass
+    got = False
+    for fn, o in find(otype, event.gets, event.index, event.timed):
+        nr += 1
+        txt = "%s %s" % (str(nr), fmt(o, args or keys(o), skip=keys(event.skip)))
+        if "t" in event.opts:
+            txt = txt + " %s" % (elapsed(time.time() - fntime(fn)))
+        got = True
+        event.reply(txt)
+    if not got:
+        event.reply("no result")
+
+
+def log(event):
+    if not event.rest:
+        event.reply("log <txt>")
+        return
+    o = Log()
+    o.txt = event.rest
+    save(o)
+    event.reply("ok")
+
+
+def ver(event):
+    event.reply("%s %s" % (sys.argv[0].split(os.sep)[-1].upper(), __version__))
+
 
 def wrap(func):
-    termsave()
+    fd = sys.stdin.fileno()
+    old = termios.tcgetattr(fd)
     try:
         func()
     except KeyboardInterrupt:
         pass
+    except PermissionError as ex:
+        print(str(ex))
+    except Exception as ex:
+        print(get_exception())
     finally:
-        termreset()
+        termios.tcsetattr(fd, termios.TCSADRAIN, old)
 
 def main():
-    k.start()
+    k.boot()
+    tbl.scan("__main__")
     if k.cfg.txt:
-       cli = CLI()
-       return k.cmd(cli, k.cfg.otxt)
-    if k.cfg.m:
-       csl = Console()
-       csl.start()
-       k.wait()
+        return k.cmd(k.cfg.otxt)
+    if k.opt("c") or k.cfg.mod:
+        global clt
+        clt = Console()
+        k.start()
+        k.init(k.cfg.mod)
+        clt.start()
+        k.wait()
 
 wrap(main)

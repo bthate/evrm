@@ -83,6 +83,5 @@ intersphinx_mapping = {
                       }
 intersphinx_cache_limit=1
 rst_prolog = """.. image:: nederland2.jpg
-    :height: 2.7cm
     :width: 100%
 """
