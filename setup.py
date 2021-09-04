@@ -37,7 +37,6 @@ setup(
     scripts=["bin/evrm"],
     long_description=read(),
     include_package_data=True,
-    packages=["evrm"],
     data_files=[("share/doc/evrm", uploadlist("docs"))],
     classifiers=[
         'Development Status :: 3 - Alpha',
