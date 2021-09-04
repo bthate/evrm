@@ -27,7 +27,7 @@ def read():
 
 setup(
     name='evrm',
-    version='75',
+    version='76',
     url='https://github.com/bthate/evrm',
     author='Bart Thate',
     author_email='bthate67@gmail.com',
@@ -36,6 +36,8 @@ setup(
     zip_safe=True,
     scripts=["bin/evrm"],
     long_description=read(),
+    py_modules=["obj", "run"],
+    packages=["evrm"],
     include_package_data=True,
     data_files=[("share/doc/evrm", uploadlist("docs"))],
     classifiers=[
