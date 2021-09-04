@@ -1,43 +1,23 @@
 #!/usr/bin/env python3
 # This file is placed in the Public Domain.
 
-import os, sys ; sys.path.insert(0, os.getcwd())
-
-
+import importlib
 import os
+import pkgutil
 import readline
 import sys
 import termios
 import time
 
-
-wd = os.path.expanduser("~/.evrm")
-
-
-from krn.obj import Object, fmt, find, fntime, getmain, getwd
-from krn.obj import keys, listfiles, save
-from krn.run import Client, Runtime
-from krn.tbl import Table
-from krn.tms import elapsed
-from krn.trc import get_exception
-from krn.ver import __version__
+from obj import RunCfg, Object, fmt, keys, save
+from run import Client, Runtime, Table, elapsed, find, fntime, get_exception
+from run import listfiles, spl
 
 
-starttime = time.time()
+RunCfg.wd = os.path.expanduser("~/.evrm")
 
 
-class CLI(Client):
-
-    def handle(self, clt, e):
-        k.put(e)
-
-
-    def raw(self, txt):
-        print(txt)
-        sys.stdout.flush()
-
-
-class Console(CLI):
+class Console(Client):
 
     def handle(self, clt, e):
         k.put(e)
@@ -45,6 +25,10 @@ class Console(CLI):
 
     def poll(self):
         return input("> ")
+
+    def raw(self, txt):
+        print(txt)
+        sys.stdout.flush()
 
 
 class Kernel(Runtime):
@@ -54,64 +38,46 @@ class Kernel(Runtime):
         sys.stdout.flush()
 
     def log(self, txt):
-        if k.opt("v"):
-            print(txt)
+        if "PONG" in txt or "PING" in txt:
+            return
+        if RunCfg.verbose:
+            print(txt.rstrip())
             sys.stdout.flush()
 
-class Log(Object):
 
-    def __init__(self):
-        super().__init__()
-        self.txt = ""
+class Table(Table):
 
+    def addmod(self, mn):
+        spc = importlib.util.find_spec(mn)
+        if not spc:
+            return
+        mod = importlib.import_module(mn)
+        self.introspect(mod)
 
-clt = CLI()
-k = Kernel()
-tbl = Table()
-
-
-def cmd(event):
-    tbl = getmain("tbl")
-    event.reply(",".join(sorted(tbl.modnames)))
-
-
-def fnd(event):
-    if not event.args:
-        fls = listfiles(getwd())
-        if fls:
-            event.reply(",".join(sorted({x.split(".")[-1].lower() for x in fls})))
-        return
-    otype = event.args[0]
-    nr = -1
-    args = list(event.gets)
-    try:
-        args.extend(event.args[1:])
-    except IndexError:
-        pass
-    got = False
-    for fn, o in find(otype, event.gets, event.index, event.timed):
-        nr += 1
-        txt = "%s %s" % (str(nr), fmt(o, args or keys(o), skip=keys(event.skip)))
-        if "t" in event.opts:
-            txt = txt + " %s" % (elapsed(time.time() - fntime(fn)))
-        got = True
-        event.reply(txt)
-    if not got:
-        event.reply("no result")
+    def scan(self, pn):
+        spc = importlib.util.find_spec(pn)
+        if not spc:
+            return
+        pkg = importlib.import_module(pn)
+        for mn in pkgutil.walk_packages(pkg.__path__, pn + "."):
+            mod = importlib.import_module(mn.name)
+            if mod:
+                self.introspect(mod)
 
 
-def log(event):
-    if not event.rest:
-        event.reply("log <txt>")
-        return
-    o = Log()
-    o.txt = event.rest
-    save(o)
-    event.reply("ok")
-
-
-def ver(event):
-    event.reply("%s %s" % (sys.argv[0].split(os.sep)[-1].upper(), __version__))
+def daemon():
+    pid = os.fork()
+    if pid != 0:
+        termreset()
+        os._exit(0)
+    os.setsid()
+    os.umask(0)
+    si = open("/dev/null", 'r')
+    so = open("/dev/null", 'a+')
+    se = open("/dev/null", 'a+')
+    os.dup2(si.fileno(), sys.stdin.fileno())
+    os.dup2(so.fileno(), sys.stdout.fileno())
+    os.dup2(se.fileno(), sys.stderr.fileno())
 
 
 def wrap(func):
@@ -120,25 +86,39 @@ def wrap(func):
     try:
         func()
     except KeyboardInterrupt:
-        pass
-    except PermissionError as ex:
-        print(str(ex))
-    except Exception as ex:
-        print(get_exception())
+        print("")
     finally:
         termios.tcsetattr(fd, termios.TCSADRAIN, old)
 
+
+clt = Console()
+k = Kernel()
+tbl = Table()
+
+
+def cmd(event):
+    event.reply(",".join(tbl.modnames))
+
 def main():
+    from run import __version__
     k.boot()
-    tbl.scan("__main__")
+    tbl.scan("evrm")
+    tbl.add(cmd)
+    if RunCfg.verbose:
+        k.log("EVRM %s" % __version__)
+        k.log(fmt(RunCfg, ["bork","console","daemon","debug","verbose","wd"]))
+    if RunCfg.verbose:
+        k.log(",".join(tbl.modnames))
     if k.cfg.txt:
         return k.cmd(k.cfg.otxt)
-    if k.opt("c") or k.cfg.mod:
-        global clt
-        clt = Console()
+    if RunCfg.daemon:
+        daemon()
+    if RunCfg.console or k.cfg.mod:
         k.start()
-        k.init(k.cfg.mod)
+        for mn in spl(k.cfg.mod):
+            k.init("evrm.%s" % mn)
         clt.start()
         k.wait()
+
 
 wrap(main)
