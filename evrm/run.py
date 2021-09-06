@@ -15,7 +15,7 @@ import time
 import traceback
 import types
 
-from obj import RunCfg, Db, Default, List, Object, cdir, fmt, get, update
+from .obj import RunCfg, Db, Default, List, Object, cdir, fmt, get, update
 
 
 def __dir__():
