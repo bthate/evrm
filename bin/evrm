@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # This file is placed in the Public Domain.
 
+__version__ = 77
+
 import importlib
 import os
 import pkgutil
@@ -99,11 +101,17 @@ tbl = Table()
 def cmd(event):
     event.reply(",".join(tbl.modnames))
 
+
+def ver(event):
+    event.reply("EVRM %s" % __version__)
+
+
 def main():
     from run import __version__
     k.boot()
     tbl.scan("evrm")
     tbl.add(cmd)
+    tbl.add(ver)
     if RunCfg.verbose:
         k.log("EVRM %s" % __version__)
         k.log(fmt(RunCfg, ["bork","console","daemon","debug","verbose","wd"]))

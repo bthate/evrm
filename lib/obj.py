@@ -353,6 +353,8 @@ def fmt(self, keyz=None, empty=True, skip=None):
         if key in skip:
             continue
         if key in dir(self):
+            if key.startswith("__"):
+                continue
             val = getattr(self, key, None)
             if empty and not val:
                 continue

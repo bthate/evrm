@@ -385,10 +385,8 @@ class Runtime(Dispatcher, Loop):
         self.opts = Object()
         self.register("cmd", self.handle)
 
-    def boot(self, disk=False):
-        self.parse_cli(disk)
-        cdir(RunCfg.wd+os.sep)
-        cdir(os.path.join(RunCfg.wd, "store", ""))
+    def boot(self):
+        self.parse_cli()
 
     def cmd(self, txt):
         if not txt:
@@ -446,18 +444,13 @@ class Runtime(Dispatcher, Loop):
                 return True
         return False
 
-    def parse_cli(self, disk=False):
+    def parse_cli(self):
         o = Default()
-        if disk:
-            db = Db()
-            oo = db.lastobject(self.cfg)
-            if oo:
-                update(o, oo)
         txt = " ".join(sys.argv[1:])
         if txt:
             parse_txt(o, txt)
         self.cfg.txt = o.txt
-        self.cfg.otxt = o.txt
+        self.cfg.otxt = o.otxt
         if o.sets:
             update(self.cfg, o.sets)
         if o.index:
@@ -499,6 +492,7 @@ class Runtime(Dispatcher, Loop):
         os.setgid(pwn.pw_gid)
         os.setuid(pwn.pw_uid)
         os.umask(0o22)
+        self.log("lower permissions to %s:%s" % (pwn.pw_uid, 0o22))
         return True
 
     @staticmethod
@@ -507,6 +501,15 @@ class Runtime(Dispatcher, Loop):
             return False
         return True
 
+    @staticmethod
+    def skel():
+        try:
+            assert RunCfg.wd
+            cdir(RunCfg.wd+os.sep)
+            cdir(os.path.join(RunCfg.wd, "store", ""))
+        except Exception as ex:
+            pass
+            
     @staticmethod
     def wait():
         while 1:
