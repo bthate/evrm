@@ -1,9 +1,5 @@
 .. _evrm:
 
-.. image:: ../jpg/nederland2.jpg
-    :width: 100%
-    :height: 4cm
-
 EVRM
 ####
 

@@ -1,7 +1,12 @@
-From:	Bart Thate <bthate@dds.nl>
-To: 	voorzitter@tweedekamer.nl, l.bontes@tweedekamer.nl, S.Buma@tweedekamer.nl, j.houwers@tweedekamer.nl, j.klaver@tweedekamer.nl, ...
-Subject:	Wet verplichte Geestelijke Gezondheid Zorg
-Date:	Tue, 27 Oct 2015 16:36:21 +0100
+.. _tweede kamer:
+
+TWEEDE KAMER
+============
+
+| From:	Bart Thate <bthate@dds.nl>
+| To: 	voorzitter@tweedekamer.nl, l.bontes@tweedekamer.nl, S.Buma@tweedekamer.nl, j.houwers@tweedekamer.nl, j.klaver@tweedekamer.nl, ...
+| Subject:	Wet verplichte Geestelijke Gezondheid Zorg
+| Date:	Tue, 27 Oct 2015 16:36:21 +0100
 
 
 Geachte Tweede Kamer,

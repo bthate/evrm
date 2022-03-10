@@ -1,3 +1,8 @@
+.. _notworking:
+
+NOT WORKING
+===========
+
 To: dpa-scsb3@un.org
 From: Bart Thate <bthate@dds.nl>
 Subject: concerning genocide by the king of the netherlands to which the

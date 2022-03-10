@@ -82,6 +82,11 @@ intersphinx_mapping = {
                        'sphinx': ('http://sphinx.pocoo.org/', None),
                       }
 intersphinx_cache_limit=1
-rst_prolog = """.. image:: nederland2.jpg
+rst_prolog = """.. raw:: html
+
+    <br>
+
+
+.. image:: nederland2.jpg
     :width: 100%
 """
