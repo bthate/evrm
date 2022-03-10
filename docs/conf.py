@@ -12,7 +12,7 @@ curdir = os.getcwd()
 sys.path.insert(0, curdir + os.sep)
 sys.path.insert(0, curdir + os.sep + '..' + os.sep)
 
-__version__ = 72
+__version__ = 100
 
 needs_sphinx='1.1'
 nitpick_ignore=[
@@ -54,11 +54,11 @@ add_module_names = False
 show_authors = True
 pygments_style = 'sphinx'
 modindex_common_prefix = [""]
-keep_warnings = True
-html_theme = "haiku"
-#html_theme_options = {
-#     "nosidebar": True,
-#}
+keep_warnings = False
+html_theme = "bizstyle"
+html_theme_options = {
+     "nosidebar": True,
+}
 html_theme_path = []
 html_short_title = "EVRM %s" % __version__
 html_favicon = "jpg/aes.ico"
