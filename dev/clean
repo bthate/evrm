@@ -1,3 +1,3 @@
 # This file is placed in the Public Domain.
 
-rm -fR evrm.egg-info/ .readthedocs.yml~ evrm/*~ evrm/__pycache__ files/*~ docs/*~ docs/mods*.rst docs/ol*.rst run run.tar.gz html env env.tar.gz mods/*~ mods/__pycache__ op/*~ op/__pycache__ .data build dist MANIFEST bin/*~ *~ dev/*~ tests/*~ tests/__pycache__
+rm -fR evrm.egg-info/ .readthedocs.yml~ evrm/*~ evrm/__pycache__ files/*~ docs/txt/*~ docs/*~ docs/mods*.rst docs/ol*.rst run run.tar.gz html env env.tar.gz mods/*~ mods/__pycache__ op/*~ op/__pycache__ .data build dist MANIFEST bin/*~ *~ dev/*~ tests/*~ tests/__pycache__
