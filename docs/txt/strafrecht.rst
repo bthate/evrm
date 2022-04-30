@@ -3,5 +3,5 @@
 strafrecht
 ##########
 
-.. include:: Wetboek-van-Strafrecht.txt
+.. literalinclude:: Wetboek-van-Strafrecht.txt
     :encoding: "latin-1"
