@@ -34,7 +34,7 @@ setup(
     url='https://github.com/bthate/evrm',
     author='Bart Thate',
     author_email='bthate67@gmail.com',
-    description="ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE !!!",
+    description="ANTIPSYCHOTICA AKATHISIA KATATONIE SEDERING SHOCKS LETHAAL",
     license='Public Domain',
     zip_safe=False,
     scripts=["bin/evrm"],

@@ -8,7 +8,7 @@ def open(txt):
         print(line.rstrip())
 
 def main():
-    open("bin/clean")
+    open("dev/clean")
     for line in os.popen("python3 setup.py sdist").readlines():
         print(line.strip())
     open("python3 -mvirtualenv --python=python3 --system-site-packages env")

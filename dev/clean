@@ -1,5 +1,3 @@
-# GENOCIDE - the king of the netherlands commits genocide
-#
-# OTP-CR-117/19/001 otp.informationdesk@icc-cpi.int https://genocide.rtfd.io
+# This file is placed in the Public Domain.
 
-rm -fR lib/evrm.egg-info/ .readthedocs.yml~ bot/*~ bot/__pycache__ evrm/*~ evrm/__pycache__ files/*~ docs/*~ docs/mods*.rst docs/ol*.rst run run.tar.gz html env env.tar.gz mods/*~ mods/__pycache__ op/*~ op/__pycache__ .data build dist MANIFEST evrm.egg-info bin/*~ *~ tests/*~ tests/__pycache__
+rm -fR evrm.egg-info/ .readthedocs.yml~ evrm/*~ evrm/__pycache__ files/*~ docs/*~ docs/mods*.rst docs/ol*.rst run run.tar.gz html env env.tar.gz mods/*~ mods/__pycache__ op/*~ op/__pycache__ .data build dist MANIFEST bin/*~ *~ dev/*~ tests/*~ tests/__pycache__
