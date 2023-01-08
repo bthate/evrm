@@ -30,11 +30,11 @@ def read():
 
 setup(
     name='evrm',
-    version='101',
+    version='111',
     url='https://github.com/bthate/evrm',
     author='Bart Thate',
     author_email='bthate67@gmail.com',
-    description="ANTIPSYCHOTICS AKATHISIA KATATONIE SEDERING SHOCKS DEAD",
+    description="@KarimKhanQC reconsider OTP-CR-117/19",
     license='Public Domain',
     zip_safe=False,
     scripts=["bin/evrm"],
