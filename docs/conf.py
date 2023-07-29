@@ -3,11 +3,11 @@
 #
 
 
-"Prosecutor. Court. Reconsider OTP-CR-117/19."
+"ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE"
 
 
 __name__ = "evrm"
-__version__ = "52"
+__version__ = "200"
 
 
 import doctest
@@ -31,7 +31,7 @@ project = __name__
 master_doc = 'index'
 version = '%s' % __version__
 release = '%s' % __version__
-language = ''
+language = 'utf-8'
 today = ''
 today_fmt = '%B %d, %Y'
 needs_sphinx='1.7'
@@ -58,7 +58,7 @@ extensions=[
 # -- Options for HTML output -------------------------------------------------
 
 
-html_title = "Prosecutor. Court. Reconsider OTP-CR-117/19."
+html_title = "ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE"
 html_style = 'evrm.css'
 html_static_path = ["_static"]
 html_css_files = ["evrm.css",]
@@ -112,9 +112,32 @@ rst_prolog = """.. image:: nederland2.jpg
     :width: 100%
     :target: index.html
     
-.. title:: Prosecutor. Court, Reconsider OTP-CT-117/19.
+.. title:: ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE
+
+
+.. raw:: html
+
+     <br><br>
+     <center>
+     <i>ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE</i>
+     </center>
+     <br>
 
 """ 
+
+rst_epilog = '''.. raw:: html
+
+     <br>
+     <center>
+     <b>
+
+:ref:`home <evrm>` - :ref:`manual <manual>` - :ref:`source <source>` - :ref:`about <about>`
+
+.. raw:: html
+
+    </b>
+    </center>
+'''
 autosummary_generate=True
 autodoc_default_flags=['members', 'undoc-members', 'private-members', "imported-members"]
 autodoc_member_order='groupwise'

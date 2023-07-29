@@ -3,7 +3,7 @@
 
 .. raw:: html
 
-    <br><br><br>
+    <br>
 
 evrm
 ####
@@ -141,4 +141,5 @@ email
     :glob:
     :hidden:
 
+    *
     txt/*

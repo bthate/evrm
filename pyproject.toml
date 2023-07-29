@@ -11,7 +11,7 @@ include_package_data = true
 [project]
 name = "evrm"
 description = "ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE"
-version = "250"
+version = "200"
 authors = [
     {name = "Bart Thate", email = "bthate@dds.nl" },
 ]
