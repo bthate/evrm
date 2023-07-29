@@ -1,5 +1,0 @@
-# This file is placed in the Public Domain.
-
-bin/clean
-bin/upenv
-env/bin/python3 env/bin/sphinx-build docs html

@@ -1,5 +1,0 @@
-#!/bin/bash
-# This file is placed in the Public Domain.
-
-bin/env
-env/bin/python3 env/bin/pip3 install -I "Jinja2==3.0.0" "mock==1.0.1" "pillow>5.4.1" "alabaster>=0.7,<0.8,!=0.7.5" "commonmark==0.8.1" "recommonmark==0.5.0" "sphinx<2" "sphinx-rtd-theme<0.5" "readthedocs-sphinx-ext<2.2"
