@@ -1,7 +1,16 @@
 .. title:: ! ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE !
 
-EVRM
+
+.. raw:: html
+
+    <br><br><br>
+
+evrm
 ####
+
+.. raw:: html
+
+    <br>
 
 In 2012 heb ik het Europeese Hof voor de Rechten van de Mens :ref:`aangeschreven <verzoek>` om een klacht tegen Nederland in te dienen.
 De :ref:`klacht <greffe>` betrof het afwezig zijn van verpleging in het nieuwe ambulante behandeltijdperk van de GGZ. :ref:`Uitspraak <uitspraak>` is niet-ontvankelijk. 
@@ -20,8 +29,10 @@ Het is niet mogelijk voor de Koningin, noch de Koning om  :ref:`verdere tussenko
 
 Op basis van de veronderstelling dat opnames worden voorkomen is men bedden gaan afbouwen.
 
-WET
-###
+
+wet
+===
+
 
 Artikel 174
 
@@ -29,8 +40,10 @@ Artikel 174
 
 2. Indien het feit iemands dood ten gevolge heeft, wordt de schuldige gestraft met levenslange gevangenisstraf of tijdelijke van ten hoogste dertig jaren of geldboete van de vijfde categorie.
 
-BEWIJS
-######
+
+bewijs
+======
+
 
 Het bewijs dat deze stoffen gif zijn is te vinden is de :ref:`Material Safety Data Sheet <sds>`, daar staan LD50 waardes in.
 LD50 staat voor lethal dose 50%, de dosis die nodig is om de helft van de test populatie te doden door toediening van de betreffende stof.
@@ -46,8 +59,10 @@ Op de Hodge and Sterner Scale:
 | 5 Practically Non-toxic       5000-15,000
 | 6 Relatively Harmless         15,000 or more
 
-(F)ACT
-######
+
+(f)act
+======
+
 
 De zorg die de GGZ zegt te leveren is ook een waar (zorg) die de gezondheid benadelt en waarbij de leverancier de schadelijkheid verzwijgt.
 Het niet melden van schadelijkheid heeft desastreuze gevolgen:
@@ -112,8 +127,10 @@ Het niet melden van schadelijkheid heeft desastreuze gevolgen:
 
     Volledig ingevulde behandelplannen zouden een vereiste moeten zijn voor behandeling.
 
-EMAIL
-#####
+
+email
+=====
+
 
 | Bartholomeus Henricus Julius (Bart) Thate - :ref:`teksten <teksten>`
 | botfather on #dunkbots irc.freenode.net 
