@@ -2,7 +2,7 @@
 
 .. raw:: html
 
-    <br>
+    <br><br>
 
 .. title:: {{ fullname }}
 
@@ -17,12 +17,14 @@
 
     </h3>
     </center>
+    <br><br>
+
 
 .. auto{{ objtype }}:: {{ fullname }}
     :members:
     :private-members:
     :undoc-members:
 
-.. raw:: html
+    .. raw:: html
 
-    <br><br>
+        <br><br>

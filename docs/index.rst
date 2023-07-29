@@ -1,11 +1,24 @@
-.. title:: ! ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE !
-
+.. _home:
 
 .. raw:: html
 
     <br>
 
-evrm
+
+.. title:: ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE
+
+
+.. raw:: html
+
+    <br><br>
+    <center>
+    <i>
+    ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE
+    </i>
+    </center>
+    <br><br>
+
+EVRM
 ####
 
 .. raw:: html

@@ -107,23 +107,16 @@ intersphinx_mapping = {
 intersphinx_cache_limit=1
 
 
-rst_prolog = """.. image:: nederland2.jpg
+rst_prolog = '''.. image:: nederland2.jpg
     :height: 2.6cm
     :width: 100%
     :target: index.html
-    
-.. title:: ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE
 
 
-.. raw:: html
+.. raw::: html
 
-     <br><br>
-     <center>
-     <i>ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE</i>
-     </center>
-     <br>
-
-""" 
+    <br><br>
+'''
 
 rst_epilog = '''.. raw:: html
 
@@ -131,7 +124,7 @@ rst_epilog = '''.. raw:: html
      <center>
      <b>
 
-:ref:`home <evrm>` - :ref:`manual <manual>` - :ref:`source <source>` - :ref:`about <about>`
+:ref:`home <home>` - :ref:`manual <manual>` - :ref:`source <source>` - :ref:`about <about>`
 
 .. raw:: html
 
