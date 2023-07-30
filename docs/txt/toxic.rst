@@ -1,7 +1,19 @@
 .. _toxic:
 
+
+.. raw:: html
+
+    <br>
+
+
 toxic
 #####
+
+
+.. raw:: html
+
+    <br>
+
 
 Haldol:
 

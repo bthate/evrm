@@ -1,7 +1,19 @@
 .. _dodelijk:
 
-DODELIJK
+
+.. raw:: html
+
+    <br>
+
+
+dodelijk
 ########
+
+
+.. raw:: html
+
+    <br>
+
 
 Antipsychotica zijn levenbedreigend, toedienen brengt de kans op sterven:
 

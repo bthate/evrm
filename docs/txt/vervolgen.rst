@@ -1,14 +1,18 @@
 .. _vervolgen:
 
+
+.. raw:: html
+
+    <br>
+
 vervolgen
 #########
 
-.. image:: ../jpg/nederland2.jpg
-    :width: 100%
-    :height: 4cm
 
-STRAFRECHT
-##########
+.. raw:: html
+
+    <br>
+
 
 | 285.1 Bedreiging met enig misdrijf tegen het leven gericht wordt gestraft met gevangenisstraf van ten hoogste twee jaren of geldboete van de vierde categorie.
 
@@ -18,8 +22,20 @@ STRAFRECHT
 
 | 294.1 Hij die opzettelijk een ander tot zelfdoding aanzet, wordt, indien de zelfdoding volgt, gestraft met een gevangenisstraf van ten hoogste drie jaren of geldboete van de vierde categorie.
 
-DODELIJK
+
+.. raw:: html
+
+    <br>
+
+
+dodelijk
 ########
+
+
+.. raw:: html
+
+    <br>
+
 
 | Een patient kan door toediening van antipsychotica te maken krijgen met positieve en negatieve symptomen, symptomen van vergiftiging, onthoudingsverschijnselen en ernstige bijwerkingen, zie :ref:`symptomen`.
 

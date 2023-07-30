@@ -1,7 +1,18 @@
 .. _ernstig:
 
-ERNSTIG NADEEL
+
+.. raw:: html
+
+    <br>
+
+ernstig nadeel
 ##############
+
+
+.. raw:: html
+
+    <br>
+
 
 Voor de toepassing van deze wet en de daarop berustende bepalingen wordt onder “ernstig nadeel” verstaan, het bestaan van of het aanzienlijk risico op:
 

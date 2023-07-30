@@ -1,6 +1,9 @@
 .. _symptomen:
 
-#########
+.. raw:: html
+
+    <br>
+
 symptomen
 #########
 

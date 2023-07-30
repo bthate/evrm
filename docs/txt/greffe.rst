@@ -1,11 +1,17 @@
 .. _greffe:
 
+
+.. raw:: html
+
+    <br>
+
 greffe
 ######
 
-.. image:: ../jpg/nederland2.jpg
-    :width: 100%
-    :height: 4cm
+.. raw:: html
+
+    <br>
+
 
 2012/11/8 Bart Thate <bthate@gmail.com<mailto:bthate@gmail.com>>
 

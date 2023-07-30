@@ -1,7 +1,18 @@
 .. _aantallen:
 
-AANTALLEN
+
+.. raw:: html
+
+    <br>
+
+aantallen
 #########
+
+
+.. raw:: html
+
+    <br>
+
 
                                   2011 2012 2013 2014
 

@@ -1,9 +1,21 @@
 .. _vergiftiging:
 
-VERGIFTIGING
+
+.. raw:: html
+
+    <br>
+
+
+vergiftiging
 ############
 
-“Test toont dat men aan het vergiftigen is. De bijwerkingen zijn vergiftigingssymptomen.”
+
+.. raw:: html
+
+    <br>
+
+
+“Test toont dat men aan het vergiftigen is. De bijwerkingen zijn vergiftigings symptomen.”
 
 Table 9. Common Adverse Reactions (≥5%) in the 6-Week, Randomized, Chlorpromazine-controlled Trial in Treatment-Resistant Schizophrenia:
 

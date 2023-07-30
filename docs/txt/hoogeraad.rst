@@ -1,7 +1,17 @@
 .. _hogeraad:
 
+.. raw:: html
+
+    <br>
+
+
 hogeraad
 ########
+
+.. raw:: html
+
+    <br>
+
 
 2012/10/22 Info Hoge Raad <info@hogeraad.nl<mailto:info@hogeraad.nl>>
 Geachte heer Thate,

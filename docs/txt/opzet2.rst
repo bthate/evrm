@@ -1,7 +1,19 @@
 .. _opzet:
 
-OPZET
+
+.. raw:: html
+
+    <br>
+
+
+opzet
 #####
+
+
+.. raw:: html
+
+    <br>
+
 
 Aan de (F)ACT methodiek kan men zien dat men een opzet tot vergiftigen heeft, men zegt het toedienen van gif “verantwoord” te kunnen doen:
 

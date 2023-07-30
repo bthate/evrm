@@ -1,7 +1,19 @@
 .. _leven:
 
-STRAFRECHT
-##########
+
+.. raw:: html
+
+    <br>
+
+
+leven
+#####
+
+
+.. raw:: html
+
+    <br>
+
 
 285.1 Bedreiging met enig misdrijf tegen het leven gericht wordt gestraft met gevangenisstraf van ten hoogste twee jaren of geldboete van de vierde categorie.
 

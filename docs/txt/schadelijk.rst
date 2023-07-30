@@ -1,7 +1,19 @@
-.. _schade:
+.. _schadelijk:
 
-SCHADE
-######
+
+.. raw:: html
+
+    <br>
+
+
+schadelijk
+##########
+
+
+.. raw:: html
+
+    <br>
+
 
 “After 17 to 27 months of treatment, both haloperidol- and olanzapine-treated monkeys had an equivalent and highly significant 8% to 11% decrease in fresh brain weight and volume when compared with the sham group.”
 

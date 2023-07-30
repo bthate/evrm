@@ -1,7 +1,17 @@
 .. _GIF:
 
-GIF
+
+.. raw:: html
+
+    <br>
+
+gif
 ###
+
+.. raw:: html
+
+    <br>
+
 
 Data komt van documentatie bij de FDA, zie http://www.accessdata.fda.gov/scripts/cder/daf/
 Type een medicijn naam in, click "Approval Date(s) and History, Letters, Labels, Reviews" en download de label.

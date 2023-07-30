@@ -1,9 +1,18 @@
+.. _bewijs:
+
+.. raw:: html
+
+    <br>
 
 “After 17 to 27 months of treatment, both haloperidol- and olanzapine-treated monkeys had an equivalent and highly significant 8% to 11% decrease in fresh brain weight and volume when compared with the sham group.”
 
-.. _bewijs:
 
-MISHANDELING
+.. raw:: html
+
+    <br>
+
+
+mishandeling
 ############
 
 "Gerichte schade toebrenging."
@@ -14,7 +23,7 @@ MISHANDELING
 
 | 304.3 indien het misdrijf wordt gepleegd door toediening van voor het leven of de gezondheid schadelijke stoffen.
 
-DODELIJK
+dodelijk
 ########
 
 "Hoezo schadelijk?"
@@ -41,7 +50,7 @@ Bijv. clozapine kan de volgende potentieel dodelijk aandoeningen veroorzaken:
 
 | Een patient kan door toediening van antipsychotica te maken krijgen met positieve en negatieve symptomen, symptomen van vergiftiging, onthoudingsverschijnselen en ernstige bijwerkingen, zie :ref:`symptomen`.
 
-SCHADELIJK
+schadelijk
 ##########
 
 "Hoezo dodelijk ?"
@@ -59,7 +68,7 @@ Schade zijn de volgende ziektes veroorzaakt door antipsychotica:
 | Diabetes
 | Hersenweefselverlies - http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3476840/
 
-SEDEREN
+sederem
 #######
 
 "Intoxicaties met antipsychotica geven vaak aanleiding tot depressie van het centraal zenuwstelsel (CZS), zich in eerste instantie uitend in sedatie."

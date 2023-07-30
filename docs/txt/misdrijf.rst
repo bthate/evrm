@@ -1,7 +1,17 @@
 .. _misdrijven:
 
+
+.. raw:: html
+
+    <br>
+
 misdrijven
 ##########
+
+.. raw:: html
+
+    <br>
+
 
 Titel XIX. Misdrijven tegen het leven gericht
 

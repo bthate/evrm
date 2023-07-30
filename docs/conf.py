@@ -110,12 +110,19 @@ intersphinx_cache_limit=1
 rst_prolog = '''.. image:: nederland2.jpg
     :height: 2.6cm
     :width: 100%
-    :target: index.html
+    :target: /index.html
 
 
-.. raw::: html
+.. raw:: html
 
     <br><br>
+    <center>
+    <i>
+    ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE 
+    </i>
+    </center>
+
+
 '''
 
 rst_epilog = '''.. raw:: html
@@ -124,7 +131,7 @@ rst_epilog = '''.. raw:: html
      <center>
      <b>
 
-:ref:`home <home>` - :ref:`manual <manual>` - :ref:`source <source>` - :ref:`about <about>`
+:ref:`home <home>` - :ref:`manual <manual>` - :ref:`source <source>` - :ref:`text <teksten>` - :ref:`about <about>`
 
 .. raw:: html
 

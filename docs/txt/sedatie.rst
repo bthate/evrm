@@ -1,7 +1,19 @@
 .. _sedatie:
 
+
+.. raw:: html
+
+    <br>
+
+
 sedatie
 #######
+
+
+.. raw:: html
+
+    <br>
+
 
 "Intoxicaties met antipsychotica geven vaak aanleiding tot depressie van het centraal zenuwstelsel (CZS), zich in eerste instantie uitend in sedatie."
 

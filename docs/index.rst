@@ -10,13 +10,12 @@
 
 .. raw:: html
 
-    <br><br>
     <center>
     <i>
     ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE
     </i>
     </center>
-    <br><br>
+    <br>
 
 evrm
 ####

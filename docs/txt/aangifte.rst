@@ -1,7 +1,16 @@
 .. _aangifte:
 
+
+.. raw:: html
+
+    <br>
+
 aangifte
-~~~~~~~~
+########
+
+.. raw:: html
+
+    <br>
 
 Van: Bart Thate [mailto:bthate@gmail.com<mailto:bthate@gmail.com>]
 Verzonden: dinsdag 16 oktober 2012 21:49

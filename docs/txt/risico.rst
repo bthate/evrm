@@ -1,7 +1,17 @@
 .. _risico:
 
-AANZIENLIJK RISICO
+
+.. raw:: html
+
+    <br>
+
+aanzienlijk risico
 ##################
+
+.. raw:: html
+
+    <br>
+
 
 "Zonder schuldig bevinding !"
 

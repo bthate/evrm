@@ -1,7 +1,19 @@
-.. _tweede kamer:
+.. _tweedekamer:
 
-TWEEDE KAMER
+
+.. raw:: html
+
+    <br>
+
+
+tweede kamer
 ============
+
+
+.. raw:: html
+
+    <br>
+
 
 | From:	Bart Thate <bthate@dds.nl>
 | To: 	voorzitter@tweedekamer.nl, l.bontes@tweedekamer.nl, S.Buma@tweedekamer.nl, j.houwers@tweedekamer.nl, j.klaver@tweedekamer.nl, ...
