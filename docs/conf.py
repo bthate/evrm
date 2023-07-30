@@ -58,7 +58,7 @@ extensions=[
 # -- Options for HTML output -------------------------------------------------
 
 
-html_title = "ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE"
+html_title = "ANTIPSYCHOTICS - AKATHISIA - CATATONIA - SEDATION - SHOCKS - LETHAL CATATONIA"
 html_style = 'evrm.css'
 html_static_path = ["_static"]
 html_css_files = ["evrm.css",]
@@ -118,7 +118,7 @@ rst_prolog = '''.. image:: nederland2.jpg
     <br><br>
     <center>
     <i>
-    ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE 
+    ANTIPSYCHOTICS - AKATHISIA - CATATONIA - SEDATION - SHOCKS - LETHAL CATATONIA
     </i>
     </center>
 

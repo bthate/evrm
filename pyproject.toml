@@ -28,7 +28,7 @@ classifiers=[
 
 
 [project.scripts]
-opr = "opr.__main__:wrapped"
+evrm = "evrm.__main__:wrapped"
 
 
 [project.optional-dependencies]
