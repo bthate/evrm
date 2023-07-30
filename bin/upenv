@@ -79,4 +79,4 @@ def popen(txt):
     proc.wait()
 
 
-popen("env/bin/python3 env/bin/pip3 install -I %s" % TXT)
+popen("env/bin/python3 env/bin/pip3 install -I %s" % " ".join([f"{x}" for x in TXT.split("\n") if "#" not in x]))
