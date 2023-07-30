@@ -18,7 +18,7 @@
     </center>
     <br><br>
 
-EVRM
+evrm
 ####
 
 .. raw:: html
