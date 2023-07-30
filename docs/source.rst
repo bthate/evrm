@@ -23,6 +23,8 @@
     evrm.command   commands
     evrm.error	   errors
     evrm.event	   events
+    evrm.json	   decoder/encoder
+    evrm.locks	   locks module
     evrm.modules   plugins
     evrm.object	   clean namespace
     evrm.parser	   parsing

@@ -36,7 +36,6 @@ popen("clean")
 if not os.path.exists("env"):
     popen("mkenv")
     popen("upenv")
-    #popen("env/bin/python3 -m pip install -r docs/requirements.txt --upgrade")
 
 
 popen("env/bin/python3 env/bin/sphinx-build docs html")

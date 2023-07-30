@@ -3,28 +3,22 @@ requires = ["setuptools>=43.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 
-[options]
-zip_safe = true
-include_package_data = true
-
-
 [project]
 name = "evrm"
-description = "ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE"
-version = "200"
+description = "Reconsider OTP-CR-117/19"
+version = "120"
 authors = [
     {name = "Bart Thate", email = "bthate@dds.nl" },
 ]
 readme = "README.rst"
 license = { text="Public Domain"}
-classifiers = [ 
-               'Development Status :: 3 - Alpha',
-               'License :: Public Domain',
-               'Operating System :: Unix',
-               'Programming Language :: Python',
-               'Topic :: Utilities'
-              ]
-
+classifiers=[
+             'Development Status :: 3 - Alpha',
+             'License :: Public Domain',
+             'Operating System :: Unix',
+             'Programming Language :: Python',
+             'Topic :: Utilities'
+            ]
 
 
 [project.urls]
@@ -32,12 +26,13 @@ classifiers = [
 "bugs" = "https://github.com/bthate/evrm/issues"
 "source" = "https://github.com/bthate/evrm"
 
-[project.optional-dependencies]
-dev = []
 
 [project.scripts]
-evrm = "evrm.__main__:wrapped"
+opr = "opr.__main__:wrapped"
 
+
+[project.optional-dependencies]
+dev = []
 
 [tool.setuptools]
 packages = [
@@ -47,7 +42,125 @@ packages = [
 zip-safe = true
 
 
-[tool.pytest.ini_options]
-minversion = "6.0"
-addopts = ""
-testpaths = ["test"]
+
+[tool.setuptools.data-files]
+"share/doc/evrm" = [
+                    "docs/about.rst",
+                    "docs/conf.py",
+                    "docs/index.rst",
+                    "docs/manual.rst",
+                    "docs/nederland2.jpg",
+                    "docs/README",
+                    "docs/robots.txt",
+                    "docs/skull.png",
+                    "docs/source.rst",
+                    "docs/Wetboek-van-Strafrecht.txt",
+                   ]
+
+"share/doc/evrm/_static" = [
+                  "docs/_static/evrm.css",
+                 ]
+
+"share/doc/evrm/txt" = [
+                        "docs/txt/aangifte.rst",
+                        "docs/txt/aantallen.rst",
+                        "docs/txt/absoluut.rst",
+                        "docs/txt/bedreiging.rst",
+                        "docs/txt/beuker.rst",
+                        "docs/txt/BIJWERKING",
+                        "docs/txt/bijwerkingen.rst",
+                        "docs/txt/clozapine.rst",
+                        "docs/txt/CONTACT",
+                        "docs/txt/contact.rst",
+                        "docs/txt/dodelijk.rst",
+                        "docs/txt/DOPAMINE",
+                        "docs/txt/echt.rst",
+                        "docs/txt/ernstig.rst",
+                        "docs/txt/evrm.rst",
+                        "docs/txt/fact.rst",
+                        "docs/txt/gif.rst",
+                        "docs/txt/greffe.rst",
+                        "docs/txt/hoogeraad.rst",
+                        "docs/txt/igz.rst",
+                        "docs/txt/index.rst",
+                        "docs/txt/kamerbrief2.rst",
+                        "docs/txt/kamerbrief3.rst",
+                        "docs/txt/kamerbrief.rst",
+                        "docs/txt/kamerbrief.rst",
+                        "docs/txt/ld50.rst",
+                        "docs/txt/leven.rst",
+                        "docs/txt/loggen.rst",
+                        "docs/txt/MADS",
+                        "docs/txt/minister.rst",
+                        "docs/txt/misdrijf.rst",
+                        "docs/txt/mishandeling.rst",
+                        "docs/txt/nederland2.jpg",
+                        "docs/txt/notworking.rst",
+                        "docs/txt/om.rst",
+                        "docs/txt/ONTWENNING",
+                        "docs/txt/oorzaak.rst",
+                        "docs/txt/opzet2.rst",
+                        "docs/txt/pad.rst",
+                        "docs/txt/realtweedekamer.rst",
+                        "docs/txt/receptoren.rst",
+                        "docs/txt/recht.rst",
+                        "docs/txt/risico.rst",
+                        "docs/txt/schadelijk.rst",
+                        "docs/txt/sedatie.rst",
+                        "docs/txt/strafrecht.rst",
+                        "docs/txt/symptomen.rst",
+                        "docs/txt/todo.rst",
+                        "docs/txt/toxic.rst",
+                        "docs/txt/tussenkomst.rst",
+                        "docs/txt/uitspraak.rst",
+                        "docs/txt/urls.rst",
+                        "docs/txt/VERGIFTIGING",
+                        "docs/txt/vergiftiging.rst",
+                        "docs/txt/vervolgen.rst",
+                        "docs/txt/verzoek.rst",
+                        "docs/txt/Wetboek-van-Strafrecht.txt",
+                        "docs/txt/wet.rst",
+                        "docs/txt/wvggz.rst",
+                        "docs/txt/WvGGZ.rst",
+                        "docs/txt/WvGGZ.txt",
+                        "docs/txt/zyprexa.rst"
+                       ]
+
+"share/docs/evrm/jpg" = [
+                         "docs/jpg/20140730_011.jpg",
+                         "docs/jpg/20151028_009.jpg",
+                         "docs/jpg/20151029_004.jpg",
+                         "docs/jpg/69389.jpg",
+                         "docs/jpg/absoluut2.jpg",
+                         "docs/jpg/aesculaap.ico",
+                         "docs/jpg/aes.ico",
+                         "docs/jpg/bart2.jpg",
+                         "docs/jpg/bart.jpg",
+                         "docs/jpg/besloten.jpg",
+                         "docs/jpg/fact.jpg",
+                         "docs/jpg/geinformeerd.jpg",
+                         "docs/jpg/gelijk2.jpg",
+                         "docs/jpg/haarmaken.jpg",
+                         "docs/jpg/igz.jpg",
+                         "docs/jpg/minister.jpg",
+                         "docs/jpg/nalatig.jpg",
+                         "docs/jpg/nederland2.jpg",
+                         "docs/jpg/neurotoxisch.jpg",
+                         "docs/jpg/stoned2.jpg",
+                         "docs/jpg/tussenkomst.jpg",
+                         "docs/jpg/verbod.jpg"
+                        ]
+
+
+"share/doc/evrm/_templates" = [
+                     "docs/_templates/base.rst",
+                     "docs/_templates/class.rst",
+                     "docs/_templates/module.rst"
+                    ]
+
+[tool.setuptools.exclude-package-data]
+"*" = [
+       "env*",
+       "html*",
+       "test*"
+      ]

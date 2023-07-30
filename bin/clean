@@ -47,7 +47,8 @@ def main():
     #popen("rm -fR env")
     loop(".", "rm -fR *~")
     loop(".", "rm -fR __pycache__")
-
+    if "-f" in sys.argv:
+        popen("rm -fR env")
 
 if __name__ == "__main__":
     main()
