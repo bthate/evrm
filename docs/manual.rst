@@ -3,12 +3,20 @@
 
 .. raw:: html
 
-    <br><br>
+    <br>
 
 
 .. title:: Manual
 
-    
+
+manual
+######
+
+
+.. raw:: html
+
+    <br>
+
 **NAME**
 
  | ``EVRM`` - ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE

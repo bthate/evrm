@@ -14,10 +14,14 @@ verzoek
     <br>
 
 
-From: Bart Thate <bthate@gmail.com>
-Date: 2012/10/18
-Subject: Re: reactie op de brief van de minister met kenmerk
-CZ-3131204 dd. 12 oktober 2012
+| From: Bart Thate <bthate@gmail.com>
+| Date: 2012/10/18
+| Subject: Re: reactie op de brief van de minister met kenmerk CZ-3131204 dd. 12 oktober 2012
+
+.. raw:: html
+
+    <br>
+
 
 De Griffier van het Europese Hof voor de
 Rechten van de Mens

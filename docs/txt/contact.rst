@@ -1,12 +1,13 @@
 .. _contact:
 
+
 .. raw:: html
 
     <br>
 
-
-CONTACT
+contact
 #######
+
 
 .. raw:: html
 

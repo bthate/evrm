@@ -110,7 +110,7 @@ intersphinx_cache_limit=1
 rst_prolog = '''.. image:: nederland2.jpg
     :height: 2.6cm
     :width: 100%
-    :target: /index.html
+    :target: index.html
 
 
 .. raw:: html

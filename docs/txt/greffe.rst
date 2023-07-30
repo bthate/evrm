@@ -13,15 +13,15 @@ greffe
     <br>
 
 
-2012/11/8 Bart Thate <bthate@gmail.com<mailto:bthate@gmail.com>>
-
-                            Le Greffe
-                            Cour Europeenne des Droits de l'Homme
-                            Conseil de l'Europe
-                            F-67075 STRASBOURG CEDEX.
-
-
-                                                   8 november 2012
+| 2012/11/8 Bart Thate <bthate@gmail.com>
+|
+|                            Le Greffe
+|                            Cour Europeenne des Droits de l'Homme
+|                            Conseil de l'Europe
+|                            F-67075 STRASBOURG CEDEX.
+|
+|
+|                                                  8 november 2012
 
 
 uw kenmerk: 69389/12

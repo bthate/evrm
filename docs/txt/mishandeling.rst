@@ -15,6 +15,12 @@
 mishandeling
 ############
 
+
+.. raw:: html
+
+    <br>
+
+
 "Gerichte schade toebrenging."
 
 | Antipsychotica zijn antagonisten, medicijnen die receptoren in de hersenen blokkeren. Dit blokkeren is een benadeling van de gezondheid, er treed een verminderde werking op van de neurotransmitter die geblokkeerd word. Dat de arts deze medicijnen inzet voor hun schadelijke werking, maakt het toedienen ervan opzettelijke benadeling van de gezondheid. Er is dus geen sprake van behandeling maar van mishandeling.
@@ -23,8 +29,15 @@ mishandeling
 
 | 304.3 indien het misdrijf wordt gepleegd door toediening van voor het leven of de gezondheid schadelijke stoffen.
 
+
 dodelijk
-########
+========
+
+
+.. raw:: html
+
+    <br>
+
 
 "Hoezo schadelijk?"
 
@@ -48,12 +61,20 @@ Bijv. clozapine kan de volgende potentieel dodelijk aandoeningen veroorzaken:
 | Fecal Impaction (vastzittend stront)
 | Paralytic Ileus (ook voedsel vastzittend in de darm)
 
-| Een patient kan door toediening van antipsychotica te maken krijgen met positieve en negatieve symptomen, symptomen van vergiftiging, onthoudingsverschijnselen en ernstige bijwerkingen, zie :ref:`symptomen`.
+| Een patient kan door toediening van antipsychotica te maken krijgen met positieve en negatieve symptomen, symptomen van vergiftiging, onthoudingsverschijnselen en ernstige bijwerkingen, zie :ref:`symptomen <symptomen>`.
+
 
 schadelijk
-##########
+==========
+
+
+.. raw:: html
+
+    <br>
+
 
 "Hoezo dodelijk ?"
+
 
 Schade zijn de volgende ziektes veroorzaakt door antipsychotica:
 
@@ -68,8 +89,14 @@ Schade zijn de volgende ziektes veroorzaakt door antipsychotica:
 | Diabetes
 | Hersenweefselverlies - http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3476840/
 
-sederem
-#######
+
+sederen
+=======
+
+.. raw:: html
+
+    <br>
+
 
 "Intoxicaties met antipsychotica geven vaak aanleiding tot depressie van het centraal zenuwstelsel (CZS), zich in eerste instantie uitend in sedatie."
 

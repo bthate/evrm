@@ -5,7 +5,7 @@
     <br>
 
 
-STRAFRECHT
+strafrecht
 ##########
 
 .. raw:: html
@@ -27,8 +27,8 @@ STRAFRECHT
     <br>
 
 
-DODELIJK
-########
+dodelijk
+========
 
 .. raw:: html
 

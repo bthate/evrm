@@ -30,4 +30,4 @@ Schade zijn de volgende ziektes veroorzaakt door antipsychotica:
 | Diabetes
 | Hersenweefselverlies - http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3476840/
 
-| Een patient kan door toediening van antipsychotica te maken krijgen met positieve en negatieve symptomen, symptomen van vergiftiging, onthoudingsverschijnselen en ernstige bijwerkingen, zie :ref:`symptomen`.
+| Een patient kan door toediening van antipsychotica te maken krijgen met positieve en negatieve symptomen, symptomen van vergiftiging, onthoudingsverschijnselen en ernstige bijwerkingen, zie :ref:`symptomen <symptomen>`.

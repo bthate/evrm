@@ -3,6 +3,9 @@
 # pylint: disable=C,I,R
 
 
+"locks"
+
+
 import _thread
 
 
