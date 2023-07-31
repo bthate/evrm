@@ -26,17 +26,21 @@ Persist.add(Todo)
 
 def dne(event):
     if not event.args:
+        event.reply("dne <txt>")
         return
     selector = {'txt': event.args[0]}
+    nrs = 0
     for obj in find('todo', selector):
+        nrs += 1
         obj.__deleted__ = True
         write(obj)
         event.reply('ok')
         break
+    if not nrs:
+        event.reply("nothing todo")
 
 
 def tdo(event):
-    print(Persist.classes)
     if not event.rest:
         nmr = 0
         for obj in find('todo'):

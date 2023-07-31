@@ -3,10 +3,10 @@
 # flake8: noqa=F401
 
 
-"""modules"""
+"modules"
 
 
-from . import cmd, dbg, err, flt, irc, log, mdl, mod, req, rss, sts, tdo, thr
+from . import cmd, dbg, err, flt, irc, log, mod, rss, sts, tdo, thr
 
 
 def __dir__():
@@ -17,8 +17,6 @@ def __dir__():
             'flt',
             'irc',
             'log',
-            'mdl',
-            'req',
             'rss',
             'tdo',
             'thr'

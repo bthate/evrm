@@ -683,11 +683,15 @@ def dlt(event):
         event.reply('dlt <username>')
         return
     selector = {'user': event.args[0]}
+    nr = 0
     for obj in find('user', selector):
+        nr += 1
         obj.__deleted__ = True
         write(obj)
         event.reply('ok')
         break
+    if not nr:
+        event.reply("no users")
 
 
 def met(event):
@@ -711,7 +715,7 @@ def mre(event):
     if not event.channel:
         event.reply('channel is not set.')
         return
-    bot = event.bot()
+    bot = Bus.byorig(event.orig)
     if 'cache' not in dir(bot):
         event.reply('bot is missing cache')
         return

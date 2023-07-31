@@ -140,7 +140,7 @@ class Fetcher(Object):
         if objs:
             write(Fetcher.seen)
         txt = ''
-        feedname = getattr(feed, 'name')
+        feedname = getattr(feed, 'name', None)
         if feedname:
             txt = f'[{feedname}] '
         for obj in objs:
@@ -289,10 +289,10 @@ def rss(event):
     if not event.rest:
         nrs = 0
         for feed in find('rss'):
+            nrs += 1
             elp = laps(time.time()-fntime(feed.__oid__))
             txt = printable(feed)
             event.reply(f'{nrs} {txt} {elp}')
-            nrs += 1
         if not nrs:
             event.reply('no rss feed found.')
         return

@@ -23,9 +23,10 @@ __all__ = __dir__()
 
 
 def err(event):
-    nmr = 0
+    if not Error.errors:
+        event.reply("no error")
+        return
     for exc in Error.errors:
-        nmr += 1
         stream = io.StringIO(
                              traceback.print_exception(
                                                        type(exc),
@@ -35,5 +36,3 @@ def err(event):
                             )
         for line in stream.readlines():
             event.reply(line)
-    if not nmr:
-        event.reply("no error")

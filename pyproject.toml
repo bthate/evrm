@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "evrm"
 description = "ANTIPSYCHOTICS - AKATHISIA - CATATONIA - SEDATION - SHOCKS - LETHAL CATATONIA"
-version = "120"
+version = "121"
 authors = [
     {name = "Bart Thate", email = "bthate@dds.nl" },
 ]

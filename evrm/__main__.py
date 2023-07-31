@@ -128,7 +128,18 @@ def wrapped():
     wrap(main)
 
 
+# COMMANDS
+
+
+def ver(event):
+    event.reply(f"{NAME} {VERSION}")
+
+
+# RUNTIME
+
+
 def main():
+    Command.add(ver)
     parse(Cfg, " ".join(sys.argv[1:]))
     if "v" in Cfg.opts:
         Error.raw = cprint

@@ -13,9 +13,9 @@ import time
 
 
 from .json   import dump, load
-from .locks  import disklock
-from .object import Object, ident, kind, search, update
-from .utils  import cdir
+from .locks  import disklock, hooklock
+from .object import Object, ident, keys, kind, search, update
+from .utils  import cdir, strip
 
 
 def __dir__():
@@ -33,40 +33,42 @@ __all__ = __dir__()
 
 class Persist:
 
-    classes = {}
-    workdir = ""
+    classes = Object()
+    workdir = f".{__file__.split(os.sep)[-2]}"
 
     @staticmethod
     def add(clz):
-        if "__name__" not in str(clz):
-            name = str(clz)
-        else:
-            name = clz.__name__
-        Persist.classes[f"{clz.__module__}.{name}"] = clz
+        if not clz:
+            return
+        name = str(clz).split()[1][1:-2]
+        Persist.classes[name] = clz
 
     @staticmethod
     def long(nme):
         spl = nme.split(".")[-1].lower()
-        for name in Persist.classes:
-            if spl == name.split(".")[-1].lower():
+        for name in keys(Persist.classes):
+            if spl in name.split(".")[-1].lower():
                 return name
-        return nme
+
+    @staticmethod
+    def path(pth):
+        return os.path.join(Persist.store(), pth)
+
+    @staticmethod
+    def store(pth=""):
+        return os.path.join(Persist.workdir, "store", pth)
 
 
 def files() -> []:
-    assert Persist.workdir
-    res = []
-    path = os.path.join(Persist.workdir, "store")
-    if os.path.exists(path):
-        res = os.listdir(path)
-    return res
+    return os.listdir(Persist.store())
 
 
 def find(mtc, selector=None) -> []:
     if selector is None:
         selector = {}
     for fnm in reversed(sorted(fns(mtc), key=lambda x: fntime(x))):
-        obj = hook(fnm)
+        ppth = os.path.join(mtc, fnm)
+        obj = hook(ppth)
         if '__deleted__' in obj:
             continue
         if selector and not search(obj, selector):
@@ -79,7 +81,7 @@ def fns(mtc) -> []:
     dname = ''
     clz = Persist.long(mtc)
     #lst = mtc.lower().split(".")[-1]
-    path = os.path.join(Persist.workdir, "store", clz)
+    path = os.path.join(Persist.store(), clz)
     for rootdir, dirs, _files in os.walk(path, topdown=False):
         if dirs:
             dname = sorted(dirs)[-1]
@@ -106,20 +108,21 @@ def fntime(daystr) -> float:
 
 
 def hook(pth) -> type:
-    clz = pth.split(os.sep)[-4]
-    splitted = clz.split(".")
-    modname = ".".join(splitted[:1])
-    clz = splitted[-1]
-    mod = sys.modules.get(modname, None)
-    if mod:
-        cls = getattr(mod, clz, None)
-    if cls:
-        obj = cls()
+    with hooklock:
+        clz = pth.split(os.sep)[-4]
+        splitted = clz.split(".")
+        modname = ".".join(splitted[:1])
+        clz = splitted[-1]
+        mod = sys.modules.get(modname, None)
+        if mod:
+            cls = getattr(mod, clz, None)
+        if cls:
+            obj = cls()
+            read(obj, pth)
+            return obj
+        obj = Object()
         read(obj, pth)
         return obj
-    obj = Object()
-    read(obj, pth)
-    return obj
 
 
 def last(self, selector=None) -> None:
@@ -137,23 +140,23 @@ def last(self, selector=None) -> None:
 
 
 def read(self, pth) -> str:
-    pth = os.path.join(Persist.workdir, "store", pth)
     with disklock:
+        pth = os.path.join(Persist.workdir, "store", pth)
         with open(pth, 'r', encoding='utf-8') as ofile:
             data = load(ofile)
             update(self, data)
-    self.__oid__ = os.sep.join(pth.split(os.sep)[-4:])
-    return self.__oid__
+        self.__oid__ = os.sep.join(pth.split(os.sep)[-4:])
+        return self.__oid__
 
 
 def write(self) -> str:
-    try:
-        pth = self.__oid__
-    except TypeError:
-        pth = ident(self)
-    pth = os.path.join(Persist.workdir, "store", pth)
-    cdir(pth)
     with disklock:
+        try:
+            pth = self.__oid__
+        except TypeError:
+            pth = ident(self)
+        pth = os.path.join(Persist.workdir, "store", pth)
+        cdir(pth)
         with open(pth, 'w', encoding='utf-8') as ofile:
             dump(self, ofile)
-    return os.sep.join(pth.split(os.sep)[-4:])
+        return os.sep.join(pth.split(os.sep)[-4:])

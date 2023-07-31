@@ -4,5 +4,12 @@
 "debug"
 
 
+from ..run import Cfg
+
+
 def dbg(event):
-    raise Exception("debug")
+    if Cfg.error:
+        event.reply("raising")
+        raise Exception("debug")
+    else:
+        event.reply("error is not enabled")
