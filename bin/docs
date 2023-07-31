@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+# This file is placed in the Public Domain.
+
+
+"create docs"
+
+
+__author__ = "Bart Thate <skullbonesandnumber@gmail.com>"
+
+
+import os
+import subprocess
+import sys
+
+
+os.environ["PATH"] = "bin:" + os.environ["PATH"]
+
+
+def popen(txt):
+    "run commands"
+    with subprocess.Popen(
+                            txt.split(),
+                            stdin=sys.stdin,
+                            stdout=sys.stdout,
+                            stderr=sys.stderr,
+                            close_fds=False,
+                            text=True
+                           ) as proc:
+        proc.communicate()
+        proc.wait()
+
+
+popen("clean")
+
+
+if not os.path.exists("env"):
+    popen("mkenv")
+    popen("upenv")
+
+
+popen("env/bin/python3 env/bin/sphinx-build docs html")
