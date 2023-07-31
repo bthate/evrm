@@ -118,10 +118,9 @@ rst_prolog = '''.. image:: nederland2.jpg
     <br><br>
     <center>
     <i>
-    ANTIPSYCHOTICS - AKATHISIA - CATATONIA - SEDATION - SHOCKS - LETHAL CATATONIA
+    ANTIPSYCHOTICS - AKATHISIA - CATATONIA - SEDATION - SHOCKS - LETHAL CATATONIA 
     </i>
     </center>
-
 
 '''
 
