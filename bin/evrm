@@ -3,4 +3,4 @@
 # pylint: disable=C,I,R
 
 
-python3 -m kamer $* ;
+python3 -m evrm $* ;
