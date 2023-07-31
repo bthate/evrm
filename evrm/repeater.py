@@ -3,7 +3,7 @@
 # pylint: disable=C,I,R,W0212,W0718,E0402
 
 
-"rrepeater"
+"repeater"
 
 
 import threading
