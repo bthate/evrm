@@ -20,7 +20,7 @@ manual
 .. raw:: html
 
     </center>
-    <br>
+
 
 **NAME**
 

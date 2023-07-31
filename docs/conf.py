@@ -112,15 +112,9 @@ rst_prolog = '''.. image:: nederland2.jpg
     :width: 100%
     :target: index.html
 
-
 .. raw:: html
 
-    <br><br>
-    <center>
-    <i>
-    ANTIPSYCHOTICS - AKATHISIA - CATATONIA - SEDATION - SHOCKS - LETHAL CATATONIA 
-    </i>
-    </center>
+   <br>
 
 '''
 
@@ -130,7 +124,7 @@ rst_epilog = '''.. raw:: html
      <center>
      <b>
 
-:ref:`home <home>` - :ref:`manual <manual>` - :ref:`source <source>` - :ref:`text <teksten>` - :ref:`about <about>`
+:ref:`home <home>` - :ref:`manual <manual>` - :ref:`source <source>` - :ref:`about <about>`
 
 .. raw:: html
 
