@@ -5,7 +5,7 @@
     <br>
 
 
-.. title:: ANTIPSYCHOTICS - AKATHISIA - CATATONIA - SEDATION - SHOCKS - LETHAL CATATONIA
+.. title:: Home
 
 
 
