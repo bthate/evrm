@@ -1,21 +1,25 @@
 # This file is placed in the Public Domain.
 #
-# pylint: disable=C,I,R,W0401,W0622
-# flake8: noqa
+# pylint: disable=C0116,W0105,E0402
 
 
 "status of bots"
 
 
-from ..bus    import Bus
-from ..object import printable
+from ..reactor import Broker
+
+
+def __dir__():
+    return (
+            "sts",
+           )
 
 
 def sts(event):
     nmr = 0
-    for bot in Bus.objs:
+    for bot in Broker.objs:
         if 'state' in dir(bot):
-            event.reply(printable(bot.state, skip='lastline'))
+            event.reply(str(bot.state))
             nmr += 1
     if not nmr:
         event.reply("no status")

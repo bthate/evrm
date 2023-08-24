@@ -1,7 +1,6 @@
 # This file is placed in the Public Domain.
 #
-# pylint: disable=C,I,R
-# flake8: noqa=E501
+# pylint: disable=C0115,C0116,W0105,E0402,R0903
 
 
 "udp to irc relay"
@@ -10,16 +9,24 @@
 import select
 import socket
 import sys
+import threading
 import time
 
 
-from ..bus     import Bus
-from ..object  import Default, Object
-from ..persist import last
-from ..thread  import launch
+from ..objects import Default, Object
+from ..reactor import Broker
+from ..threads import launch
 
 
-def start():
+def __dir__():
+    return (
+            'Cfg',
+            'UDP',
+            'udp'
+           )
+
+
+def init():
     udpd = UDP()
     udpd.start()
     return udpd
@@ -27,16 +34,9 @@ def start():
 
 class Cfg(Default):
 
-    def __init__(self):
-        super().__init__()
-        self.host = "localhost"
-        self.port = 5500
-
-    def len(self):
-        return self.server
-
-    def size(self):
-        return self.port
+    addr = ""
+    host = "localhost"
+    port = 5500
 
 
 class UDP(Object):
@@ -49,19 +49,20 @@ class UDP(Object):
         self._sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
         self._sock.setblocking(1)
         self._starttime = time.time()
-        self.cfg = Cfg()
-        self.cfg.addr = ""
+        self.ready = threading.Event()
 
     def output(self, txt, addr=None):
         if addr:
-            self.cfg.addr = addr
-        Bus.announce(txt.replace("\00", ""))
+            Cfg.addr = addr
+        for bot in Broker.objs:
+            bot.announce(txt.replace("\00", ""))
 
     def loop(self):
         try:
-            self._sock.bind((self.cfg.host, self.cfg.port))
+            self._sock.bind((Cfg.host, Cfg.port))
         except socket.gaierror:
             return
+        self.ready.set()
         while not self.stopped:
             (txt, addr) = self._sock.recvfrom(64000)
             if self.stopped:
@@ -74,10 +75,12 @@ class UDP(Object):
     def exit(self):
         self.stopped = True
         self._sock.settimeout(0.01)
-        self._sock.sendto(bytes("exit", "utf-8"), (self.cfg.host, self.cfg.port))
+        self._sock.sendto(
+                          bytes("exit", "utf-8"),
+                          (Cfg.host, Cfg.port)
+                         )
 
     def start(self):
-        last(self.cfg)
         launch(self.loop)
 
 
@@ -87,11 +90,10 @@ def toudp(host, port, txt):
 
 
 def udp(event):
-    cfg = Cfg()
-    last(cfg)
     if len(sys.argv) > 2:
         txt = " ".join(sys.argv[2:])
-        toudp(cfg.host, cfg.port, txt)
+        toudp(Cfg.host, Cfg.port, txt)
+        event.reply(f"{len(txt)} characters sent")
         return
     if not select.select(
                          [sys.stdin, ],
@@ -119,7 +121,6 @@ def udp(event):
                 stop = True
                 break
             size += len(txt)
-            toudp(cfg.host, cfg.port, txt)
+            toudp(Cfg.host, Cfg.port, txt)
         if stop:
             break
-    event.reply(f"send {size}")

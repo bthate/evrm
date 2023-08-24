@@ -1,7 +1,6 @@
 # This file is placed in the Public Domain.
 #
-# pylint: disable=C,I,R
-# flake8: noqa
+# pylint: disable=C0115,C0116,E0402,R0903
 
 
 "log text"
@@ -10,35 +9,23 @@
 import time
 
 
-from ..object  import Object
-from ..persist import Persist, find, fntime, write
-from ..utils   import laps
+from ..objects import Object
+from ..storage import find, fntime, write
+from ..threads import laps
 
 
 def __dir__():
     return (
-            'log',
+            "Log",
+            "log" 
            )
-
-
-__all__ = __dir__()
 
 
 class Log(Object):
 
     def __init__(self):
         super().__init__()
-        self.createtime = time.time()
         self.txt = ''
-
-    def __size__(self):
-        return len(self.txt)
-
-    def __since__(self):
-        return self.createtime
-
-
-Persist.add(Log)
 
 
 def log(event):

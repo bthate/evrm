@@ -1,7 +1,6 @@
 # This file is placed in the Public Domain.
 #
-# pylint: disable=C,I,R,W0401,W0622
-# flake8: noqa
+# pylint: disable=C0116,W0105,E0402
 
 
 "running threads"
@@ -11,8 +10,15 @@ import threading
 import time
 
 
-from ..object import Object, update
-from ..utils  import laps
+from ..objects import Object
+from ..methods import update
+from ..threads import laps
+
+
+def __dir__():
+    return (
+            "thr",
+           )
 
 
 STARTTIME = time.time()

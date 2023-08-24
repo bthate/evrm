@@ -1,7 +1,6 @@
 # This file is placed in the Public Domain.
 #
-# pylint: disable=C,I,R,W0401
-# flake8: noqa=E272
+# pylint: disable=C0115,C0116,W0105,E0402
 
 
 "rich site syndicte"
@@ -20,18 +19,27 @@ from urllib.parse import quote_plus, urlencode
 from urllib.request import Request, urlopen
 
 
-from ..bus      import Bus
-from ..object   import Default, Object
-from ..object   import printable, update
-from ..persist  import Persist, find, fntime, last, write
-from ..run      import Cfg
-from ..repeater import Repeater
-from ..thread   import launch
-from ..utils    import laps, spl
+from ..objects import Default, Object
+from ..methods import prt, update, spl
+from ..reactor import Broker, Cfg
+from ..storage import find, fntime, last, write
+from ..threads import Repeater, laps, launch
 
 
-def start():
-    time.sleep(5.0)
+def __dir__():
+    return (
+            "Fetcher",
+            "Parser",
+            "Rss",
+            "Seen",
+            "dpl",
+            "nme",
+            "rem",
+            "rss"
+           )
+
+
+def init():
     fetcher = Fetcher()
     fetcher.start()
     return fetcher
@@ -49,9 +57,6 @@ class Feed(Default):
         return len(self.__dict__)
 
 
-Persist.add(Feed)
-
-
 class Rss(Default):
 
     def __init__(self):
@@ -67,9 +72,6 @@ class Rss(Default):
         return len(self.__dict__)
 
 
-Persist.add(Rss)
-
-
 class Seen(Default):
 
     def __init__(self):
@@ -81,9 +83,6 @@ class Seen(Default):
 
     def size(self):
         return len(self.__dict__)
-
-
-Persist.add(Seen)
 
 
 class Fetcher(Object):
@@ -145,7 +144,8 @@ class Fetcher(Object):
             txt = f'[{feedname}] '
         for obj in objs:
             txt2 = txt + self.display(obj)
-            Bus.announce(txt2.rstrip())
+            for bot in Broker.objs:
+                bot.announce(txt2.rstrip())
         return counter
 
     def run(self):
@@ -188,9 +188,6 @@ class Parser(Object):
                 setattr(obj, itm, Parser.getitem(line, itm))
             res.append(obj)
         return res
-
-
-# UTILITY
 
 
 def getfeed(url, item):
@@ -246,9 +243,6 @@ def useragent(txt):
     return 'Mozilla/5.0 (X11; Linux x86_64) ' + txt
 
 
-# COMMANDS
-
-
 def dpl(event):
     if len(event.args) < 2:
         event.reply('dpl <stringinurl> <item1,item2>')
@@ -291,7 +285,7 @@ def rss(event):
         for feed in find('rss'):
             nrs += 1
             elp = laps(time.time()-fntime(feed.__oid__))
-            txt = printable(feed)
+            txt = prt(feed)
             event.reply(f'{nrs} {txt} {elp}')
         if not nrs:
             event.reply('no rss feed found.')

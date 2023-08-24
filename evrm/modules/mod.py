@@ -1,6 +1,6 @@
 # This file is placed in the Public Domain.
 #
-# pylint: disable=C,I,R,W0401,W0622
+# pylint: disable=C0103,C0116,E0402
 
 
 "available modules"
@@ -9,20 +9,14 @@
 import os
 
 
-from .. import modules
-
-
 def __dir__():
     return (
-            'mod',
+            "mod",
            )
 
 
-__all__ = __dir__()
-
-
 def mod(event):
-    path = modules.__path__[0]
+    path = os.path.join(os.getcwd(), "modules")
     modlist = [
                x[:-3] for x in os.listdir(path)
                if x.endswith(".py")

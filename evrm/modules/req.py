@@ -1,7 +1,6 @@
 # This file is placed in the Public Domain.
 #
-# pylint: disable=C,I,R
-# flake8: noqa
+# pylint: disable=C0115,C0116
 
 
 """| **Information and Evidence Unit**
@@ -78,7 +77,6 @@ p.s.
 (1) provided are the confirmation letters of both the chamber and the king.
 (2) your reference: OTP-CR-117/19
 """
-
 
 
 def req(event):

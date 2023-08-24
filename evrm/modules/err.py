@@ -1,6 +1,6 @@
 # This file is placed in the Public Domain.
 #
-# pylint: disable=C,I,R
+# pylint: disable=C0116,E0402
 
 
 "errors"
@@ -10,23 +10,21 @@ import io
 import traceback
 
 
-from ..error import Error
+from ..reactor import Reactor
+from ..threads import Thread
 
 
 def __dir__():
     return (
-            'err',
+            "err",
            )
 
 
-__all__ = __dir__()
-
-
 def err(event):
-    if not Error.errors:
-        event.reply("no error")
+    if not Reactor.errors and not Thread.errors:
+        event.reply("no errors")
         return
-    for exc in Error.errors:
+    for exc in Reactor.errors + Thread.errors:
         stream = io.StringIO(
                              traceback.print_exception(
                                                        type(exc),

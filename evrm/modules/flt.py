@@ -1,30 +1,28 @@
 # This file is placed in the Public Domain.
 #
-# pylint: disable=C,I,R,W0401,W0622
-# flake8: noqa
+# pylint: disable=C0116,E0402
 
 
 "list of bots"
 
 
-from ..bus    import Bus
-from ..object import printable
+from ..reactor import Broker
 
 
 def __dir__():
     return (
-            'flt',
+            "flt",
            )
-
-
-__all__ = __dir__()
 
 
 def flt(event):
     try:
         index = int(event.args[0])
-        event.reply(printable(Bus.objs[index]))
+        event.reply(str(Broker.objs[index]))
         return
     except (KeyError, TypeError, IndexError, ValueError):
         pass
-    event.reply(' | '.join([repr(obj).split()[0].split(".")[-1] for obj in Bus.objs]))
+    event.reply(
+                ' | '.join([repr(obj).split()[0].split(".")[-1]
+                            for obj in Broker.objs])
+               )

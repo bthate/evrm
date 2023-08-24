@@ -1,7 +1,6 @@
 # This file is placed in the Public Domain.
 #
-# pylint: disable=C,I,R,W0613,E1101,E0402,W0401
-# pylama: ignore=E225,E501
+# pylint: disable=C,I,R,W0613,E1101,E0402,W0401,W0105
 # flake8: noqa=E501
 
 
@@ -12,16 +11,19 @@ import datetime
 import time
 
 
-from ..bus   import Bus
-from ..event import Event
-from ..object import Object, keys
-from ..repeater import Repeater
-from ..thread import launch
-from ..utils import laps
+from ..objects import Object, construct
+from ..methods import keys
+from ..reactor import Broker, Event
+from ..threads import Repeater, laps, launch
 
 
-def start():
-    time.sleep(6.0)
+def __dir__():
+    return (
+            "now",
+           ) 
+
+
+def init():
     for key in keys(oorzaken):
         val = getattr(oorzaken, key, None)
         if val and int(val) > 10000:
@@ -29,15 +31,10 @@ def start():
             evt.txt = ""
             evt.rest = key
             sec = seconds(val)
-            repeater = Repeater(
-                                sec,
-                                cbstats,
-                                evt,
-                                thrname=aliases.get(key)
-                               )
+            repeater = Repeater(sec, cbstats, evt, thrname=aliases.get(key))
             repeater.start()
     launch(daily, name="daily")
-
+    
 
 DAY = 24*60*60
 YEAR = 365*DAY
@@ -46,8 +43,7 @@ STARTDATE = "2020-01-01 00:00:00"
 STARTTIME = time.mktime(time.strptime(STARTDATE, "%Y-%m-%d %H:%M:%S"))
 
 
-oor = """
-         "Totaal onderliggende doodsoorzaken (aantal)";
+oor = """"Totaal onderliggende doodsoorzaken (aantal)";
          "1 Infectieuze en parasitaire ziekten/Totaal infectieuze en parasitaire zktn (aantal)";
          "1 Infectieuze en parasitaire ziekten/1.1 Tuberculose (aantal)";
          "1 Infectieuze en parasitaire ziekten/1.2 Meningokokkeninfecties (aantal)";
@@ -243,9 +239,6 @@ aantal = """
          """.split(";")
 
 
-# oorzaak.Suicide = 1859
-
-
 aliases = {}
 aliases["Nieuwvormingen"] = "cancer"
 aliases["Hart en vaatstelsel"] = "hart disease"
@@ -281,19 +274,123 @@ jaar["Wfz"] = 23820
 jaar["totaal"] = 168678
 
 
-oorzaak = Object(zip(oor, aantal))
+oorzaak = Object()
+construct(oorzaak, zip(oor, aantal))
 oorzaken = Object()
 
 
-# UTILITY
+
+def getalias(txt):
+    for key, value in aliases.items():
+        if txt.lower() in key.lower():
+            return value
+
+
+def getday():
+    day = datetime.datetime.now()
+    day = day.replace(hour=0, minute=0, second=0, microsecond=0)
+    return day.timestamp()
+
+
+def getnr(name):
+    for k in keys(oorzaken):
+        if name.lower() in k.lower():
+            return int(getattr(oorzaken, k))
+    return 0
+
+
+def seconds(nrs):
+    if not nrs:
+        return nrs
+    return 60*60*24*365 / float(nrs)
+
+
+
+def iswanted(k, line):
+    for word in line:
+        if word in k:
+            return True
+    return False
+
+
+def daily():
+    while 1:
+        time.sleep(24*60*60)
+        evt = Event()
+        cbnow(evt)
+
+
+def hourly():
+    while 1:
+        time.sleep(60*60)
+        evt = Event()
+        cbnow(evt)
+
+
+def cbnow(evt):
+    delta = time.time() - STARTTIME
+    txt = laps(delta) + " "
+    for name in sorted(keys(oorzaken), key=lambda x: seconds(getnr(x))):
+        needed = seconds(getnr(name))
+        if needed > 60*60:
+            continue
+        nrtimes = int(delta/needed)
+        txt += "%s: %s " % (getalias(name), nrtimes)
+    txt += " http://genocide.rtfd.io"
+    Broker.announce(txt)
+
+
+def cbstats(evt):
+    name = evt.rest or "Psych"
+    needed = seconds(getnr(name))
+    if needed:
+        delta = time.time() - STARTTIME
+        nrtimes = int(delta/needed)
+        nryear = int(YEAR/needed)
+        nrday = int(DAY/needed)
+        delta2 = time.time() - getday()
+        thisday = int(delta2/needed)
+        txt = "patient #%s died from %s (%s/%s) every %s (%s/year)" % (
+                                                               nrtimes,
+                                                               getalias(name),
+                                                               thisday,
+                                                               nrday,
+                                                               laps(needed),
+                                                               nryear,
+                                                              )
+        for bot in Broker.objs:
+            bot.announce(txt)
+
+
+def now(event):
+    name = event.rest or "Psych"
+    needed = seconds(getnr(name))
+    if needed:
+        delta = time.time() - STARTTIME
+        txt = laps(delta) + " "
+        nrtimes = int(delta/needed)
+        nryear = int(YEAR/needed)
+        nrday = int(DAY/needed)
+        thisday = int(DAY % needed)
+        txt += "patient #%s died from %s (%s/%s/%s) every %s" % (
+                                                                 nrtimes,
+                                                                 getalias(name),
+                                                                 thisday,
+                                                                 nrday,
+                                                                 nryear,
+                                                                 laps(needed)
+                                                                )
+        event.reply(txt)
+    else:
+        event.reply("not needed")
 
 
 def boot():
     _nr = -1
     for key in keys(oorzaak):
         _nr += 1
-        #if _nr == 0:
-        #    continue
+        if _nr == 0:
+            continue
         if key.startswith('"'):
             key = key[1:]
         lines = key.split("/")
@@ -316,116 +413,6 @@ def boot():
         nms = " ".join(atl.split()[1:]).capitalize()
         nms = nms.strip()
         setattr(oorzaken, nms, aantal[_nr])
-
-
-def daily():
-    time.sleep(10.0)
-    while 1:
-        evt = Event()
-        cbnow(evt)
-        time.sleep(24*60*60)
-
-
-def hourly():
-    while 1:
-        time.sleep(60*60)
-        evt = Event()
-        cbnow(evt)
-
-
-def seconds(nrs):
-    if not nrs:
-        return nrs
-    return 60*60*24*365 / float(nrs)
-
-
-def getalias(txt):
-    for key, value in aliases.items():
-        if txt.lower() in key.lower():
-            return value
-
-
-def getday():
-    day = datetime.datetime.now()
-    day = day.replace(hour=0, minute=0, second=0, microsecond=0)
-    return day.timestamp()
-
-
-def getnr(name):
-    for k in keys(oorzaken):
-        if name.lower() in k.lower():
-            return int(getattr(oorzaken, k))
-    return 0
-
-
-def iswanted(k, line):
-    for word in line:
-        if word in k:
-            return True
-    return False
-
-
-# CALLBACKS
-
-
-def cbnow(evt):
-    delta = time.time() - STARTTIME
-    txt = laps(delta) + " "
-    for name in sorted(keys(oorzaken), key=lambda x: seconds(getnr(x))):
-        needed = seconds(getnr(name))
-        if needed > 60*60:
-            continue
-        nrtimes = int(delta/needed)
-        txt += "%s: %s " % (getalias(name), nrtimes)
-    txt += " http://genocide.rtfd.io"
-    Bus.announce(txt)
-
-
-def cbstats(evt):
-    name = evt.rest or "Psych"
-    needed = seconds(getnr(name))
-    if needed:
-        delta = time.time() - STARTTIME
-        nrtimes = int(delta/needed)
-        nryear = int(YEAR/needed)
-        nrday = int(DAY/needed)
-        delta2 = time.time() - getday()
-        thisday = int(delta2/needed)
-        txt = "patient #%s died from %s (%s/%s) every %s (%s/year)" % (
-                                                               nrtimes,
-                                                               getalias(name),
-                                                               thisday,
-                                                               nrday,
-                                                               laps(needed),
-                                                               nryear,
-                                                              )
-        Bus.announce(txt)
-
-
-# COMMANDS
-
-
-def now(event):
-    name = event.rest or "Psych"
-    needed = seconds(getnr(name))
-    if needed:
-        delta = time.time() - STARTTIME
-        nrtimes = int(delta/needed)
-        nryear = int(YEAR/needed)
-        nrday = int(DAY/needed)
-        thisday = int(DAY % needed)
-        txt = "patient #%s died from %s (%s/%s/%s) every %s" % (
-                                                               nrtimes,
-                                                               getalias(name),
-                                                               thisday,
-                                                               nrday,
-                                                               nryear,
-                                                               laps(needed)
-                                                              )
-        event.reply(txt)
-
-
-# RUNTIME
 
 
 boot()

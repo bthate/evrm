@@ -1,17 +1,25 @@
 # This file is placed in the Public Domain.
 #
-# pylint: disable=C,I,R
-# flake8: noqa
+# pylint: disable=C0115,C0116,R0903,W0105,E0402
 
 
 "todo list"
 
+
 import time
 
 
-from ..object  import Object
-from ..persist import Persist, find, fntime, write
-from ..utils   import laps
+from ..objects import Object
+from ..storage import find, fntime, write
+from ..threads import laps
+
+
+def __dir__():
+    return (
+            "Todo",
+            "dne",
+            "tdo"
+           )
 
 
 class Todo(Object):
@@ -21,22 +29,19 @@ class Todo(Object):
         self.txt = ''
 
 
-Persist.add(Todo)
-
-
 def dne(event):
     if not event.args:
         event.reply("dne <txt>")
         return
     selector = {'txt': event.args[0]}
-    nrs = 0
+    nmr = 0
     for obj in find('todo', selector):
-        nrs += 1
+        nmr += 1
         obj.__deleted__ = True
         write(obj)
         event.reply('ok')
         break
-    if not nrs:
+    if not nmr:
         event.reply("nothing todo")
 
 
