@@ -29,7 +29,7 @@ from evrm.threads import Thread, launch
 from evrm import modules
 
 
-Cfg.mod = "err,mod,sts,thr,bsc"
+Cfg.mod = "err,mdl,mod,req,sts,thr,bsc"
 Cfg.name = __file__.split(os.sep)[-1]
 
 

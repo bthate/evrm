@@ -27,10 +27,6 @@ classifiers=[
 "source" = "https://github.com/bthate/evrm"
 
 
-[project.scripts]
-evrm = "evrm.__main__:wrapped"
-
-
 [project.optional-dependencies]
 dev = []
 
@@ -40,7 +36,7 @@ packages = [
             "evrm.modules"
            ]
 zip-safe = true
-
+script-files = ["bin/evrm"]
 
 
 [tool.setuptools.data-files]
