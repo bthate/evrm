@@ -9,7 +9,7 @@
 
 **NAME**
 
-    **EVRM** - 69389/12 `! <source.html>`_
+    ``EVRM`` - 69389/12 `! <source.html>`_
 
 
 **SYNOPSIS**
