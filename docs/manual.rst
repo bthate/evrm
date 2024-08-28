@@ -93,8 +93,8 @@
     ::
 
         $ evrm cfg server=<server>
-        $ evrmcfg channel=<channel>
-        $ evrmcfg nick=<nick>
+        $ evrm cfg channel=<channel>
+        $ evrm cfg nick=<nick>
 
     sasl
 
