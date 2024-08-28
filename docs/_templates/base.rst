@@ -1,30 +1,29 @@
 .. _{{ fullname }}:
 
+
 .. raw:: html
 
-    <br><br>
+    <br>
+    <center>
+    <h3>
+    <b>
 
 .. title:: {{ fullname }}
 
-.. raw:: html
 
-    <center>
-    <h3>
-
-{{ fullname }}
+:ref:`src <source>`/**{{ name }}**
 
 .. raw:: html
 
-    </h3>
-    </center>
-    <br><br>
-
+    </b><h3></center>
 
 .. auto{{ objtype }}:: {{ fullname }}
     :members:
     :private-members:
     :undoc-members:
 
-    .. raw:: html
+.. raw:: html
 
-        <br><br>
+    <br><br>
+
+'''

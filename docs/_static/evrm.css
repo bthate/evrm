@@ -12,7 +12,18 @@ div.body a:link, div.body h, div.body p, div.body dd, div.body li, div.body bloc
 body {
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva',
                  'Verdana', sans-serif;
-    font-size: 120%;
+    font-size: 113%;
+    background-color: #fff;
+    color: #555;
+    margin: 30px;
+    padding: 0px 30px 0px 30px;
+}
+
+
+i {
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva',
+                 'Verdana', sans-serif;
+    font-size: 90%;
     background-color: #fff;
     color: #555;
     margin: 30px;
@@ -48,3 +59,14 @@ style {
     text-decoration: none;
 }
 
+li > p:first-child {
+    margin-top: 0;
+}
+
+li > p:last-child {
+    margin-bottom: 0;
+}
+
+div.admonition dl {
+    margin-bottom: 0;
+}

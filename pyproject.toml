@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "evrm"
-description = "ANTIPSYCHOTICS - AKATHISIA - CATATONIA - SEDATION - SHOCKS - LETHAL CATATONIA"
+description = "Elderly, Handicapped, Criminals, Wicked"
 version = "122"
 authors = [
     {name = "Bart Thate", email = "bthate@dds.nl" },
@@ -20,6 +20,11 @@ classifiers=[
              'Topic :: Utilities'
             ]
 
+
+[project.scripts]
+"evrm"  = "evrm.__main__:wrapped"
+"evrmc" = "evrm.prompt:wrapped"
+"evrmd" = "evrm.daemon:wrapped"
 
 [project.urls]
 "home" = "https://pypi.org/project/evrm"
@@ -36,7 +41,6 @@ packages = [
             "evrm.modules"
            ]
 zip-safe = true
-script-files = ["bin/evrm"]
 
 
 [tool.setuptools.data-files]
