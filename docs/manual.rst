@@ -1,182 +1,151 @@
 .. _manual:
 
-
 .. raw:: html
 
-    <br>
-
+    <br><br>
 
 .. title:: Manual
 
 
-.. raw:: html
-
-    <center>
-
-manual
-######
-
-
-.. raw:: html
-
-    </center>
-
-
 **NAME**
 
- | EVRM - 69389/12
+    **EVRM** - 69389/12 `! <source.html>`_
 
 
 **SYNOPSIS**
 
- ::
+    ::
 
-  evrm <cmd> [key=val] 
-  evrm <cmd> [key==val]
-  evrm [-c] [-d] [-v]
+        evrm  <cmd> [key=val] [key==val]
+        evrmc [-i] [-v]
+        evrmd 
 
 
 **DESCRIPTION**
 
-
- ``EVRM`` is a python3 IRC bot is intended to be programmable  in a
- static, only code, no popen, no user imports and no reading modules from
- a directory, way. It can show genocide and suicide stats of king netherlands
- his genocide into a IRC channel, display rss feeds and log simple text
- messages, source is `here <source.html>`_.
-
+    In 2012 heb ik het Europeese Hof voor de Rechten van de Mens aangeschreven om een klacht tegen Nederland in te dienen. De klacht betrof het afwezig zijn van verpleging in het nieuwe ambulante behandeltijdperk van de GGZ. Uitspraak is niet-ontvankelijk.
 
 
 **INSTALL**
 
- with sudo::
+    ::
 
-  $ python3 -m pip install evrm
+        $ pipx install evrm
+        $ pipx ensurepath
 
- as user::
+        <new terminal>
 
-  $ pipx install evrm
+        $ evrm srv > genocide.service
+        # mv *.service /etc/systemd/system/
+        # systemctl enable evrm --now
 
- or download the tar, see::
-
-  https://pypi.org/project/evrm
+        joins #evrm on localhost
 
 
 **USAGE**
 
+    without any argument the bot does nothing
 
- list of commands::
+    ::
 
-    $ evrm cmd
-    cmd,err,flt,sts,thr,upt
+        $ evrm
+        $
 
- start a console::
+    see list of commands
 
-    $ evrm -c
-    >
+    ::
 
- start additional modules::
+        $ evrm cmd
+        cmd,req,skl,srv
 
-    $ evrm mod=<mod1,mod2> -c
-    >
 
- list of modules::
+    start a console
 
-    $ evrm mod
-    cmd,err,flt,fnd,irc,log,mdl,mod,
-    req, rss,slg,sts,tdo,thr,upt,ver
+    ::
 
- to start irc, add mod=irc when
- starting::
+        $ evrmc
+        >
 
-     $ evrm mod=irc -c
+    start daemon
 
- to start rss, also add mod=rss
- when starting::
+    ::
 
-     $ evrm mod=irc,rss -c
+        $ evrmd
+        $ 
 
- start as daemon::
 
-    $ evrm mod=irc,rss -d
-    $ 
+    show request to the prosecutor
+
+    ::
+
+        $ evrm req
+        Information and Evidence Unit
+        Office of the Prosecutor
+        Post Office Box 19519
+        2500 CM The Hague
+        The Netherlands
 
 
 **CONFIGURATION**
 
+    irc
 
- *irc*
+    ::
 
- ::
+        $ evrm cfg server=<server>
+        $ evrmcfg channel=<channel>
+        $ evrmcfg nick=<nick>
 
-    $ evrm cfg server=<server>
-    $ evrm cfg channel=<channel>
-    $ evrm cfg nick=<nick>
+    sasl
 
- *sasl*
+    ::
 
- ::
+        $ evrm pwd <nsvnick> <nspass>
+        $ evrm cfg password=<frompwd>
 
-    $ evrm pwd <nsvnick> <nspass>
-    $ evrm cfg password=<frompwd>
+    rss
 
- *rss*
+    ::
 
- ::
-
-    $ evrm rss <url>
-    $ evrm dpl <url> <item1,item2>
-    $ evrm rem <url>
-    $ evrme nme <url< <name>
+        $ evrm rss <url>
+        $ evrm dpl <url> <item1,item2>
+        $ evrm rem <url>
+        $ evrm nme <url> <name>
 
 
 **COMMANDS**
 
+    ::
 
- ::
+        cfg - irc configuration
+        cmd - commands
+        mre - displays cached output
+        pwd - sasl nickserv name/pass
+        req - reconsider
 
-    cmd - commands
-    cfg - irc configuration
-    dlt - remove a user
-    dpl - sets display items
-    ftc - runs a fetching batch
-    fnd - find objects 
-    flt - instances registered
-    log - log some text
-    mdl - genocide model
-    met - add a user
-    mre - displays cached output
-    nck - changes nick on irc
-    now - genocide stats
-    pwd - sasl nickserv name/pass
-    rem - removes a rss feed
-    req - reconsider
-    rss - add a feed
-    slg - slogan
-    thr - show the running threads
-    tpc - genocide stats into topic
+
+**SOURCE**
+
+
+    source is :ref:`here <source>`
 
 
 **FILES**
 
- ::
+    ::
 
-    ~/.local/bin/evrm
-    ~/.local/pipx/venvs/evrm/
-    /usr/local/bin/evrm
-    /usr/local/share/doc/evrm
+        ~/.evrm 
+        ~/.local/bin/evrm
+        ~/.local/bin/evrmc
+        ~/.local/bin/evrmd
+        ~/.local/pipx/venvs/evrm/*
 
 
 **AUTHOR**
 
-
- ::
- 
     Bart Thate <bthate@dds.nl>
 
 
 **COPYRIGHT**
 
- ::
-
-    EVRM is Public Domain.
+    ``EVRM`` is Public Domain.
