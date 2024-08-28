@@ -1,6 +1,4 @@
 # This file is placed in the Public Domain.
-#
-# pylint: disable=C0115,C0116
 
 
 """| **Information and Evidence Unit**
@@ -10,7 +8,8 @@
 | **The Netherlands**
 |
 
-Hello Office of the Prosecutor,
+
+Hello Office of the Prosecutor, 
 
 i write you in the context of communications and claims under art.15 of
 the Rome Statute. i want to inform the prosecutor that the king of the
@@ -65,19 +64,19 @@ Since the members of the chamber and the king were aware that these
 medicine are poison at the time they voted for this law and the day the
 Wfz law took effect (1-1-2019), i ask the prosecutor to prosecute the
 king for making the commiting of the above mentioned crimes (killing,
-torture and impotent making) possible here in the netherlands in the
-hope that it stops the mass torture with poison the king of the
-netherlands and his government are doing.
+torture and impotent making) possible.
 
-Bart Thate
 
 p.s.
 
 
-(1) provided are the confirmation letters of both the chamber and the king.
-(2) your reference: OTP-CR-117/19
+1) Entered in the Communications Register of the Office on ``4 march 2019``
+2) Your reference ``OTP-CR-117/19``
+
+
 """
 
 
 def req(event):
+    "reconsider"
     event.reply(__doc__)

@@ -1,6 +1,5 @@
 # This file is placed in the Public Domain.
-#
-# pylint: disable=C0115,C0116,R0903,W0105,E0402
+# pylint: disable=R0903
 
 
 "todo list"
@@ -9,20 +8,19 @@
 import time
 
 
-from ..objects import Object
-from ..storage import find, fntime, write
-from ..threads import laps
+from ..object  import Object
+from ..persist import find, sync
+from ..utils   import fntime, laps
 
 
-def __dir__():
-    return (
-            "Todo",
-            "dne",
-            "tdo"
-           )
+class NoDate(Exception):
+
+    "no matching date"
 
 
 class Todo(Object):
+
+    "Todo"
 
     def __init__(self):
         Object.__init__(self)
@@ -30,15 +28,16 @@ class Todo(Object):
 
 
 def dne(event):
+    "flag todo as done."
     if not event.args:
         event.reply("dne <txt>")
         return
     selector = {'txt': event.args[0]}
     nmr = 0
-    for obj in find('todo', selector):
+    for fnm, obj in find('todo', selector):
         nmr += 1
         obj.__deleted__ = True
-        write(obj)
+        sync(obj, fnm)
         event.reply('ok')
         break
     if not nmr:
@@ -46,10 +45,11 @@ def dne(event):
 
 
 def tdo(event):
+    "add todo."
     if not event.rest:
         nmr = 0
-        for obj in find('todo'):
-            lap = laps(time.time()-fntime(obj.__oid__))
+        for fnm, obj in find('todo'):
+            lap = laps(time.time()-fntime(fnm))
             event.reply(f'{nmr} {obj.txt} {lap}')
             nmr += 1
         if not nmr:
@@ -57,5 +57,5 @@ def tdo(event):
         return
     obj = Todo()
     obj.txt = event.rest
-    write(obj)
+    sync(obj)
     event.reply('ok')

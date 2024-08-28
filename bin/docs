@@ -2,7 +2,7 @@
 # This file is placed in the Public Domain.
 
 
-"sphinx docs"
+"create docs"
 
 
 import os
@@ -10,12 +10,8 @@ import subprocess
 import sys
 
 
-CWD = os.getcwd()
-NAME = CWD.split(os.sep)[-2]
-
-
-os.environ["PATH"] = "bin:" + os.environ["PATH"]
-
+NAME = "sbn"
+curdir = os.getcwd()
 
 TXT = '''
 #
@@ -69,8 +65,14 @@ urllib3==2.0.3
 '''
 
 
+curdir = os.getcwd()
+
+
+os.environ["PATH"] = ":./bin" + os.environ["PATH"]
+
+
 def popen(txt):
-    "run commands"
+    "run commands on splitted string."
     with subprocess.Popen(
                             txt.split(),
                             stdin=sys.stdin,
@@ -83,10 +85,27 @@ def popen(txt):
         proc.wait()
 
 
-popen("python3 setup.py sdist")
-popen("python3 -m pip wheel -e .")
-popen("mv *.whl dist")
-popen("python3 -mvirtualenv --system-site-packages env")
-popen("env/bin/pip3 install %s -f dist --upgrade" % NAME)
-popen("env/bin/python3 env/bin/pip3 install -I %s" % " ".join([f"{x}" for x in TXT.split("\n") if "#" not in x]))
-popen("env/bin/python3 env/bin/sphinx-build docs html")
+def popen2(txt):
+    "run commands on plain txt"
+    proc = subprocess.Popen(
+                            txt,
+                            stdin=sys.stdin,
+                            stdout=sys.stdout,
+                            stderr=sys.stderr,
+                            close_fds=False,
+                            shell=True,
+                            text=True
+                           )
+    proc.communicate()
+    proc.wait()
+
+
+if not os.path.exists("dist"):
+    popen("python3 setup.py sdist")
+if not os.path.exists("env"):
+    popen("python3 -mvirtualenv env")
+    popen(f"env/bin/pip3 install {NAME} -f dist --upgrade --force")
+    popen2("env/bin/python3 env/bin/pip3 install -I %s" % " ".join([f"{x}" for x in TXT.split("\n") if "#" not in x]))
+
+
+popen("env/bin/sphinx-build docs html")

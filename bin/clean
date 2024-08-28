@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # This file is placed in the Public Domain.
 #
-# pylint: disable=C,I,R
+# pylint: disable=C0116
 
 
 "clean directories"
@@ -9,10 +9,6 @@
 
 import os
 import sys
-
-
-CWD = os.getcwd()
-NAME = CWD.split(os.sep)[-2]
 
 
 SKIP = ["env", ".git"]
@@ -44,15 +40,18 @@ def popen(txt):
 
 
 def main():
-    popen("rm -fR DEAD* build dist MANIFEST *.egg-info *.whl")
-    popen("rm -fR store setup.cfg .pytest_cache .test  __pycache__")
-    popen("rm -fR *~")
-    popen("rm -fR docs/kamer.*.rst html")
-    #popen("rm -fR env")
-    loop(".", "rm -fR *~")
-    loop(".", "rm -fR __pycache__")
+    popen("rm -fRv DEAD* build dist MANIFEST *.egg-info *.whl")
+    popen("rm -fRv .pytest_cache .test __pycache__")
+    popen("rm -fRv lib/*.egg-info")
+    popen("rm -fRv .*~ *~")
+    popen('rm -fRv docs/sbn*.rst')
     if "-f" in sys.argv:
-        popen("rm -fR env")
+        popen("rm -fR html store env")
+    if "-ff" in sys.argv:
+        popen("rm -fR ~/.cache/pip")
+    loop(".", "rm -fRv *~")
+    loop(".", "rm -fRv __pycache__")
+
 
 if __name__ == "__main__":
     main()

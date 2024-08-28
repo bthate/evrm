@@ -1,38 +1,30 @@
 # This file is placed in the Public Domain.
-#
-# pylint: disable=C0116,W0105,E0402
 
 
-"running threads"
+"show running threads"
 
 
 import threading
 import time
 
 
-from ..objects import Object
-from ..methods import update
-from ..threads import laps
-
-
-def __dir__():
-    return (
-            "thr",
-           )
-
-
-STARTTIME = time.time()
+from ..object  import Object, update
+from ..runtime import STARTTIME
+from ..utils   import laps
 
 
 def thr(event):
+    "show running threads."
     result = []
     for thread in sorted(threading.enumerate(), key=lambda x: x.name):
         if str(thread).startswith('<_'):
             continue
         obj = Object()
         update(obj, vars(thread))
+        if getattr(obj, 'current', None):
+            thread.name = obj.current
         if getattr(obj, 'sleep', None):
-            uptime = obj.sleep - int(time.time() - obj.state.latest)
+            uptime = obj.sleep - int(time.time() - obj.state["latest"])
         elif getattr(obj, 'starttime', None):
             uptime = int(time.time() - obj.starttime)
         else:
