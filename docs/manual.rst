@@ -35,7 +35,7 @@
 
         <new terminal>
 
-        $ evrm srv > genocide.service
+        $ evrm srv > evrm.service
         # mv *.service /etc/systemd/system/
         # systemctl enable evrm --now
 

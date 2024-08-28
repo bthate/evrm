@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "evrm"
 description = "Elderly, Handicapped, Criminals, Wicked"
-version = "122"
+version = "130"
 authors = [
     {name = "Bart Thate", email = "bthate@dds.nl" },
 ]
