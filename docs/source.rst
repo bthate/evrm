@@ -59,10 +59,5 @@
 
     evrm.modules.cmd
     evrm.modules.err
-    evrm.modules.irc
-    evrm.modules.log
     evrm.modules.mod
     evrm.modules.req
-    evrm.modules.rss
-    evrm.modules.tdo
-    evrm.modules.thr
