@@ -5,8 +5,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "evrm"
-description = "Elderly, Handicapped, Criminals, Wicked"
-version = "130"
+description = "EVRM 69389/12 - removed after 1 year."
+version = "140"
 authors = [
     {name = "Bart Thate", email = "bthate@dds.nl" },
 ]
@@ -23,8 +23,6 @@ classifiers=[
 
 [project.scripts]
 "evrm"  = "evrm.__main__:wrapped"
-"evrmc" = "evrm.prompt:wrapped"
-"evrmd" = "evrm.daemon:wrapped"
 
 [project.urls]
 "home" = "https://pypi.org/project/evrm"

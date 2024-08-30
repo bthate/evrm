@@ -20,8 +20,6 @@
     :toctree: 
     :template: base.rst
 
-    evrm.cache
-    evrm.config
     evrm.client
     evrm.cmds
     evrm.console
@@ -31,7 +29,6 @@
     evrm.errors
     evrm.event
     evrm.fleet
-    evrm.group
     evrm.log
     evrm.main
     evrm.object
