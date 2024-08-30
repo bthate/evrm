@@ -1,10 +1,3 @@
-﻿##########
-KAMERBRIEF
-##########
-
-
-::
-
 # this is an MEDS file, 4024 characters
 #
 # this file can be edited !!
@@ -19,7 +12,7 @@ KAMERBRIEF
     "Message-ID": "<CAJdWPN7sXdhtrZ=mf6XmMdhRFi0WXkhmnd6cm982goPfoFGsiA@mail.gmail.com>",
     "Received": "by 10.194.35.193 with HTTP; Tue, 18 Sep 2012 17:20:04 -0700 (PDT)",
     "Subject": "Urgent handelen nodig ter aanpak van het \"ontbreken van weekend hulp\"
- probleem voor GGZ patienten.",
+                probleem voor GGZ patienten.",
     "To": "voorzitter@tweedekamer.nl, cie.vws@tweedekamer.nl",
     "prefix": "email",
     "text": "Geachte Voorzitter van de 2e kamer, mevrouw Verbeet,
