@@ -1,13 +1,13 @@
-# GENOCIDE OTP-CR-117/19
+# EVRM 69389/12
 # -*- coding: utf-8 -*-
 #
 
 
-"ANTIPSYCHOTICA - AKATHISIA - KATATONIE - SEDERING - SHOCKS - LETHALE KATATONIE"
+"Bejaarden en Gehandicapten (Wzd), Cimininals (Wfz), Wicked (WvGGZ)"
 
 
 __name__ = "evrm"
-__version__ = "130"
+__version__ = "142"
 
 
 import doctest
@@ -124,7 +124,7 @@ rst_epilog = '''.. raw:: html
      <center>
      <b>
 
-:ref:`home <home>` - :ref:`manual <manual>` - :ref:`source <source>` - :ref:`about <about>`
+:ref:`reconsider <home>` - :ref:`evidence <evidence>` - :ref:`guilty <guilty>` - :ref:`writings <writings>`
 
 .. raw:: html
 

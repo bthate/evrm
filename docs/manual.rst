@@ -67,12 +67,6 @@
         The Netherlands
 
 
-**SOURCE**
-
-
-    source is :ref:`here <source>`
-
-
 **FILES**
 
     ::

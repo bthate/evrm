@@ -5,8 +5,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "evrm"
-description = "Bejaarden, Gehandicapten, Criminelen, Psychiatrische Patienten"
-version = "141"
+description = "Bejaarden en Gehandicapten (Wzd), Criminelen (Wfz), Psychiatrische Patienten (WvGGZ)"
+version = "142"
 authors = [
     {name = "Bart Thate", email = "bthate@dds.nl" },
 ]
@@ -24,6 +24,7 @@ classifiers=[
 [project.scripts]
 "evrm"  = "evrm.__main__:wrapped"
 
+
 [project.urls]
 "home" = "https://pypi.org/project/evrm"
 "bugs" = "https://github.com/bthate/evrm/issues"
@@ -32,6 +33,7 @@ classifiers=[
 
 [project.optional-dependencies]
 dev = []
+
 
 [tool.setuptools]
 packages = [
@@ -42,119 +44,143 @@ zip-safe = true
 
 
 [tool.setuptools.data-files]
-"share/doc/evrm" = [
-                    "docs/about.rst",
-                    "docs/conf.py",
-                    "docs/index.rst",
-                    "docs/manual.rst",
-                    "docs/nederland2.jpg",
-                    "docs/README",
-                    "docs/robots.txt",
-                    "docs/skull.png",
-                    "docs/source.rst",
-                    "docs/Wetboek-van-Strafrecht.txt",
-                   ]
-
-"share/doc/evrm/_static" = [
-                  "docs/_static/evrm.css",
-                 ]
-
-"share/doc/evrm/txt" = [
-                        "docs/txt/aangifte.rst",
-                        "docs/txt/aantallen.rst",
-                        "docs/txt/absoluut.rst",
-                        "docs/txt/bedreiging.rst",
-                        "docs/txt/beuker.rst",
-                        "docs/txt/BIJWERKING",
-                        "docs/txt/bijwerkingen.rst",
-                        "docs/txt/clozapine.rst",
-                        "docs/txt/CONTACT",
-                        "docs/txt/contact.rst",
-                        "docs/txt/dodelijk.rst",
-                        "docs/txt/DOPAMINE",
-                        "docs/txt/echt.rst",
-                        "docs/txt/ernstig.rst",
-                        "docs/txt/evrm.rst",
-                        "docs/txt/fact.rst",
-                        "docs/txt/gif.rst",
-                        "docs/txt/greffe.rst",
-                        "docs/txt/hoogeraad.rst",
-                        "docs/txt/igz.rst",
-                        "docs/txt/index.rst",
-                        "docs/txt/kamerbrief2.rst",
-                        "docs/txt/kamerbrief3.rst",
-                        "docs/txt/kamerbrief.rst",
-                        "docs/txt/kamerbrief.rst",
-                        "docs/txt/ld50.rst",
-                        "docs/txt/leven.rst",
-                        "docs/txt/loggen.rst",
-                        "docs/txt/MADS",
-                        "docs/txt/minister.rst",
-                        "docs/txt/misdrijf.rst",
-                        "docs/txt/mishandeling.rst",
-                        "docs/txt/nederland2.jpg",
-                        "docs/txt/notworking.rst",
-                        "docs/txt/om.rst",
-                        "docs/txt/ONTWENNING",
-                        "docs/txt/oorzaak.rst",
-                        "docs/txt/opzet2.rst",
-                        "docs/txt/pad.rst",
-                        "docs/txt/realtweedekamer.rst",
-                        "docs/txt/receptoren.rst",
-                        "docs/txt/recht.rst",
-                        "docs/txt/risico.rst",
-                        "docs/txt/schadelijk.rst",
-                        "docs/txt/sedatie.rst",
-                        "docs/txt/strafrecht.rst",
-                        "docs/txt/symptomen.rst",
-                        "docs/txt/todo.rst",
-                        "docs/txt/toxic.rst",
-                        "docs/txt/tussenkomst.rst",
-                        "docs/txt/uitspraak.rst",
-                        "docs/txt/urls.rst",
-                        "docs/txt/VERGIFTIGING",
-                        "docs/txt/vergiftiging.rst",
-                        "docs/txt/vervolgen.rst",
-                        "docs/txt/verzoek.rst",
-                        "docs/txt/Wetboek-van-Strafrecht.txt",
-                        "docs/txt/wet.rst",
-                        "docs/txt/wvggz.rst",
-                        "docs/txt/WvGGZ.rst",
-                        "docs/txt/WvGGZ.txt",
-                        "docs/txt/zyprexa.rst"
-                       ]
-
-"share/docs/evrm/jpg" = [
-                         "docs/jpg/20140730_011.jpg",
-                         "docs/jpg/20151028_009.jpg",
-                         "docs/jpg/20151029_004.jpg",
-                         "docs/jpg/69389.jpg",
-                         "docs/jpg/absoluut2.jpg",
-                         "docs/jpg/aesculaap.ico",
-                         "docs/jpg/aes.ico",
-                         "docs/jpg/bart2.jpg",
-                         "docs/jpg/bart.jpg",
-                         "docs/jpg/besloten.jpg",
-                         "docs/jpg/fact.jpg",
-                         "docs/jpg/geinformeerd.jpg",
-                         "docs/jpg/gelijk2.jpg",
-                         "docs/jpg/haarmaken.jpg",
-                         "docs/jpg/igz.jpg",
-                         "docs/jpg/minister.jpg",
-                         "docs/jpg/nalatig.jpg",
-                         "docs/jpg/nederland2.jpg",
-                         "docs/jpg/neurotoxisch.jpg",
-                         "docs/jpg/stoned2.jpg",
-                         "docs/jpg/tussenkomst.jpg",
-                         "docs/jpg/verbod.jpg"
-                        ]
+"share/doc/evrm/docs/" = [
+    "docs/about.rst",
+    "docs/conf.py",
+    "docs/index.rst",
+    "docs/manual.rst",
+    "docs/nederland2.jpg",
+    "docs/README",
+    "docs/robots.txt",
+    "docs/skull.png",
+    "docs/source.rst",
+    "docs/Wetboek-van-Strafrecht.txt",
+    "docs/ECHAabilify.png",
+    "docs/ECHAclozapine.png",
+    "docs/ECHAhaldol.png",
+    "docs/ECHAzyprexa.png",
+    "docs/OTP111.png",
+    "docs/OTP222.png",
+    "docs/evidence.rst",
+    "docs/guilty.rst",
+    "docs/informed.jpg",
+    "docs/kamer.png",
+    "docs/reconsider.rst",
+    "docs/request.rst",
+]
 
 
-"share/doc/evrm/_templates" = [
-                     "docs/_templates/base.rst",
-                     "docs/_templates/class.rst",
-                     "docs/_templates/module.rst"
-                    ]
+"share/doc/evrm/docs/_static" = [
+    "docs/_static/evrm.css",
+]
+
+
+"share/doc/evrm/docs/txt" = [
+    "docs/txt/aangifte.rst",
+    "docs/txt/aantallen.rst",
+    "docs/txt/absoluut.rst",
+    "docs/txt/bedreiging.rst",
+    "docs/txt/beuker.rst",
+    "docs/txt/BIJWERKING",
+    "docs/txt/bijwerkingen.rst",
+    "docs/txt/clozapine.rst",
+    "docs/txt/CONTACT",
+    "docs/txt/contact.rst",
+    "docs/txt/dodelijk.rst",
+    "docs/txt/DOPAMINE",
+    "docs/txt/echt.rst",
+    "docs/txt/ernstig.rst",
+    "docs/txt/evrm.rst",
+    "docs/txt/fact.rst",
+    "docs/txt/gif.rst",
+    "docs/txt/greffe.rst",
+    "docs/txt/hoogeraad.rst",
+    "docs/txt/igz.rst",
+    "docs/txt/index.rst",
+    "docs/txt/kamerbrief2.rst",
+    "docs/txt/kamerbrief3.rst",
+    "docs/txt/kamerbrief.rst",
+    "docs/txt/kamerbrief.rst",
+    "docs/txt/ld50.rst",
+    "docs/txt/leven.rst",
+    "docs/txt/loggen.rst",
+    "docs/txt/MADS",
+    "docs/txt/minister.rst",
+    "docs/txt/misdrijf.rst",
+    "docs/txt/mishandeling.rst",
+    "docs/txt/nederland2.jpg",
+    "docs/txt/notworking.rst",
+    "docs/txt/om.rst",
+    "docs/txt/ONTWENNING",
+    "docs/txt/oorzaak.rst",
+    "docs/txt/opzet2.rst",
+    "docs/txt/pad.rst",
+    "docs/txt/realtweedekamer.rst",
+    "docs/txt/receptoren.rst",
+    "docs/txt/recht.rst",
+    "docs/txt/risico.rst",
+    "docs/txt/schadelijk.rst",
+    "docs/txt/sedatie.rst",
+    "docs/txt/strafrecht.rst",
+    "docs/txt/symptomen.rst",
+    "docs/txt/todo.rst",
+    "docs/txt/toxic.rst",
+    "docs/txt/tussenkomst.rst",
+    "docs/txt/uitspraak.rst",
+    "docs/txt/urls.rst",
+    "docs/txt/VERGIFTIGING",
+    "docs/txt/vergiftiging.rst",
+    "docs/txt/vervolgen.rst",
+    "docs/txt/verzoek.rst",
+    "docs/txt/Wetboek-van-Strafrecht.txt",
+    "docs/txt/wet.rst",
+    "docs/txt/wvggz.rst",
+    "docs/txt/WvGGZ.rst",
+    "docs/txt/WvGGZ.txt",
+    "docs/txt/zyprexa.rst"
+]
+
+"share/doc/evrm/docs/jpg" = [
+    "docs/jpg/20140730_011.jpg",
+    "docs/jpg/20151028_009.jpg",
+    "docs/jpg/20151029_004.jpg",
+    "docs/jpg/69389.jpg",
+    "docs/jpg/absoluut2.jpg",
+    "docs/jpg/aesculaap.ico",
+    "docs/jpg/aes.ico",
+    "docs/jpg/bart2.jpg",
+    "docs/jpg/bart.jpg",
+    "docs/jpg/besloten.jpg",
+    "docs/jpg/fact.jpg",
+    "docs/jpg/geinformeerd.jpg",
+    "docs/jpg/gelijk2.jpg",
+    "docs/jpg/haarmaken.jpg",
+    "docs/jpg/igz.jpg",
+    "docs/jpg/minister.jpg",
+    "docs/jpg/nalatig.jpg",
+    "docs/jpg/nederland2.jpg",
+    "docs/jpg/neurotoxisch.jpg",
+    "docs/jpg/stoned2.jpg",
+    "docs/jpg/tussenkomst.jpg",
+    "docs/jpg/verbod.jpg"
+]
+
+
+"share/doc/evrm/docs/_templates" = [
+    "docs/_templates/base.rst",
+    "docs/_templates/class.rst",
+    "docs/_templates/module.rst"
+]
+
+"share/doc/evrm/pdf" =  [
+    "docs/pdf/bevestigd.pdf",
+    "docs/pdf/EM_Ack_OTP-CR-117_19.pdf",
+    "docs/pdf/EM_T04_OTP-CR-117_19.pdf",
+    "docs/pdf/EM_T07_OTP-CR-117_19_001.pdf",
+    "docs/pdf/Kamer.pdf",
+    "docs/pdf/Rome-Statute.pdf"
+]
+
 
 [tool.setuptools.exclude-package-data]
 "*" = [
