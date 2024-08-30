@@ -8,22 +8,6 @@
 .. title:: Home
 
 
-
-.. raw:: html
-
-    <center>
-
-evrm
-#####
-
-
-
-.. raw:: html
-
-    </center>
-    <br>
-
-
 In 2012 i wrote the European Court of Human Rights to complain about the
 dutch government. The complaint was about the lack of casemanager in the
 ambulant (at home) treatement of psychiatric patients. Judgement was not
@@ -34,8 +18,13 @@ In 2024 i add a command to the bot to show the request to the prosecutor
 (``OTP-CR-117/19``) to arrest the king for his genocide. Prosecutor called
 it no basis to proceed. Open for reconsider.
 
+.. raw:: html
 
-<dutch>
+    <br>
+
+
+**DUTCH**
+
 
 In 2012 heb ik het Europeese Hof voor de Rechten van de Mens :ref:`aangeschreven <verzoek>` om een klacht tegen Nederland in te dienen.
 De :ref:`klacht <greffe>` betrof het afwezig zijn van verpleging in het nieuwe ambulante behandeltijdperk van de GGZ. :ref:`Uitspraak <uitspraak>` is niet-ontvankelijk. 
@@ -55,8 +44,12 @@ Het is niet mogelijk voor de Koningin, noch de Koning om  :ref:`verdere tussenko
 Op basis van de veronderstelling dat opnames worden voorkomen is men bedden gaan afbouwen.
 
 
-wet
-===
+.. raw:: html
+
+    <br>
+
+
+**WET**
 
 
 Artikel 174
@@ -66,8 +59,12 @@ Artikel 174
 2. Indien het feit iemands dood ten gevolge heeft, wordt de schuldige gestraft met levenslange gevangenisstraf of tijdelijke van ten hoogste dertig jaren of geldboete van de vijfde categorie.
 
 
-bewijs
-======
+.. raw:: html
+
+    <br>
+
+
+**BEWIJS**
 
 
 Het bewijs dat deze stoffen gif zijn is te vinden is de :ref:`Material Safety Data Sheet <sds>`, daar staan LD50 waardes in.
@@ -84,9 +81,11 @@ Op de Hodge and Sterner Scale:
 | 5 Practically Non-toxic       5000-15,000
 | 6 Relatively Harmless         15,000 or more
 
+.. raw:: html
 
-(f)act
-======
+    <br>
+
+**(F)ACT**
 
 
 De zorg die de GGZ zegt te leveren is ook een waar (zorg) die de gezondheid benadelt en waarbij de leverancier de schadelijkheid verzwijgt.
@@ -153,9 +152,11 @@ Het niet melden van schadelijkheid heeft desastreuze gevolgen:
     Volledig ingevulde behandelplannen zouden een vereiste moeten zijn voor behandeling.
 
 
-email
-=====
+.. raw:: html
 
+    <br>
+
+**EMAIL**
 
 | Bartholomeus Henricus Julius (Bart) Thate - :ref:`teksten <teksten>`
 | botfather on #dunkbots irc.freenode.net 
