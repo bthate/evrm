@@ -29,6 +29,11 @@ def main():
     cmnd(Cfg.otxt, print)
 
 
-if __name__ == "__main__":
+def wrapped():
     wrap(main)
     errors()
+
+
+if __name__ == "__main__":
+    wrapped()
+    

@@ -16,11 +16,26 @@
 evrm
 #####
 
+
+
 .. raw:: html
 
     </center>
     <br>
 
+
+In 2012 i wrote the European Court of Human Rights to complain about the
+dutch government. The complaint was about the lack of casemanager in the
+ambulant (at home) treatement of psychiatric patients. Judgement was not
+submissable. Verzoekschrift (``69389/12``). Removed after 1 year.
+
+
+In 2024 i add a command to the bot to show the request to the prosecutor
+(``OTP-CR-117/19``) to arrest the king for his genocide. Prosecutor called
+it no basis to proceed. Open for reconsider.
+
+
+<dutch>
 
 In 2012 heb ik het Europeese Hof voor de Rechten van de Mens :ref:`aangeschreven <verzoek>` om een klacht tegen Nederland in te dienen.
 De :ref:`klacht <greffe>` betrof het afwezig zijn van verpleging in het nieuwe ambulante behandeltijdperk van de GGZ. :ref:`Uitspraak <uitspraak>` is niet-ontvankelijk. 

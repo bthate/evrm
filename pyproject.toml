@@ -5,8 +5,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "evrm"
-description = "EVRM 69389/12 - removed after 1 year"
-version = "140"
+description = "Bejaarden, Gehandicapten, Criminelen, Psychiatrische Patienten"
+version = "141"
 authors = [
     {name = "Bart Thate", email = "bthate@dds.nl" },
 ]
