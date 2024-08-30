@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "evrm"
 description = "Bejaarden en Gehandicapten (Wzd), Criminelen (Wfz), Psychiatrische Patienten (WvGGZ)"
-version = "142"
+version = "143"
 authors = [
     {name = "Bart Thate", email = "bthate@dds.nl" },
 ]

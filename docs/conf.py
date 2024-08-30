@@ -7,7 +7,7 @@
 
 
 __name__ = "evrm"
-__version__ = "142"
+__version__ = "143"
 
 
 import doctest
