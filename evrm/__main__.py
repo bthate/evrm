@@ -30,6 +30,7 @@ def main():
 
 
 def wrapped():
+    "wrap main"
     wrap(main)
     errors()
 
