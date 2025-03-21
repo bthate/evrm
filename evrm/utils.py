@@ -5,58 +5,19 @@
 
 
 import datetime
+import hashlib
 import os
-import pathlib
-import pwd
+import re
+import sys
 import time
-import types as rtypes
-import _thread
 
 
-def cdir(pth):
-    "create directory."
-    path = pathlib.Path(pth)
-    path.parent.mkdir(parents=True, exist_ok=True)
+class NoDate(Exception):
+
+    pass
 
 
-def fntime(daystr):
-    "convert file name to it's saved time."
-    daystr = daystr.replace('_', ':')
-    datestr = ' '.join(daystr.split(os.sep)[-2:])
-    if '.' in datestr:
-        datestr, rest = datestr.rsplit('.', 1)
-    else:
-        rest = ''
-    timed = time.mktime(time.strptime(datestr, '%Y-%m-%d %H:%M:%S'))
-    if rest:
-        timed += float('.' + rest)
-    return timed
-
-
-def forever():
-    "it doesn't stop, until ctrl-c"
-    while True:
-        try:
-            time.sleep(1.0)
-        except (KeyboardInterrupt, EOFError):
-            _thread.interrupt_main()
-
-
-def fqn(obj):
-    "return full qualified name of an object."
-    kin = str(type(obj)).split()[-1][1:-2]
-    if kin == "type":
-        kin = f"{obj.__module__}.{obj.__name__}"
-    return kin
-
-
-def ident(obj):
-    "return an id for an object."
-    return os.path.join(fqn(obj), *str(datetime.datetime.now()).split())
-
-
-def laps(seconds, short=True):
-    "show elapsed time."
+def elapsed(seconds, short=True) -> str:
     txt = ""
     nsec = float(seconds)
     if nsec < 1:
@@ -95,84 +56,189 @@ def laps(seconds, short=True):
     return txt
 
 
-def modnames(*args):
-    "return module names."
-    res = []
-    for arg in args:
-        res.extend([x for x in dir(arg) if not x.startswith("__")])
-    return sorted(res)
+def md5sum(path):
+    with open(path, "r", encoding="utf-8") as file:
+        txt = file.read().encode("utf-8")
+        return str(hashlib.md5(txt).hexdigest())
 
 
-def named(obj): # pylint: disable=R0911
-    "return a full qualified name of an object/function/module."
-    if isinstance(obj, rtypes.ModuleType):
-        return obj.__name__
-    typ = type(obj)
-    if '__builtins__' in dir(typ):
-        return obj.__name__
-    if '__self__' in dir(obj):
-        return f'{obj.__self__.__class__.__name__}.{obj.__name__}'
-    if '__class__' in dir(obj) and '__name__' in dir(obj):
-        return f'{obj.__class__.__name__}.{obj.__name__}'
-    if '__class__' in dir(obj):
-        return f"{obj.__class__.__module__}.{obj.__class__.__name__}"
-    if '__name__' in dir(obj):
-        return f'{obj.__class__.__name__}.{obj.__name__}'
-    return None
-
-
-def pidfile(pid):
-    "write the pid to a file."
-    if os.path.exists(pid):
-        os.unlink(pid)
-    path = pathlib.Path(pid)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with open(pid, "w", encoding="utf-8") as fds:
-        fds.write(str(os.getpid()))
-
-
-def privileges(username):
-    "drop privileges."
-    pwnam = pwd.getpwnam(username)
-    os.setgid(pwnam.pw_gid)
-    os.setuid(pwnam.pw_uid)
-
-
-def skip(name, skipp):
-    "check for skipping"
-    for skp in spl(skipp):
-        if skp in name:
-            return True
-    return False
-
-
-def spl(txt):
-    "split comma separated string into a list."
+def spl(txt) -> str:
     try:
-        res = txt.split(',')
+        result = txt.split(',')
     except (TypeError, ValueError):
-        res = txt
-    return [x for x in res if x]
+        result = txt
+    return [x for x in result if x]
 
 
-def strip(pth, nmr=3):
-    "reduce to path with directory."
-    return os.sep.join(pth.split(os.sep)[-nmr:])
+"debug"
+
+
+def debug(*args):
+    for arg in args:
+        sys.stderr.write(str(arg))
+        sys.stderr.write("\n")
+        sys.stderr.flush()
+
+
+def nodebug():
+    with open('/dev/null', 'a+', encoding="utf-8") as ses:
+        os.dup2(ses.fileno(), sys.stderr.fileno())
+
+
+"time related"
+
+
+def extract_date(daystr):
+    daystr = daystr.encode('utf-8', 'replace').decode("utf-8")
+    res = time.time()
+    for fmt in FORMATS:
+        try:
+            res = time.mktime(time.strptime(daystr, fmt))
+            break
+        except ValueError:
+            pass
+    return res
+
+
+def get_day(daystr):
+    day = None
+    month = None
+    yea = None
+    try:
+        ymdre = re.search(r'(\d+)-(\d+)-(\d+)', daystr)
+        if ymdre:
+            (day, month, yea) = ymdre.groups()
+    except ValueError:
+        try:
+            ymre = re.search(r'(\d+)-(\d+)', daystr)
+            if ymre:
+                (day, month) = ymre.groups()
+                yea = time.strftime("%Y", time.localtime())
+        except Exception as ex:
+            raise NoDate(daystr) from ex
+    if day:
+        day = int(day)
+        month = int(month)
+        yea = int(yea)
+        date = f"{day} {MONTHS[month]} {yea}"
+        return time.mktime(time.strptime(date, r"%d %b %Y"))
+    raise NoDate(daystr)
+
+
+def get_hour(daystr):
+    try:
+        hmsre = re.search(r'(\d+):(\d+):(\d+)', str(daystr))
+        hours = 60 * 60 * (int(hmsre.group(1)))
+        hoursmin = hours  + int(hmsre.group(2)) * 60
+        hmsres = hoursmin + int(hmsre.group(3))
+    except AttributeError:
+        pass
+    except ValueError:
+        pass
+    try:
+        hmre = re.search(r'(\d+):(\d+)', str(daystr))
+        hours = 60 * 60 * (int(hmre.group(1)))
+        hmsres = hours + int(hmre.group(2)) * 60
+    except AttributeError:
+        return 0
+    except ValueError:
+        return 0
+    return hmsres
+
+
+def get_time(txt):
+    try:
+        target = get_day(txt)
+    except NoDate:
+        target = to_day(today())
+    hour =  get_hour(txt)
+    if hour:
+        target += hour
+    return target
+
+
+def parse_time(txt):
+    seconds = 0
+    target = 0
+    txt = str(txt)
+    for word in txt.split():
+        if word.startswith("+"):
+            seconds = int(word[1:])
+            return time.time() + seconds
+        if word.startswith("-"):
+            seconds = int(word[1:])
+            return time.time() - seconds
+    if not target:
+        try:
+            target = get_day(txt)
+        except NoDate:
+            target = to_day(today())
+        hour =  get_hour(txt)
+        if hour:
+            target += hour
+    return target
+
+
+def to_day(daystr):
+    previous = ""
+    line = ""
+    daystr = str(daystr)
+    res = None
+    for word in daystr.split():
+        line = previous + " " + word
+        previous = word
+        try:
+            res = extract_date(line.strip())
+            break
+        except ValueError:
+            res = None
+        line = ""
+    return res
+
+
+def today():
+    return str(datetime.datetime.today()).split()[0]
+
+
+MONTHS = [
+    'Bo',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+]
+
+
+FORMATS = [
+    "%Y-%M-%D %H:%M:%S",
+    "%Y-%m-%d %H:%M:%S",
+    "%Y-%m-%d",
+    "%d-%m-%Y",
+    "%d-%m",
+    "%m-%d",
+]
 
 
 def __dir__():
     return (
-        'cdir',
-        'fntime',
-        'forever',
-        'fqn',
-        'ident',
-        'laps',
-        'modnames',
-        'named',
-        'pidfile',
-        'privileges',
-        'skip',
-        'spl',
-        'strip'
+        'debug',
+        'elapsed',
+        'extract_date',
+        'get_day',
+        'get_hour',
+        'get_time',
+        'md5sum',
+        'nodebug',
+        'parse_time',
+        'to_day',
+        'today',
+        'spl'
     )

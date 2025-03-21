@@ -5,40 +5,40 @@
 
 
 import threading
+import time
 
 
-from .default import Default
-from .object  import Object
+from .fleet  import Fleet
+from .object import Default
 
 
-class Event(Default, Object): # pylint: disable=R0902
-
-    "Event"
+class Event(Default):
 
     def __init__(self):
         Default.__init__(self)
-        Object.__init__(self)
-        self._ready  = threading.Event()
-        self._thr    = None
-        self.orig    = ""
-        self.result  = []
-        self.txt     = ""
-        self.type    = "command"
+        self._ready = threading.Event()
+        self._thr   = None
+        self.ctime  = time.time()
+        self.result = {}
+        self.type   = "event"
+        self.txt    = ""
 
-    def ready(self):
-        "event is ready."
+    def display(self):
+        Fleet.display(self)
+
+    def done(self) -> None:
+        self.reply("ok")
+
+    def ready(self) -> None:
         self._ready.set()
 
-    def reply(self, txt):
-        "add text to the result"
-        self.result.append(txt)
+    def reply(self, txt) -> None:
+        self.result[time.time()] = txt
 
-    def wait(self, timeout=None):
-        "wait for event to be ready."
-        self._ready.wait(timeout)
+    def wait(self) -> None:
+        self._ready.wait()
         if self._thr:
             self._thr.join()
-        return self.result
 
 
 def __dir__():

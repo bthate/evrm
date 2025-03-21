@@ -25,7 +25,7 @@ Both the chamber suggesting these laws to the king and the king himself
 have been informed about the fact the the substances administered under
 these laws are proven to be poison (1).
 
-There is proof the medication used in forced treatements in the
+There is proof the medication used in forced treatments in the
 netherlands are poison.
 
 1) haloperidol
@@ -65,18 +65,8 @@ medicine are poison at the time they voted for this law and the day the
 Wfz law took effect (1-1-2019), i ask the prosecutor to prosecute the
 king for making the commiting of the above mentioned crimes (killing,
 torture and impotent making) possible.
-
-
-p.s.
-
-
-1) Entered in the Communications Register of the Office on ``4 march 2019``
-2) Your reference ``OTP-CR-117/19``
-
-
 """
 
 
 def req(event):
-    "reconsider"
     event.reply(__doc__)

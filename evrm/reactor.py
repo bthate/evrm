@@ -1,7 +1,7 @@
 # This file is placed in the Public Domain.
 
 
-"reactor"
+"callback engine"
 
 
 import queue
@@ -9,59 +9,66 @@ import threading
 import _thread
 
 
-from .object import Object
+from .error  import later
 from .thread import launch
+
+
+lock = threading.RLock()
 
 
 class Reactor:
 
-    "Reactor"
-
     def __init__(self):
-        self.cbs      = Object()
-        self.queue    = queue.Queue()
-        self.stopped  = threading.Event()
+        self.cbs     = {}
+        self.queue   = queue.Queue()
+        self.ready   = threading.Event()
+        self.stopped = threading.Event()
 
-    def callback(self, evt):
-        "call callback based on event type."
-        evt.orig = repr(self)
-        func = getattr(self.cbs, evt.type, None)
-        if not func:
-            evt.ready()
-            return
-        if "target" in dir(func) and func.target not in str(self).lower():
-            evt.ready()
-            return
-        evt._thr = launch(func, self, evt) # pylint: disable=W0212
-
-    def loop(self):
-        "proces events until interrupted."
-        while not self.stopped.is_set():
+    def callback(self, evt) -> None:
+        with lock:
+            func = self.cbs.get(evt.type, None)
+            if not func:
+                evt.ready()
+                return
             try:
-                evt = self.poll()
+                evt._thr = launch(func, evt, name=evt.cmd)
+            except Exception as ex:
+                later(ex)
+                evt.ready()
+
+    def loop(self) -> None:
+        while not self.stopped.is_set():
+            evt = self.poll()
+            if evt is None:
+                break
+            evt.orig = repr(self)
+            try:
                 self.callback(evt)
-            except (KeyboardInterrupt, EOFError):
+            except Exception as ex:
+                later(ex)
                 _thread.interrupt_main()
+        self.ready.set()
 
     def poll(self):
-        "function to return event."
         return self.queue.get()
 
-    def put(self, evt):
-        "put event into the queue."
-        self.queue.put_nowait(evt)
+    def put(self, evt) -> None:
+        self.queue.put(evt)
 
-    def register(self, typ, cbs):
-        "register callback for a type."
-        setattr(self.cbs, typ, cbs)
+    def register(self, typ, cbs) -> None:
+        self.cbs[typ] = cbs
 
-    def start(self):
-        "start the event loop."
+    def start(self) -> None:
+        self.stopped.clear()
+        self.ready.clear()
         launch(self.loop)
 
-    def stop(self):
-        "stop the event loop."
+    def stop(self) -> None:
         self.stopped.set()
+        self.queue.put(None)
+
+    def wait(self) -> None:
+        self.ready.wait()
 
 
 def __dir__():

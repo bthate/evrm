@@ -4,15 +4,13 @@
 "a clean namespace"
 
 
-class Object: # pylint: disable=R0902
+import json
 
-    "Object"
+
+class Object:
 
     def __contains__(self, key):
         return key in dir(self)
-
-    def __getstate__(self):
-        "no pickle."
 
     def __iter__(self):
         return iter(self.__dict__)
@@ -24,8 +22,13 @@ class Object: # pylint: disable=R0902
         return str(self.__dict__)
 
 
-def construct(obj, *args, **kwargs):
-    "construct an object from provided arguments."
+class Default(Object):
+
+    def __getattr__(self, key):
+        return self.__dict__.get(key, "")
+
+
+def construct(obj, *args, **kwargs) -> None:
     if args:
         val = args[0]
         if isinstance(val, zip):
@@ -38,8 +41,7 @@ def construct(obj, *args, **kwargs):
         update(obj, kwargs)
 
 
-def edit(obj, setter, skip=False):
-    "edit an object from provided dict/dict-like."
+def edit(obj, setter, skip=False) -> None:
     for key, val in items(setter):
         if skip and val == "":
             continue
@@ -61,8 +63,7 @@ def edit(obj, setter, skip=False):
             setattr(obj, key, val)
 
 
-def fmt(obj, args=None, skip=None, plain=False):
-    "format an object to a printable string."
+def fmt(obj, args=None, skip=None, plain=False) -> str:
     if args is None:
         args = keys(obj)
     if skip is None:
@@ -81,77 +82,108 @@ def fmt(obj, args=None, skip=None, plain=False):
         elif isinstance(value, str) and len(value.split()) >= 2:
             txt += f'{key}="{value}" '
         else:
-            txt += f"{key}={value} "
+            txt += f'{key}={value} '
     return txt.strip()
 
 
-def items(obj):
-    "return the items of an object."
-    if isinstance(obj, type({})):
+def fqn(obj) -> str:
+    kin = str(type(obj)).split()[-1][1:-2]
+    if kin == "type":
+        kin = f"{obj.__module__}.{obj.__name__}"
+    return kin
+
+
+def items(obj) -> []:
+    if isinstance(obj,type({})):
         return obj.items()
     return obj.__dict__.items()
 
 
-def keys(obj):
-    "return keys of an object."
+def keys(obj) -> [str]:
     if isinstance(obj, type({})):
         return obj.keys()
     return list(obj.__dict__.keys())
 
 
-def match(obj, txt):
-    "check if object has matching keys."
-    for key in keys(obj):
-        if txt in key:
-            return True
-    return False
+def update(obj, data) -> None:
+    if not isinstance(data, type({})):
+        obj.__dict__.update(vars(data))
+    else:
+        obj.__dict__.update(data)
 
 
-def search(obj, selector):
-    "check if object matches provided values."
-    res = False
-    if not selector:
-        return res
-    for key, value in items(selector):
-        val = getattr(obj, key, None)
-        if not val:
-            continue
-        if str(value).lower() in str(val).lower():
-            res = True
-        else:
-            res = False
-            break
-    return res
-
-
-def update(obj, data, empty=True):
-    "update an object."
-    for key, value in items(data):
-        if empty and not value:
-            continue
-        setattr(obj, key, value)
-
-
-def values(obj):
-    "return values of an object."
+def values(obj) -> []:
     return obj.__dict__.values()
 
 
-def pjoin(*args):
-    "path join."
-    return "/".join(args)
+"decoder"
+
+
+class Decoder(json.JSONDecoder):
+
+    def __init__(self, *args, **kwargs):
+        json.JSONDecoder.__init__(self, *args, **kwargs)
+
+    def decode(self, s, _w=None):
+        val = json.JSONDecoder.decode(self, s)
+        if isinstance(val, dict):
+            return hook(val)
+        return val
+
+
+def hook(objdict) -> Object:
+    obj = Object()
+    construct(obj, objdict)
+    return obj
+
+
+def loads(string, *args, **kw) -> Object:
+    kw["cls"] = Decoder
+    kw["object_hook"] = hook
+    return json.loads(string, *args, **kw)
+
+
+"encoding"
+
+
+class Encoder(json.JSONEncoder):
+
+    def __init__(self, *args, **kwargs):
+        json.JSONEncoder.__init__(self, *args, **kwargs)
+
+    def default(self, o) -> str:
+        if isinstance(o, dict):
+            return o.items()
+        if issubclass(type(o), Object):
+            return vars(o)
+        if isinstance(o, list):
+            return iter(o)
+        try:
+            return json.JSONEncoder.default(self, o)
+        except TypeError:
+            try:
+                return vars(o)
+            except TypeError:
+                return repr(o)
+
+
+def dumps(*args, **kw) -> str:
+    kw["cls"] = Encoder
+    return json.dumps(*args, **kw)
 
 
 def __dir__():
     return (
+        'Default',
         'Object',
         'construct',
+        'dumps',
         'edit',
         'fmt',
+        'fqn',
         'items',
         'keys',
-        'match',
-        'search',
+        'loads',
         'update',
         'values'
     )

@@ -1,41 +1,36 @@
 # This file is placed in the Public Domain.
 
 
-"at a specific time"
+"time related functions"
 
 
-import time
 import threading
+import time
 
 
 from .object import Object
-from .thread import launch
-from .utils  import named
+from .thread import launch, name
 
 
-class Timer(Object): # pylint: disable=R0902
+class Timer(Object):
 
-    "Timer"
-
-    def __init__(self, sleep, func, *args, thrname=None):
+    def __init__(self, sleep, func, *args, thrname=None, **kwargs):
         Object.__init__(self)
-        self.args  = args
-        self.func  = func
-        self.sleep = sleep
-        self.name  = thrname or named(func)
-        self.state = {}
-        self.timer = None
+        self.args   = args
+        self.func   = func
+        self.kwargs = kwargs
+        self.sleep  = sleep
+        self.name   = thrname or kwargs.get("name", name(func))
+        self.state  = {}
+        self.timer  = None
 
-    def run(self):
-        "run the payload in a thread."
+    def run(self) -> None:
         self.state["latest"] = time.time()
-        launch(self.func, *self.args)
+        self.func(*self.args)
 
-    def start(self):
-        "start timer."
+    def start(self) -> None:
         timer = threading.Timer(self.sleep, self.run)
         timer.name   = self.name
-        timer.daemon = True
         timer.sleep  = self.sleep
         timer.state  = self.state
         timer.func   = self.func
@@ -44,13 +39,20 @@ class Timer(Object): # pylint: disable=R0902
         timer.start()
         self.timer   = timer
 
-    def stop(self):
-        "stop timer."
+    def stop(self) -> None:
         if self.timer:
             self.timer.cancel()
 
 
+class Repeater(Timer):
+
+    def run(self) -> None:
+        launch(self.start)
+        super().run()
+
+
 def __dir__():
     return (
-        'Timer',
+        'Repeater',
+        'Timer'
     )
